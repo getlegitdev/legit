@@ -1,0 +1,8 @@
+{
+  "keywords": ["migration", "COBOL", "mainframe", "AWS", "FedRAMP", "PCI DSS", "tax", "cloud-native", "cutover", "knowledge transfer"],
+  "numeric_values": {},
+  "min_word_count": 1500,
+  "required_sections": ["executive_summary", "technical_approach", "solution_architecture", "implementation_timeline", "pricing_summary"],
+  "must_address_compliance": true,
+  "expected_phases_minimum": 3
+}

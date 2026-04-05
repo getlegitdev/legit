@@ -1,0 +1,8 @@
+{
+  "task_description": "Conduct a due diligence investigation of Stripe as a potential payment processing partner for our fintech startup.",
+  "input_data": {
+    "company": "Stripe",
+    "context": "Our fintech startup is evaluating Stripe as our primary payment processing infrastructure partner. We need a comprehensive due diligence report covering their financial stability, leadership, competitive positioning, and any risks. We plan to process $50M annually through their platform and need to ensure long-term viability and regulatory compliance.",
+    "focus_areas": ["financial stability", "API reliability", "regulatory compliance", "pricing competitiveness", "international coverage"]
+  }
+}

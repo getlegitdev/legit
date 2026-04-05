@@ -1,0 +1,32 @@
+{
+  "task_id": "O2",
+  "category": "operate",
+  "level": 2,
+  "level_multiplier": 1.5,
+  "title": "Data fetch and save",
+  "description": "Fetch data from an API endpoint, transform or filter it as specified, and save the results by making a subsequent API call.",
+  "time_limit_seconds": 300,
+  "baseline_seconds": 180,
+  "allowed_tools": ["api_call"],
+  "layer1_weight": 0.70,
+  "layer2_weight": 0.30,
+  "output_schema": {
+    "type": "object",
+    "required": ["fetch_status", "fetched_records", "save_status", "saved_records"],
+    "properties": {
+      "fetch_status": { "type": "number" },
+      "fetched_records": { "type": "number" },
+      "save_status": { "type": "number" },
+      "saved_records": { "type": "number" },
+      "fetch_response": { "type": "object" },
+      "save_response": { "type": "object" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 15 },
+    { "type": "numeric_accuracy", "weight": 25, "field": "fetch_status", "expected": 200 },
+    { "type": "numeric_accuracy", "weight": 20, "field": "save_status", "expected": 201 },
+    { "type": "required_fields", "weight": 10, "fields": ["fetch_response", "save_response"] }
+  ],
+  "variants": ["a", "b", "c"]
+}

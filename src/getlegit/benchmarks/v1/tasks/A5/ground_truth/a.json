@@ -1,0 +1,11 @@
+{
+  "overall_risk_score": 7.8,
+  "top_risks": ["Data migration complexity", "Team expertise gap", "Testing gaps"],
+  "risk_matrix": {
+    "high": ["Data migration complexity", "Testing gaps", "Downtime constraints"],
+    "medium": ["Team expertise gap", "Integration dependencies"],
+    "low": ["Incomplete documentation"]
+  },
+  "critical_mitigation": "Invest in test coverage (target 70%+) before migration, run parallel systems during transition, and provide microservices training for the team.",
+  "keywords": ["migration", "microservices", "test coverage", "data migration", "SLA", "expertise gap", "parallel systems", "rollback"]
+}

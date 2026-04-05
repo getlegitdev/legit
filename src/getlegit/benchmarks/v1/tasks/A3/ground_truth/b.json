@@ -1,0 +1,10 @@
+{
+  "datasets_compared": ["east_region", "west_region"],
+  "ranking": [
+    {"dataset": "west_region", "rank": 1, "score": 0.88},
+    {"dataset": "east_region", "rank": 2, "score": 0.82}
+  ],
+  "best_team": "west_region",
+  "rationale": "West region shows stronger performance when normalized: higher per-capita sales ($178,500/person vs $158,333/person), stronger growth trajectory (132% increase Jan-Dec vs 75%), better customer retention (91% vs 85%), and consistent month-over-month improvement. East has higher absolute sales but with a larger team.",
+  "keywords": ["per-capita", "growth", "retention", "trajectory", "normalized", "west", "efficiency"]
+}

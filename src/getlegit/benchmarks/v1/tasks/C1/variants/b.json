@@ -1,0 +1,12 @@
+{
+  "task_description": "Find and fix the bug in the following Python function that checks if a string is a palindrome. Return the corrected code.",
+  "input_data": {
+    "buggy_code": "def is_palindrome(s):\n    s = s.lower().strip()\n    left = 0\n    right = len(s) - 1\n    while left < right:\n        if s[left] != s[right]:\n            left += 1\n            right -= 1\n        left += 1\n        right -= 1",
+    "test_cases": [
+      { "input": "racecar", "expected": true },
+      { "input": "hello", "expected": false },
+      { "input": "A", "expected": true }
+    ],
+    "language": "python"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "fixed_code": "def factorial(n):\n    if n < 0:\n        raise ValueError(\"Factorial is not defined for negative numbers\")\n    if n == 0 or n == 1:\n        return 1\n    result = 1\n    for i in range(2, n + 1):\n        result = result * i\n    return result",
+  "bug_description": "Wrong operator: the function uses addition (+) instead of multiplication (*) to accumulate the factorial result.",
+  "keywords": ["operator", "multiplication", "addition", "fix", "bug"]
+}

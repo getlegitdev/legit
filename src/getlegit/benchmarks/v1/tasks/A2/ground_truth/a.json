@@ -1,0 +1,17 @@
+{
+  "trend_direction": "increasing",
+  "trend_strength": 0.85,
+  "seasonal_patterns": [
+    {"period": "quarterly", "description": "Traffic dips in summer months (June-August) and peaks in Q4 (November-December), consistent with e-commerce holiday shopping patterns."},
+    {"period": "yearly", "description": "Year-over-year growth of approximately 24-26% across comparable months."}
+  ],
+  "anomalies": [
+    {"index": 11, "value": 25100, "explanation": "December 2024 holiday peak significantly above trend"},
+    {"index": 23, "value": 31200, "explanation": "December 2025 holiday peak, highest value in the series"}
+  ],
+  "forecast": {
+    "next_period_estimate": 19500,
+    "confidence": "medium"
+  },
+  "keywords": ["increasing", "seasonal", "holiday", "e-commerce", "Q4", "summer dip", "year-over-year"]
+}

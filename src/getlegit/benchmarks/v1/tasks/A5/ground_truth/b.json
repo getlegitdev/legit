@@ -1,0 +1,11 @@
+{
+  "overall_risk_score": 8.2,
+  "top_risks": ["HIPAA compliance", "Data breach liability", "Talent retention"],
+  "risk_matrix": {
+    "high": ["HIPAA compliance", "Data breach liability", "Regulatory approval"],
+    "medium": ["Market timing", "Talent retention", "Integration requirements"],
+    "low": ["Vendor lock-in"]
+  },
+  "critical_mitigation": "Prioritize HIPAA audit and compliance certification immediately, implement comprehensive security controls and breach response plan, and provide retention packages for key engineers.",
+  "keywords": ["HIPAA", "compliance", "data breach", "healthcare", "regulatory", "FDA", "retention", "security"]
+}

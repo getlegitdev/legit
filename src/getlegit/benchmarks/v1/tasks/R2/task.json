@@ -1,0 +1,64 @@
+{
+  "task_id": "R2",
+  "category": "research",
+  "level": 2,
+  "level_multiplier": 1.5,
+  "title": "Technology selection research",
+  "description": "Evaluate candidate technologies for a given use case, comparing them across key criteria and producing a recommendation report.",
+  "time_limit_seconds": 600,
+  "baseline_seconds": 300,
+  "allowed_tools": ["web_search", "file_read"],
+  "layer1_weight": 0.20,
+  "layer2_weight": 0.80,
+  "output_schema": {
+    "type": "object",
+    "required": ["candidates", "evaluation_criteria", "recommendation", "summary"],
+    "properties": {
+      "candidates": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "description", "pros", "cons", "scores"],
+          "properties": {
+            "name": { "type": "string" },
+            "description": { "type": "string" },
+            "pros": { "type": "array", "items": { "type": "string" } },
+            "cons": { "type": "array", "items": { "type": "string" } },
+            "scores": {
+              "type": "object",
+              "additionalProperties": { "type": "number" }
+            }
+          }
+        }
+      },
+      "evaluation_criteria": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "weight", "description"],
+          "properties": {
+            "name": { "type": "string" },
+            "weight": { "type": "number" },
+            "description": { "type": "string" }
+          }
+        }
+      },
+      "recommendation": {
+        "type": "object",
+        "required": ["choice", "rationale"],
+        "properties": {
+          "choice": { "type": "string" },
+          "rationale": { "type": "string" }
+        }
+      },
+      "summary": { "type": "string" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 6 },
+    { "type": "required_fields", "weight": 6, "fields": ["candidates", "recommendation"] },
+    { "type": "min_count", "weight": 4, "field": "candidates", "min": 3 },
+    { "type": "keyword_present", "weight": 4, "keywords": ["performance", "scalability", "cost"] }
+  ],
+  "variants": ["a", "b", "c"]
+}

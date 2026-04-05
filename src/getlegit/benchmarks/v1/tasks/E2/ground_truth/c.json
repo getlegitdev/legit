@@ -1,0 +1,8 @@
+{
+  "expected_sections": ["Applicant Information", "Compliance Requirements", "Fee Schedule", "Penalties", "Appendices"],
+  "expected_table_count": 3,
+  "expected_table_names": ["Fee Schedule", "Penalty Structure", "Compliance Checklist"],
+  "keywords": ["compliance", "fee", "penalty", "regulation", "filing"],
+  "numeric_values": {},
+  "min_counts": { "sections": 3, "tables": 1 }
+}

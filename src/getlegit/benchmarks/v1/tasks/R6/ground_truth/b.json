@@ -1,0 +1,10 @@
+{
+  "expected_contradictions": [
+    "Capture efficiency: industry claims 90%+ capture rates vs. independent audits showing 50-80% at operating facilities",
+    "Cost projections: industry predicts rapid cost decline to $30-50/ton vs. academic analyses showing persistent costs of $100-200/ton",
+    "Scalability: IPCC scenarios assume massive CCS deployment vs. environmental groups arguing deployment history shows repeated failure to scale"
+  ],
+  "keywords": ["contradiction", "inconsistency", "conflict", "carbon capture", "emissions", "storage"],
+  "numeric_values": {},
+  "min_counts": { "contradictions": 3, "sources_analyzed": 5 }
+}

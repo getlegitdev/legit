@@ -1,0 +1,27 @@
+{
+  "task_description": "Generate a changelog for version 5.0.0 of a mobile SDK from the provided commit history.",
+  "input_data": {
+    "project": "AnalyticsKit Mobile SDK",
+    "version": "5.0.0",
+    "previous_version": "4.3.2",
+    "release_date": "2026-03-15",
+    "commits": [
+      { "hash": "x1y2z3a", "message": "BREAKING: migrate from callbacks to async/await API", "author": "ian" },
+      { "hash": "b4c5d6e", "message": "feat: add offline event batching with configurable flush interval", "author": "julia" },
+      { "hash": "f7g8h9i", "message": "BREAKING: drop support for iOS 14 and Android API 26", "author": "ian" },
+      { "hash": "j0k1l2m", "message": "feat: add automatic screen view tracking", "author": "kate" },
+      { "hash": "n3o4p5q", "message": "fix: resolve crash on app backgrounding during event flush", "author": "julia" },
+      { "hash": "r6s7t8u", "message": "feat: add consent management framework for GDPR/CCPA", "author": "liam" },
+      { "hash": "v9w0x1y", "message": "fix: correct timestamp drift when device clock changes", "author": "kate" },
+      { "hash": "z2a3b4c", "message": "BREAKING: rename AnalyticsConfig to SDKConfiguration for clarity", "author": "ian" },
+      { "hash": "d5e6f7g", "message": "feat: add A/B test assignment tracking", "author": "liam" },
+      { "hash": "h8i9j0k", "message": "security: encrypt locally cached events at rest", "author": "julia" },
+      { "hash": "l1m2n3o", "message": "removed: remove deprecated trackLegacyEvent method", "author": "ian" },
+      { "hash": "p4q5r6s", "message": "fix: reduce SDK initialization time from 800ms to 150ms", "author": "kate" }
+    ],
+    "requirements": {
+      "format": "Keep a Changelog style",
+      "should_include": ["Summary paragraph", "Categorized entries", "Breaking changes prominently listed", "Migration guide for breaking changes", "Minimum platform version callout"]
+    }
+  }
+}

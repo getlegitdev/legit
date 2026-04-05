@@ -1,0 +1,42 @@
+{
+  "task_id": "R1",
+  "category": "research",
+  "level": 2,
+  "level_multiplier": 1.5,
+  "title": "Competitive analysis report",
+  "description": "Identify 5 competitors for the given product and create a structured comparison report.",
+  "time_limit_seconds": 600,
+  "baseline_seconds": 300,
+  "allowed_tools": ["web_search", "file_read"],
+  "layer1_weight": 0.30,
+  "layer2_weight": 0.70,
+  "output_schema": {
+    "type": "object",
+    "required": ["competitors", "summary", "methodology"],
+    "properties": {
+      "competitors": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "description", "strengths", "weaknesses", "market_position"],
+          "properties": {
+            "name": { "type": "string" },
+            "description": { "type": "string" },
+            "strengths": { "type": "array", "items": { "type": "string" } },
+            "weaknesses": { "type": "array", "items": { "type": "string" } },
+            "market_position": { "type": "string" }
+          }
+        }
+      },
+      "summary": { "type": "string" },
+      "methodology": { "type": "string" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "required_fields", "weight": 10, "fields": ["competitors"] },
+    { "type": "min_count", "weight": 5, "field": "competitors", "min": 5 },
+    { "type": "keyword_present", "weight": 5, "keywords": ["competitor", "market"] }
+  ],
+  "variants": ["a", "b", "c"]
+}

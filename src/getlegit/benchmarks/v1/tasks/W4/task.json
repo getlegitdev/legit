@@ -1,0 +1,36 @@
+{
+  "task_id": "W4",
+  "category": "write",
+  "level": 3,
+  "level_multiplier": 2.0,
+  "title": "Technical specification",
+  "description": "Write a detailed technical specification document for a software feature or system component, including architecture decisions, API contracts, data models, and implementation considerations.",
+  "time_limit_seconds": 900,
+  "baseline_seconds": 480,
+  "allowed_tools": ["web_search", "file_read"],
+  "layer1_weight": 0.15,
+  "layer2_weight": 0.85,
+  "output_schema": {
+    "type": "object",
+    "required": ["title", "overview", "goals", "non_goals", "architecture", "api_design", "data_model", "implementation_plan"],
+    "properties": {
+      "title": { "type": "string" },
+      "overview": { "type": "string" },
+      "goals": { "type": "array", "items": { "type": "string" } },
+      "non_goals": { "type": "array", "items": { "type": "string" } },
+      "architecture": { "type": "string" },
+      "api_design": { "type": "string" },
+      "data_model": { "type": "string" },
+      "implementation_plan": { "type": "string" },
+      "security_considerations": { "type": "string" },
+      "testing_strategy": { "type": "string" },
+      "rollout_plan": { "type": "string" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 5 },
+    { "type": "required_fields", "weight": 3, "fields": ["title", "overview", "architecture", "api_design", "data_model"] },
+    { "type": "keyword_present", "weight": 2, "keywords": [] }
+  ],
+  "variants": ["a", "b", "c"]
+}

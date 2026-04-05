@@ -1,0 +1,15 @@
+{
+  "test_code": "import pytest\nimport re\n\ndef parse_email(email):\n    if not isinstance(email, str):\n        raise TypeError('Email must be a string')\n    email = email.strip()\n    if not email:\n        raise ValueError('Email cannot be empty')\n    pattern = r'^([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+)\\.([a-zA-Z]{2,})$'\n    match = re.match(pattern, email)\n    if not match:\n        raise ValueError(f'Invalid email format: {email}')\n    return {\n        'local': match.group(1),\n        'domain': match.group(2),\n        'tld': match.group(3),\n        'full': email\n    }\n\ndef test_valid_simple_email():\n    result = parse_email('user@example.com')\n    assert result['local'] == 'user'\n    assert result['domain'] == 'example'\n    assert result['tld'] == 'com'\n\ndef test_valid_email_with_dots():\n    result = parse_email('first.last@company.org')\n    assert result['local'] == 'first.last'\n\ndef test_valid_email_with_plus():\n    result = parse_email('user+tag@domain.net')\n    assert result['local'] == 'user+tag'\n\ndef test_whitespace_trimming():\n    result = parse_email('  user@example.com  ')\n    assert result['full'] == 'user@example.com'\n\ndef test_invalid_no_at_sign():\n    with pytest.raises(ValueError):\n        parse_email('userexample.com')\n\ndef test_invalid_no_domain():\n    with pytest.raises(ValueError):\n        parse_email('user@')\n\ndef test_invalid_no_tld():\n    with pytest.raises(ValueError):\n        parse_email('user@domain')\n\ndef test_empty_string():\n    with pytest.raises(ValueError):\n        parse_email('')\n\ndef test_non_string_input():\n    with pytest.raises(TypeError):\n        parse_email(123)\n\ndef test_none_input():\n    with pytest.raises(TypeError):\n        parse_email(None)\n\ndef test_long_tld():\n    result = parse_email('user@example.museum')\n    assert result['tld'] == 'museum'",
+  "test_cases_description": [
+    {"name": "test_valid_simple_email", "category": "normal"},
+    {"name": "test_valid_email_with_dots", "category": "normal"},
+    {"name": "test_valid_email_with_plus", "category": "normal"},
+    {"name": "test_whitespace_trimming", "category": "edge_case"},
+    {"name": "test_invalid_no_at_sign", "category": "error_handling"},
+    {"name": "test_invalid_no_domain", "category": "error_handling"},
+    {"name": "test_empty_string", "category": "error_handling"},
+    {"name": "test_non_string_input", "category": "error_handling"},
+    {"name": "test_long_tld", "category": "boundary"}
+  ],
+  "keywords": ["parse_email", "valid", "invalid", "TypeError", "ValueError", "whitespace", "regex", "components"]
+}

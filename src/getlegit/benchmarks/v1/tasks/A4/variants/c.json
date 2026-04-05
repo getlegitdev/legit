@@ -1,0 +1,40 @@
+{
+  "task_description": "A data pipeline that runs nightly ETL jobs started producing incorrect aggregation results. The output data shows values 2x higher than expected. Analyze the pipeline logs and metrics to find the root cause.",
+  "input_data": {
+    "metrics": {
+      "records_processed": [
+        {"date": "2025-03-25", "value": 1000000}, {"date": "2025-03-26", "value": 1050000},
+        {"date": "2025-03-27", "value": 980000}, {"date": "2025-03-28", "value": 2010000},
+        {"date": "2025-03-29", "value": 2080000}, {"date": "2025-03-30", "value": 1990000}
+      ],
+      "output_row_count": [
+        {"date": "2025-03-25", "value": 50000}, {"date": "2025-03-26", "value": 52000},
+        {"date": "2025-03-27", "value": 49000}, {"date": "2025-03-28", "value": 50500},
+        {"date": "2025-03-29", "value": 51800}, {"date": "2025-03-30", "value": 49500}
+      ],
+      "avg_revenue_per_output_row": [
+        {"date": "2025-03-25", "value": 245.50}, {"date": "2025-03-26", "value": 248.20},
+        {"date": "2025-03-27", "value": 242.80}, {"date": "2025-03-28", "value": 489.10},
+        {"date": "2025-03-29", "value": 495.30}, {"date": "2025-03-30", "value": 487.60}
+      ]
+    },
+    "event_logs": [
+      {"time": "2025-03-27 20:00", "source": "etl", "message": "Nightly ETL job started"},
+      {"time": "2025-03-27 20:15", "source": "infra", "message": "New data source connector deployed: kafka-connector-v3.2"},
+      {"time": "2025-03-27 20:30", "source": "etl", "message": "Source data ingestion complete. Records: 980000"},
+      {"time": "2025-03-27 22:00", "source": "etl", "message": "ETL job completed successfully"},
+      {"time": "2025-03-28 20:00", "source": "etl", "message": "Nightly ETL job started"},
+      {"time": "2025-03-28 20:30", "source": "etl", "message": "Source data ingestion complete. Records: 2010000"},
+      {"time": "2025-03-28 20:31", "source": "kafka", "message": "Consumer group rebalanced. Partitions assigned: [0,1,2,3,4,5] (previously [0,1,2])"},
+      {"time": "2025-03-28 22:30", "source": "etl", "message": "ETL job completed successfully"},
+      {"time": "2025-03-29 09:00", "source": "qa", "message": "Data quality alert: revenue aggregates appear doubled"}
+    ],
+    "pipeline_config": {
+      "source": "kafka_topic: transactions",
+      "partitions": 6,
+      "consumer_group": "etl-pipeline-prod",
+      "deduplication": "none configured"
+    },
+    "context": "Nightly ETL pipeline ingesting from Kafka into a data warehouse"
+  }
+}

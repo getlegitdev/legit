@@ -1,0 +1,10 @@
+{
+  "task_description": "Extract entities, relationships, key facts, and action items from a project post-mortem document for a failed product launch.",
+  "input_data": {
+    "document_type": "Project post-mortem",
+    "context": "The input file contains a post-mortem write-up for a mobile app launch that experienced critical failures. The document was assembled from multiple team members' notes and includes a timeline of events, root cause analysis, customer impact assessment, and remediation steps. It references specific engineers, vendors, infrastructure components, and dollar amounts for lost revenue. The writing style varies between sections as different authors contributed.",
+    "file_path": "launch_postmortem.txt",
+    "expected_entity_types": ["person", "organization", "date", "product", "money"],
+    "expected_action_items": 6
+  }
+}

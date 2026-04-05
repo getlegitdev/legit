@@ -1,0 +1,8 @@
+{
+  "task_description": "Evaluate backend database technologies for a high-traffic e-commerce platform handling 50,000 concurrent users, and recommend the best option.",
+  "input_data": {
+    "use_case": "E-commerce platform database",
+    "context": "A mid-size e-commerce company is rebuilding its backend to handle 50,000 concurrent users and 2 million products. Current stack uses MySQL but is hitting performance bottlenecks on complex queries and inventory updates. The team has experience with SQL databases and some NoSQL exposure. Budget allows for managed cloud services. Key requirements include ACID transactions for orders, fast product search, and real-time inventory tracking.",
+    "requirements": ["ACID transactions", "horizontal scalability", "full-text search", "real-time updates", "managed cloud availability"]
+  }
+}

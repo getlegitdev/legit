@@ -1,0 +1,10 @@
+{
+  "numeric_values": { "create_status": 201, "read_status": 200, "update_status": 200, "delete_status": 204 },
+  "keywords": ["order", "created", "updated", "deleted"],
+  "expected_response_data": {
+    "create_response": { "id": 201, "status": "created", "message": "Order created successfully" },
+    "read_response": { "id": 201, "customer": "Alice", "items": [{ "product": "Widget A", "quantity": 3 }], "total": 59.97 },
+    "update_response": { "id": 201, "status": "updated", "message": "Order updated successfully" },
+    "delete_response": {}
+  }
+}

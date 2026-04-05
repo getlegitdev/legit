@@ -1,0 +1,8 @@
+{
+  "keywords": ["WebSocket", "rate limiting", "OpenTelemetry", "Brotli", "TLS", "performance", "deprecated"],
+  "numeric_values": {},
+  "min_word_count": 300,
+  "expected_version": "2.1.0",
+  "expected_breaking_changes_count": 0,
+  "expected_categories": ["added", "changed", "fixed", "security", "deprecated"]
+}

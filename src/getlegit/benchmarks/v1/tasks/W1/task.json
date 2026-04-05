@@ -1,0 +1,32 @@
+{
+  "task_id": "W1",
+  "category": "write",
+  "level": 1,
+  "level_multiplier": 1.0,
+  "title": "Technical blog post",
+  "description": "Write a technical blog post about the given topic.",
+  "time_limit_seconds": 300,
+  "baseline_seconds": 180,
+  "allowed_tools": ["web_search", "file_read"],
+  "layer1_weight": 0.10,
+  "layer2_weight": 0.90,
+  "output_schema": {
+    "type": "object",
+    "required": ["title", "body", "tags", "word_count"],
+    "properties": {
+      "title": { "type": "string" },
+      "body": { "type": "string" },
+      "tags": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "word_count": { "type": "number" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 5 },
+    { "type": "required_fields", "weight": 3, "fields": ["title", "body"] },
+    { "type": "keyword_present", "weight": 2, "keywords": [] }
+  ],
+  "variants": ["a", "b", "c"]
+}

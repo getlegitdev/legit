@@ -1,0 +1,10 @@
+{
+  "task_description": "Extract entities, relationships, key facts, and action items from a board meeting transcript.",
+  "input_data": {
+    "document_type": "Board meeting transcript",
+    "context": "The input file contains a raw transcript of a startup board meeting lasting approximately 90 minutes. Participants include the CEO, CTO, CFO, and three board members. The meeting covers quarterly financial results, product roadmap updates, a proposed Series B fundraise, hiring plans, and competitive landscape discussion. The transcript is informal with incomplete sentences, interruptions, and side discussions mixed in.",
+    "file_path": "board_meeting_transcript.txt",
+    "expected_entity_types": ["person", "organization", "money", "date", "product"],
+    "expected_action_items": 5
+  }
+}

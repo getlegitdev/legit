@@ -1,0 +1,9 @@
+{
+  "task_description": "Analyze contradictions in reports and studies about the impact of remote work on productivity and employee wellbeing.",
+  "input_data": {
+    "topic": "Remote work impact on productivity and wellbeing",
+    "context": "Since 2020, there has been an explosion of research and corporate studies on remote work. Some reports (often from tech companies) claim remote workers are equally or more productive, while others (including studies from Stanford and Microsoft) show productivity declines in certain contexts. Similarly, wellbeing studies show contradictory findings, with some showing improved work-life balance and others finding increased burnout and isolation. Analyze academic studies, corporate reports, and survey data to identify and assess these contradictions.",
+    "source_types": ["academic studies", "corporate productivity reports", "employee surveys", "management consulting reports"],
+    "min_sources": 6
+  }
+}

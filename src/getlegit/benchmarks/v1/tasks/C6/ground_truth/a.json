@@ -1,0 +1,23 @@
+{
+  "fixed_files": [
+    {
+      "filename": "models.py",
+      "fixed_code": "class Product:\n    def __init__(self, name, price, stock):\n        self.name = name\n        self.price = price\n        self.stock = stock\n\nclass OrderItem:\n    def __init__(self, product, quantity):\n        self.product = product\n        self.quantity = quantity\n\n    def subtotal(self):\n        return self.product.price * self.quantity\n\nclass Order:\n    def __init__(self, customer_name):\n        self.customer_name = customer_name\n        self.items = []\n        self.discount_percent = 0\n\n    def add_item(self, item):\n        self.items.append(item)\n\n    def total(self):\n        subtotal = sum(item.subtotal() for item in self.items)\n        return subtotal * (1 - self.discount_percent / 100)"
+    },
+    {
+      "filename": "inventory.py",
+      "fixed_code": "from models import Product\n\nclass Inventory:\n    def __init__(self):\n        self.products = {}\n\n    def add_product(self, name, price, stock):\n        self.products[name] = Product(name, price, stock)\n\n    def check_stock(self, name, quantity):\n        if name not in self.products:\n            return False\n        return self.products[name].stock >= quantity\n\n    def reserve_stock(self, name, quantity):\n        if not self.check_stock(name, quantity):\n            raise ValueError(f'Insufficient stock for {name}')\n        self.products[name].stock -= quantity\n\n    def get_product(self, name):\n        return self.products.get(name)"
+    },
+    {
+      "filename": "processor.py",
+      "fixed_code": "from models import Order, OrderItem\nfrom inventory import Inventory\n\nclass OrderProcessor:\n    def __init__(self, inventory):\n        self.inventory = inventory\n        self.orders = []\n\n    def create_order(self, customer_name, items, discount_percent=0):\n        order = Order(customer_name)\n        for item_name, qty in items:\n            product = self.inventory.get_product(item_name)\n            if product is None:\n                raise ValueError(f'Product {item_name} not found')\n            self.inventory.reserve_stock(item_name, qty)\n            order.add_item(OrderItem(product, qty))\n        order.discount_percent = discount_percent\n        self.orders.append(order)\n        return order\n\n    def get_order_summary(self, order):\n        return {\n            'customer': order.customer_name,\n            'items': len(order.items),\n            'total': order.total()\n        }"
+    }
+  ],
+  "bugs_found": [
+    {"file": "models.py", "line": 24, "bug_type": "logic_error", "description": "Order.total() subtracts discount as a flat amount instead of treating it as a percentage. Setting discount=10 subtracts $10 instead of 10%.", "fix": "Changed to multiply subtotal by (1 - discount_percent/100) for percentage-based discount."},
+    {"file": "inventory.py", "line": 13, "bug_type": "off_by_one", "description": "check_stock uses > instead of >= for comparison, rejecting orders when requested quantity exactly equals stock.", "fix": "Changed > to >= so that stock of 5 allows ordering 5 items."},
+    {"file": "models.py", "line": 20, "bug_type": "naming", "description": "Field named 'discount' is ambiguous - used as both a flat amount in total() and set as a percentage from processor.py.", "fix": "Renamed to discount_percent for clarity and updated total() to use percentage math."}
+  ],
+  "interaction_analysis": "The bugs interact across files: processor.py passes a percentage value (discount_percent=10) to order.discount, but models.py Order.total() subtracts it as a flat dollar amount. This cross-file mismatch means the discount calculation is fundamentally wrong. Additionally, inventory.py's off-by-one error in check_stock (> instead of >=) causes reserve_stock to fail when exact stock is requested, even though processor.py correctly calls reserve_stock.",
+  "keywords": ["cross-file", "discount", "percentage", "off-by-one", "stock check", "interaction", "logic error"]
+}

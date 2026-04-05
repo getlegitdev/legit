@@ -1,0 +1,13 @@
+{
+  "task_description": "Write a technical blog post about why Rust is winning the systems programming war.",
+  "input_data": {
+    "topic": "Why Rust is Winning the Systems Programming War",
+    "target_audience": "Software engineers interested in systems programming languages",
+    "tone": "Opinionated but well-reasoned",
+    "requirements": {
+      "min_word_count": 300,
+      "should_include": ["Memory safety without garbage collection", "Comparison with C/C++", "Industry adoption examples", "The learning curve trade-off"],
+      "tags_suggestion": ["rust", "systems-programming", "memory-safety", "programming-languages"]
+    }
+  }
+}

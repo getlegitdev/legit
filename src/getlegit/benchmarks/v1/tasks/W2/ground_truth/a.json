@@ -1,0 +1,8 @@
+{
+  "keywords": ["database", "outage", "PostgreSQL", "disk space", "replication", "failover", "downtime", "remediation"],
+  "numeric_values": {},
+  "min_word_count": 400,
+  "required_sections": ["timeline", "root_cause", "impact", "remediation"],
+  "expected_severity": "SEV1",
+  "min_timeline_entries": 5
+}

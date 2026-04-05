@@ -1,0 +1,26 @@
+{
+  "hypotheses_results": [
+    {
+      "hypothesis": "H1: The treatment reduces symptom severity scores significantly compared to placebo",
+      "result": "supported",
+      "explanation": "Treatment group showed a mean change of -24.6 vs placebo -7.3, a difference of 17.3 points. Two-sample t-test on change scores is highly significant with a large effect size.",
+      "p_value": 0.0001,
+      "effect_size": 1.64
+    },
+    {
+      "hypothesis": "H2: The treatment achieves remission in more than 30% of patients",
+      "result": "supported",
+      "explanation": "Remission rate in treatment group is 39% (78/200), exceeding the 30% threshold. One-sample proportion test against 0.30 is significant.",
+      "p_value": 0.005,
+      "effect_size": 0.39
+    },
+    {
+      "hypothesis": "H3: The side effect rate of the treatment is not significantly higher than placebo",
+      "result": "refuted",
+      "explanation": "Side effect rate is 26% in treatment vs 17.5% in placebo. Chi-square test of proportions shows a statistically significant difference, meaning the treatment does have a higher side effect rate.",
+      "p_value": 0.038,
+      "effect_size": 0.10
+    }
+  ],
+  "keywords": ["clinical trial", "RCT", "remission", "side effects", "symptom severity", "t-test", "proportion test", "effect size", "NNT"]
+}

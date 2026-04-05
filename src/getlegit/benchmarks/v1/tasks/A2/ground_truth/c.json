@@ -1,0 +1,16 @@
+{
+  "trend_direction": "increasing",
+  "trend_strength": 0.95,
+  "seasonal_patterns": [
+    {"period": "daily", "description": "Regular 3-day oscillation pattern with temperatures rising for two days then dipping slightly, overlaid on a strong upward seasonal trend."},
+    {"period": "seasonal", "description": "Strong warming trend from spring (~5C) to summer (~32C) over the 90-day period."}
+  ],
+  "anomalies": [
+    {"index": 15, "value": 2.1, "explanation": "Day 16 shows a sudden cold snap dropping to 2.1C from 12.0C the previous day, a dramatic 10-degree drop likely caused by a cold front."}
+  ],
+  "forecast": {
+    "next_period_estimate": 32.5,
+    "confidence": "high"
+  },
+  "keywords": ["increasing", "warming", "seasonal", "cold snap", "anomaly", "temperature", "spring-summer"]
+}

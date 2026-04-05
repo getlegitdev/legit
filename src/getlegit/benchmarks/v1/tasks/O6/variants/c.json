@@ -1,0 +1,26 @@
+{
+  "task_description": "Start a deployment workflow, monitor its progress through build, test, and deploy stages, and collect the final deployment status when complete.",
+  "input_data": {
+    "start": {
+      "url": "http://localhost:9999/api/workflow/start",
+      "method": "POST",
+      "headers": { "Content-Type": "application/json" },
+      "body": {
+        "workflow_type": "deployment",
+        "input": {
+          "service": "api-gateway",
+          "version": "2.5.0",
+          "environment": "staging",
+          "strategy": "rolling"
+        }
+      }
+    },
+    "status_check": {
+      "url_template": "http://localhost:9999/api/workflow/{workflow_id}/status",
+      "method": "GET",
+      "headers": { "Accept": "application/json" },
+      "poll_instructions": "Poll the status endpoint using the workflow_id returned from the start call. Continue polling until the status is 'completed' or 'failed'."
+    },
+    "expected_steps": ["build", "test", "deploy"]
+  }
+}

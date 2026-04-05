@@ -1,0 +1,13 @@
+{
+  "task_description": "Merge patient appointment data from three clinical systems (scheduling CSV, electronic health record JSON, and billing system text export) into a unified appointment dataset.",
+  "input_data": {
+    "context": "A medical practice is auditing patient appointments across three systems. The scheduling CSV has appointment ID, patient name, date, time, provider, and status. The EHR JSON has encounter ID, patient MRN, date, diagnoses, procedures, and provider notes flag. The billing text export has claim number, patient name, date of service, CPT codes, and payment status. Records must be matched by patient name and date, reconciling different ID systems.",
+    "files": [
+      { "path": "scheduling_export.csv", "format": "CSV", "records": 200 },
+      { "path": "ehr_encounters.json", "format": "JSON", "records": 185 },
+      { "path": "billing_claims.txt", "format": "text", "records": 190 }
+    ],
+    "expected_unique_appointments": 210,
+    "known_issues": ["15 no-show appointments have no EHR encounter", "10 encounters missing billing claims", "Patient name spelling inconsistencies"]
+  }
+}

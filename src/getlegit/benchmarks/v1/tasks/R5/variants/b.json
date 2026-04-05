@@ -1,0 +1,9 @@
+{
+  "task_description": "Conduct a literature survey on federated learning for healthcare applications, covering key papers from 2018 to present.",
+  "input_data": {
+    "topic": "Federated Learning in Healthcare",
+    "context": "Our hospital consortium is exploring federated learning to train diagnostic AI models across institutions without sharing patient data. The survey should cover federated learning algorithms (FedAvg, FedProx, etc.), privacy guarantees (differential privacy, secure aggregation), applications in medical imaging, EHR analysis, and drug discovery, as well as real-world deployment challenges. Focus on papers from top venues (MICCAI, Nature Medicine, JMLR, IEEE TPAMI) and relevant clinical informatics journals.",
+    "time_range": "2018-2025",
+    "min_papers": 10
+  }
+}

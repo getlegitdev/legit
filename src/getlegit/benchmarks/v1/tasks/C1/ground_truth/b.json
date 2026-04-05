@@ -1,0 +1,5 @@
+{
+  "fixed_code": "def is_palindrome(s):\n    s = s.lower().strip()\n    left = 0\n    right = len(s) - 1\n    while left < right:\n        if s[left] != s[right]:\n            return False\n        left += 1\n        right -= 1\n    return True",
+  "bug_description": "Missing return statements: the function never returns True or False. When characters don't match, it should return False immediately instead of continuing. After the loop, it should return True.",
+  "keywords": ["return", "missing", "True", "False", "fix", "bug"]
+}

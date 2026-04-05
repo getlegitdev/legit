@@ -1,0 +1,45 @@
+{
+  "task_id": "W6",
+  "category": "write",
+  "level": 4,
+  "level_multiplier": 3.0,
+  "title": "RFP response",
+  "description": "Write a comprehensive Request for Proposal (RFP) response that addresses technical requirements, provides a solution architecture, includes pricing considerations, and demonstrates domain expertise.",
+  "time_limit_seconds": 1800,
+  "baseline_seconds": 900,
+  "allowed_tools": ["web_search", "file_read"],
+  "layer1_weight": 0.10,
+  "layer2_weight": 0.90,
+  "output_schema": {
+    "type": "object",
+    "required": ["executive_summary", "company_overview", "technical_approach", "solution_architecture", "implementation_timeline", "team_qualifications", "pricing_summary", "risk_mitigation"],
+    "properties": {
+      "executive_summary": { "type": "string" },
+      "company_overview": { "type": "string" },
+      "technical_approach": { "type": "string" },
+      "solution_architecture": { "type": "string" },
+      "implementation_timeline": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "phase": { "type": "string" },
+            "duration": { "type": "string" },
+            "deliverables": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      },
+      "team_qualifications": { "type": "string" },
+      "pricing_summary": { "type": "string" },
+      "risk_mitigation": { "type": "string" },
+      "references": { "type": "array", "items": { "type": "string" } },
+      "compliance_matrix": { "type": "object" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 4 },
+    { "type": "required_fields", "weight": 3, "fields": ["executive_summary", "technical_approach", "solution_architecture", "implementation_timeline"] },
+    { "type": "keyword_present", "weight": 3, "keywords": [] }
+  ],
+  "variants": ["a", "b", "c"]
+}

@@ -1,0 +1,38 @@
+{
+  "numeric_values": { "services_called": 3 },
+  "keywords": ["service-a", "service-b", "service-c", "token", "aggregated"],
+  "expected_response_data": {
+    "service_results": [
+      {
+        "service": "service-a",
+        "status": 200,
+        "data": {
+          "token": "auth-token-abc123",
+          "expires_in": 3600
+        }
+      },
+      {
+        "service": "service-b",
+        "status": 200,
+        "data": {
+          "enriched_data": {
+            "user_segments": ["enterprise", "growth", "starter"],
+            "total_accounts": 1250
+          }
+        }
+      },
+      {
+        "service": "service-c",
+        "status": 200,
+        "data": {
+          "analysis": {
+            "top_segment": "enterprise",
+            "growth_rate": 0.15,
+            "recommendation": "Focus on enterprise retention"
+          }
+        }
+      }
+    ],
+    "all_successful": true
+  }
+}

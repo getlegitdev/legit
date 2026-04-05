@@ -1,0 +1,19 @@
+{
+  "1": {
+    "orders": [
+      { "id": 101, "product": "Widget A", "quantity": 2, "total": 39.98, "status": "delivered" },
+      { "id": 102, "product": "Gadget X", "quantity": 1, "total": 49.99, "status": "shipped" }
+    ]
+  },
+  "2": {
+    "orders": [
+      { "id": 103, "product": "Widget B", "quantity": 3, "total": 89.97, "status": "processing" },
+      { "id": 104, "product": "Gadget Y", "quantity": 1, "total": 59.99, "status": "delivered" }
+    ]
+  },
+  "3": {
+    "orders": [
+      { "id": 105, "product": "Widget A", "quantity": 5, "total": 99.95, "status": "shipped" }
+    ]
+  }
+}

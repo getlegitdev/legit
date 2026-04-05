@@ -1,0 +1,29 @@
+{
+  "task_description": "Call three services sequentially where each service's input depends on the previous service's output. Service A provides a token, Service B uses it to get data, and Service C processes the combined result.",
+  "input_data": {
+    "services": [
+      {
+        "name": "service-a",
+        "url": "http://localhost:9999/api/service-a",
+        "method": "GET",
+        "headers": { "Accept": "application/json", "X-Scenario": "auth-token" },
+        "description": "Returns an authentication token to use with subsequent services"
+      },
+      {
+        "name": "service-b",
+        "url": "http://localhost:9999/api/service-b",
+        "method": "GET",
+        "headers": { "Accept": "application/json", "X-Scenario": "with-token" },
+        "description": "Returns enriched data when called with the token from service-a"
+      },
+      {
+        "name": "service-c",
+        "url": "http://localhost:9999/api/service-c",
+        "method": "GET",
+        "headers": { "Accept": "application/json", "X-Scenario": "aggregate" },
+        "description": "Returns final aggregated analysis combining data from previous services"
+      }
+    ],
+    "aggregation_instructions": "Chain the calls sequentially, passing context from each to the next, and return the final aggregated result."
+  }
+}

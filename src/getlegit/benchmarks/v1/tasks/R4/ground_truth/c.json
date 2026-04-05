@@ -1,0 +1,10 @@
+{
+  "expected_ranges": {
+    "tam_usd_billions": { "min": 2, "max": 15 },
+    "sam_usd_billions": { "min": 0.5, "max": 5 },
+    "som_usd_millions": { "min": 5, "max": 100 }
+  },
+  "keywords": ["TAM", "SAM", "SOM", "market", "EV", "charging", "Southeast Asia"],
+  "numeric_values": { "tam.value_usd": 5000000000 },
+  "min_counts": { "assumptions": 3, "data_sources": 2 }
+}

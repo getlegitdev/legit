@@ -1,0 +1,15 @@
+{
+  "task_description": "Write a customer response email to a SaaS customer who is frustrated about repeated billing errors on their enterprise account.",
+  "input_data": {
+    "customer_name": "Sarah Chen",
+    "company": "Nextera Solutions",
+    "account_tier": "Enterprise",
+    "issue": "Customer has been double-charged for the past 3 months despite raising tickets each time. The latest charge was $4,500 instead of the correct $2,250.",
+    "previous_interactions": "3 previous support tickets, each resolved with a refund but the root issue keeps recurring.",
+    "tone_guidance": "Empathetic, accountable, professional",
+    "requirements": {
+      "should_include": ["Acknowledgment of frustration", "Specific refund details", "Root cause explanation", "Concrete prevention plan", "Direct contact for escalation"],
+      "max_word_count": 500
+    }
+  }
+}

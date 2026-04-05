@@ -1,0 +1,40 @@
+{
+  "task_description": "Given clinical trial data for a new drug treatment, validate the hypotheses about efficacy and side effects compared to placebo.",
+  "input_data": {
+    "hypotheses": [
+      "H1: The treatment reduces symptom severity scores significantly compared to placebo",
+      "H2: The treatment achieves remission in more than 30% of patients",
+      "H3: The side effect rate of the treatment is not significantly higher than placebo"
+    ],
+    "placebo_group": {
+      "name": "placebo",
+      "sample_size": 200,
+      "symptom_scores": {
+        "baseline_mean": 72.5, "baseline_std": 12.3,
+        "final_mean": 65.2, "final_std": 14.1,
+        "change_mean": -7.3, "change_std": 8.2
+      },
+      "remission_count": 28,
+      "remission_rate": 0.14,
+      "side_effects_count": 35,
+      "side_effect_rate": 0.175,
+      "dropouts": 12
+    },
+    "treatment_group": {
+      "name": "drug_treatment",
+      "sample_size": 200,
+      "symptom_scores": {
+        "baseline_mean": 73.1, "baseline_std": 11.8,
+        "final_mean": 48.5, "final_std": 16.2,
+        "change_mean": -24.6, "change_std": 12.5
+      },
+      "remission_count": 78,
+      "remission_rate": 0.39,
+      "side_effects_count": 52,
+      "side_effect_rate": 0.26,
+      "dropouts": 18
+    },
+    "significance_level": 0.05,
+    "context": "Phase III double-blind randomized controlled trial for moderate depression"
+  }
+}

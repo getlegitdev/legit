@@ -1,0 +1,11 @@
+{
+  "overall_risk_score": 7.5,
+  "top_risks": ["Model bias", "Regulatory scrutiny", "Concept drift"],
+  "risk_matrix": {
+    "high": ["Model bias", "Regulatory scrutiny"],
+    "medium": ["Concept drift", "Data quality", "Fallback system"],
+    "low": ["Operational risk", "Adversarial inputs"]
+  },
+  "critical_mitigation": "Conduct thorough bias audit with disparate impact analysis, implement model explainability layer (SHAP/LIME), maintain legacy system for 6+ months as fallback, and set up continuous monitoring for concept drift.",
+  "keywords": ["bias", "fair lending", "explainability", "concept drift", "SHAP", "regulatory", "disparate impact", "monitoring"]
+}

@@ -1,0 +1,18 @@
+{
+  "numeric_values": { "steps_completed": 3 },
+  "keywords": ["completed", "workflow", "data_collection", "analysis", "rendering"],
+  "expected_response_data": {
+    "workflow_id": "wf-report-001",
+    "final_status": "completed",
+    "step_results": [
+      { "step_name": "data_collection", "status": "completed", "output": { "sources_queried": 5, "data_points": 12400 } },
+      { "step_name": "analysis", "status": "completed", "output": { "metrics_computed": 28, "anomalies_detected": 3 } },
+      { "step_name": "rendering", "status": "completed", "output": { "format": "pdf", "pages": 12, "charts": 8 } }
+    ],
+    "workflow_output": {
+      "report_url": "/reports/monthly_summary_2026_03.pdf",
+      "generated_at": "2026-04-01T12:00:00Z",
+      "processing_time_ms": 5400
+    }
+  }
+}

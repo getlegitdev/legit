@@ -1,0 +1,63 @@
+{
+  "task_id": "E3",
+  "category": "extract",
+  "level": 2,
+  "level_multiplier": 1.5,
+  "title": "Web structured extraction",
+  "description": "Extract structured data from web page content (provided as HTML or text), parsing product listings, event schedules, or directory entries into a normalized JSON format.",
+  "time_limit_seconds": 300,
+  "baseline_seconds": 180,
+  "allowed_tools": ["file_read"],
+  "layer1_weight": 0.70,
+  "layer2_weight": 0.30,
+  "output_schema": {
+    "type": "object",
+    "required": ["source", "extracted_items", "extraction_stats"],
+    "properties": {
+      "source": {
+        "type": "object",
+        "required": ["url", "page_title", "extraction_date"],
+        "properties": {
+          "url": { "type": "string" },
+          "page_title": { "type": "string" },
+          "extraction_date": { "type": "string" }
+        }
+      },
+      "extracted_items": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "category"],
+          "properties": {
+            "name": { "type": "string" },
+            "category": { "type": "string" },
+            "description": { "type": "string" },
+            "price": { "type": "string" },
+            "url": { "type": "string" },
+            "rating": { "type": "number" },
+            "attributes": {
+              "type": "object",
+              "additionalProperties": { "type": "string" }
+            }
+          }
+        }
+      },
+      "extraction_stats": {
+        "type": "object",
+        "required": ["total_items", "fields_extracted"],
+        "properties": {
+          "total_items": { "type": "integer" },
+          "fields_extracted": { "type": "array", "items": { "type": "string" } },
+          "completeness_rate": { "type": "number" }
+        }
+      }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 25 },
+    { "type": "required_fields", "weight": 20, "fields": ["extracted_items", "extraction_stats"] },
+    { "type": "min_count", "weight": 15, "field": "extracted_items", "min": 5 },
+    { "type": "numeric_accuracy", "weight": 10, "field": "extraction_stats.total_items", "tolerance": 0.10 }
+  ],
+  "variants": ["a", "b", "c"]
+}

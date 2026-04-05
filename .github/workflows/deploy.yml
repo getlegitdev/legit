@@ -1,0 +1,22 @@
+name: Deploy
+
+on:
+  workflow_dispatch:  # Manual trigger only (deploy is done via wrangler CLI)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_SUPABASE_URL: "https://placeholder.supabase.co"
+      PUBLIC_SUPABASE_ANON_KEY: "placeholder"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: cd web && npm ci && npm run build
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: pages deploy web/dist --project-name=legit

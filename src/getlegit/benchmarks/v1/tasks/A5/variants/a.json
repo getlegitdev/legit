@@ -1,0 +1,26 @@
+{
+  "task_description": "Assess the risks of migrating a legacy monolithic application to a microservices architecture. The project has a 6-month timeline and a team of 8 engineers.",
+  "input_data": {
+    "project": {
+      "name": "Legacy Monolith to Microservices Migration",
+      "timeline_months": 6,
+      "team_size": 8,
+      "budget_usd": 500000,
+      "current_system_age_years": 12,
+      "codebase_lines": 450000,
+      "test_coverage_percent": 35,
+      "external_dependencies": 15,
+      "daily_active_users": 50000,
+      "uptime_sla_percent": 99.9
+    },
+    "risk_factors": [
+      {"name": "Data migration complexity", "description": "12 years of accumulated data across 85 tables with complex relationships"},
+      {"name": "Team expertise gap", "description": "Only 2 of 8 engineers have microservices experience"},
+      {"name": "Integration dependencies", "description": "15 external systems rely on the current API contracts"},
+      {"name": "Downtime constraints", "description": "99.9% SLA allows only 8.7 hours of downtime per year"},
+      {"name": "Incomplete documentation", "description": "Roughly 20% of the codebase has documentation"},
+      {"name": "Testing gaps", "description": "Only 35% test coverage, many untested code paths"}
+    ],
+    "context": "Financial services company with regulatory compliance requirements"
+  }
+}

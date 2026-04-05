@@ -1,0 +1,9 @@
+{
+  "task_description": "Estimate the market size (TAM/SAM/SOM) for AI-powered code review tools targeting enterprise software development teams.",
+  "input_data": {
+    "product": "AI code review tool",
+    "context": "A startup is building an AI-powered code review tool that automatically detects bugs, security vulnerabilities, and code quality issues in pull requests. The tool integrates with GitHub, GitLab, and Bitbucket. Target customers are enterprise software teams with 50+ developers. Pricing model is $30/developer/month. The company plans to focus initially on North American and European markets.",
+    "geography": "North America and Europe",
+    "pricing": "$30/developer/month"
+  }
+}

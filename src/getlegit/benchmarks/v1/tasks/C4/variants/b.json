@@ -1,0 +1,15 @@
+{
+  "task_description": "Refactor the following Python code that manages a student grade book. The code has poor structure, duplication, and mixes concerns. Preserve all behavior while improving the design.",
+  "input_data": {
+    "code": "students = {}\n\ndef add_student(name):\n    if name in students:\n        return False\n    students[name] = {'grades': [], 'attendance': 0, 'total_classes': 0}\n    return True\n\ndef add_grade(name, subject, score):\n    if name not in students:\n        return False\n    if score < 0 or score > 100:\n        return False\n    students[name]['grades'].append({'subject': subject, 'score': score})\n    return True\n\ndef get_average(name):\n    if name not in students:\n        return -1\n    if len(students[name]['grades']) == 0:\n        return 0\n    total = 0\n    for g in students[name]['grades']:\n        total = total + g['score']\n    return total / len(students[name]['grades'])\n\ndef get_letter_grade(name):\n    avg = get_average(name)\n    if avg == -1:\n        return 'N/A'\n    if avg >= 90:\n        return 'A'\n    if avg >= 80:\n        return 'B'\n    if avg >= 70:\n        return 'C'\n    if avg >= 60:\n        return 'D'\n    return 'F'\n\ndef record_attendance(name, present):\n    if name not in students:\n        return False\n    students[name]['total_classes'] = students[name]['total_classes'] + 1\n    if present:\n        students[name]['attendance'] = students[name]['attendance'] + 1\n    return True\n\ndef get_attendance_rate(name):\n    if name not in students:\n        return -1\n    if students[name]['total_classes'] == 0:\n        return 0\n    return students[name]['attendance'] / students[name]['total_classes']\n\ndef get_report(name):\n    if name not in students:\n        return None\n    return {\n        'name': name,\n        'average': get_average(name),\n        'letter_grade': get_letter_grade(name),\n        'attendance_rate': get_attendance_rate(name),\n        'total_grades': len(students[name]['grades'])\n    }",
+    "test_cases": [
+      {"action": "add_student", "args": ["Alice"], "expected": true},
+      {"action": "add_grade", "args": ["Alice", "Math", 95], "expected": true},
+      {"action": "add_grade", "args": ["Alice", "English", 87], "expected": true},
+      {"action": "get_average", "args": ["Alice"], "expected": 91.0},
+      {"action": "get_letter_grade", "args": ["Alice"], "expected": "A"},
+      {"action": "get_average", "args": ["Unknown"], "expected": -1}
+    ],
+    "language": "python"
+  }
+}

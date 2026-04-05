@@ -1,0 +1,10 @@
+{
+  "expected_contradictions": [
+    "Weight loss effectiveness: some studies show significant long-term weight loss, others show no advantage over continuous calorie restriction",
+    "Metabolic health: conflicting evidence on insulin sensitivity improvements depending on study duration and population",
+    "Muscle mass: debate over whether IF leads to greater muscle loss compared to standard dieting when protein intake is controlled"
+  ],
+  "keywords": ["contradiction", "inconsistency", "conflict", "fasting", "metabolic", "evidence"],
+  "numeric_values": {},
+  "min_counts": { "contradictions": 3, "sources_analyzed": 5 }
+}

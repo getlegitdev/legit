@@ -1,0 +1,8 @@
+{
+  "keywords": ["async/await", "offline", "GDPR", "CCPA", "iOS", "Android", "breaking", "migration", "encryption"],
+  "numeric_values": {},
+  "min_word_count": 300,
+  "expected_version": "5.0.0",
+  "expected_breaking_changes_count": 3,
+  "expected_categories": ["added", "changed", "fixed", "security", "removed"]
+}

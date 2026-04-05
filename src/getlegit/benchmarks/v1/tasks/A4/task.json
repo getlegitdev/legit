@@ -1,0 +1,73 @@
+{
+  "task_id": "A4",
+  "category": "analyze",
+  "level": 3,
+  "level_multiplier": 2.0,
+  "title": "Root cause analysis",
+  "description": "Given system metrics and event logs, identify the root cause of a performance degradation or failure.",
+  "time_limit_seconds": 900,
+  "baseline_seconds": 480,
+  "allowed_tools": ["file_read", "code_execute"],
+  "layer1_weight": 0.30,
+  "layer2_weight": 0.70,
+  "output_schema": {
+    "type": "object",
+    "required": ["root_cause", "contributing_factors", "evidence", "causal_chain", "remediation", "summary"],
+    "properties": {
+      "root_cause": {
+        "type": "object",
+        "required": ["description", "confidence"],
+        "properties": {
+          "description": { "type": "string" },
+          "confidence": { "type": "number" }
+        }
+      },
+      "contributing_factors": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["factor", "impact_level"],
+          "properties": {
+            "factor": { "type": "string" },
+            "impact_level": { "type": "string", "enum": ["high", "medium", "low"] }
+          }
+        }
+      },
+      "evidence": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["source", "observation"],
+          "properties": {
+            "source": { "type": "string" },
+            "observation": { "type": "string" }
+          }
+        }
+      },
+      "causal_chain": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "remediation": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["action", "priority"],
+          "properties": {
+            "action": { "type": "string" },
+            "priority": { "type": "string", "enum": ["immediate", "short-term", "long-term"] }
+          }
+        }
+      },
+      "summary": { "type": "string" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "required_fields", "weight": 5, "fields": ["root_cause", "causal_chain"] },
+    { "type": "min_count", "weight": 5, "field": "contributing_factors", "min": 2 },
+    { "type": "min_count", "weight": 5, "field": "evidence", "min": 2 },
+    { "type": "min_count", "weight": 5, "field": "causal_chain", "min": 3 }
+  ],
+  "variants": ["a", "b", "c"]
+}

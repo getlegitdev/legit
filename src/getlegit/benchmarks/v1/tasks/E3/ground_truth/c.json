@@ -1,0 +1,7 @@
+{
+  "expected_item_count": 15,
+  "expected_fields": ["name", "cuisine", "neighborhood", "address", "rating", "price_range", "hours"],
+  "keywords": ["restaurant", "cuisine", "rating", "hours", "address"],
+  "numeric_values": { "extraction_stats.total_items": 15 },
+  "min_counts": { "extracted_items": 5 }
+}

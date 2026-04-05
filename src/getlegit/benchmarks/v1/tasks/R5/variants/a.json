@@ -1,0 +1,9 @@
+{
+  "task_description": "Conduct a literature survey on retrieval-augmented generation (RAG) techniques for large language models, covering key papers from 2020 to present.",
+  "input_data": {
+    "topic": "Retrieval-Augmented Generation (RAG) for LLMs",
+    "context": "We are building a RAG system for enterprise document Q&A and need to understand the state of the art. The survey should cover foundational RAG architectures, chunking and retrieval strategies, re-ranking methods, evaluation frameworks, and recent advances like multi-hop reasoning and agentic RAG. Focus on papers from top ML venues (NeurIPS, ICML, ACL, EMNLP, NAACL) and influential preprints.",
+    "time_range": "2020-2025",
+    "min_papers": 10
+  }
+}

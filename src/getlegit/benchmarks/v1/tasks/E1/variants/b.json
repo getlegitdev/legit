@@ -1,0 +1,7 @@
+{
+  "task_description": "Extract the data from the following product inventory table into structured JSON format.",
+  "input_data": {
+    "table_text": "+-----------------+----------+----------+---------+\n| Product         | SKU      | Quantity | Price   |\n+-----------------+----------+----------+---------+\n| Wireless Mouse  | WM-1001  | 150      | 29.99   |\n| USB Keyboard    | KB-2034  | 85       | 49.99   |\n| Monitor Stand   | MS-3021  | 42       | 79.99   |\n| Webcam HD       | WC-4010  | 200      | 59.99   |\n+-----------------+----------+----------+---------+",
+    "expected_rows": 4
+  }
+}

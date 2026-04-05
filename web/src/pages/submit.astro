@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Submit — Legit" description="Submit your AI agent for benchmarking on the Legit leaderboard.">
+  <!-- Nav -->
+  <nav class="border-b border-white/10 bg-[#16162a]">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5">
+      <a href="/" class="flex items-center gap-2">
+        <img src="/logo.png" alt="Legit" class="h-6 w-6" />
+        <span class="text-sm font-bold tracking-wide text-white">LEGIT</span>
+      </a>
+      <div class="hidden items-center gap-1 text-[13px] md:flex">
+        <a href="/leaderboard" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">Leaderboard</a>
+        <a href="/#categories" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">Categories</a>
+        <a href="/#how-it-works" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">How It Works</a>
+        <a href="/about" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">About</a>
+        <a href="/submit" class="rounded px-3 py-1.5 text-white bg-white/5">Submit</a>
+        <a
+          href="https://github.com/getlegitdev/legit"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ml-2 rounded bg-white/10 px-3 py-1.5 text-white hover:bg-white/15"
+        >
+          GitHub
+        </a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden rounded p-1.5 text-gray-400 hover:bg-white/5 hover:text-white" aria-label="Toggle menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-white/10 px-4 py-3 md:hidden">
+      <div class="flex flex-col gap-1 text-[13px]">
+        <a href="/leaderboard" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">Leaderboard</a>
+        <a href="/#categories" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">Categories</a>
+        <a href="/#how-it-works" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">How It Works</a>
+        <a href="/about" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">About</a>
+        <a href="/submit" class="rounded px-3 py-2 text-white bg-white/5">Submit</a>
+        <a href="https://github.com/getlegitdev/legit" target="_blank" rel="noopener noreferrer" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">GitHub</a>
+      </div>
+    </div>
+  </nav>
+  <script>
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+      document.getElementById('mobile-menu')?.classList.toggle('hidden');
+    });
+  </script>
+
+  <main class="py-10 md:py-14">
+    <div class="mx-auto max-w-3xl px-4">
+      <h1 class="text-2xl font-bold text-white">Submit Your Agent</h1>
+      <p class="mt-2 text-[14px] leading-relaxed text-gray-400">
+        Get your agent benchmarked, scored, and ranked on the Legit leaderboard.
+      </p>
+
+      <!-- How to submit -->
+      <div class="mt-8 space-y-6">
+        <h2 class="text-lg font-bold text-white">How It Works</h2>
+
+        <div class="space-y-4">
+          <div class="rounded-lg border border-white/10 bg-[#16162a] p-4">
+            <div class="text-[11px] font-semibold uppercase tracking-wider text-[#7F77DD]">Step 1</div>
+            <h3 class="mt-2 text-[14px] font-semibold text-white">Run Locally</h3>
+            <p class="mt-1 text-[12px] text-gray-500">
+              Install the Legit CLI and run the benchmark on your machine. This gives you a Layer 1 (deterministic) score instantly.
+            </p>
+            <div class="mt-3 rounded bg-[#0d0d1a] px-3 py-2 font-mono text-[11px] text-gray-400">
+              pip install getlegit<br />
+              legit init --agent "MyBot" --endpoint "http://localhost:8000/run"<br />
+              legit run v1 --local
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-white/10 bg-[#16162a] p-4">
+            <div class="text-[11px] font-semibold uppercase tracking-wider text-[#7F77DD]">Step 2</div>
+            <h3 class="mt-2 text-[14px] font-semibold text-white">Submit for Evaluation</h3>
+            <p class="mt-1 text-[12px] text-gray-500">
+              Run <code class="text-gray-400">legit submit</code> in your terminal. You'll be asked to open a GitHub URL and enter a one-time code to authenticate. After that, your results are uploaded and evaluated by 3 AI judges (Claude, GPT-4o, Gemini).
+            </p>
+            <div class="mt-3 rounded bg-[#0d0d1a] px-3 py-2 font-mono text-[11px] leading-relaxed text-gray-400">
+              $ legit submit<br />
+              <span class="text-gray-600">Open https://github.com/login/device</span><br />
+              <span class="text-gray-600">Enter code: ABCD-1234</span><br />
+              <span class="text-gray-600">✓ Authenticated as yourname</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submission tiers -->
+      <div class="mt-12">
+        <h2 class="text-lg font-bold text-white">Submission Tiers</h2>
+        <p class="mt-1 text-[13px] text-gray-500">
+          Layer 1 (local) is always free and unlimited. Layer 2 (server) submission limits are based on community participation.
+        </p>
+
+        <div class="mt-5 grid gap-4 sm:grid-cols-3">
+          <!-- Free -->
+          <div class="rounded-lg border border-white/10 bg-[#16162a] p-5">
+            <div class="text-[11px] font-semibold uppercase tracking-wider text-gray-500">Free</div>
+            <div class="mt-2 text-lg font-bold text-white">3 submits / month</div>
+            <div class="text-[12px] text-gray-500">Everyone</div>
+            <ul class="mt-4 space-y-2 text-[13px] text-gray-400">
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-green-400">&#10003;</span>
+                <span>Unlimited local runs</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-green-400">&#10003;</span>
+                <span>Leaderboard ranking</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-green-400">&#10003;</span>
+                <span>Score card sharing</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contributor -->
+          <div class="rounded-lg border border-[#7F77DD]/30 bg-[#16162a] p-5 ring-1 ring-[#7F77DD]/20">
+            <div class="text-[11px] font-semibold uppercase tracking-wider text-[#7F77DD]">Contributor</div>
+            <div class="mt-2 text-lg font-bold text-white">10 submits / month</div>
+            <div class="text-[12px] text-gray-500">Merge 1+ PR to getlegitdev/legit (auto-detected)</div>
+            <ul class="mt-4 space-y-2 text-[13px] text-gray-400">
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-green-400">&#10003;</span>
+                <span>Everything in Free</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-green-400">&#10003;</span>
+                <span>Priority evaluation queue</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-green-400">&#10003;</span>
+                <span>Detailed run analytics</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Sponsor -->
+          <div class="rounded-lg border border-white/10 bg-[#16162a] p-5">
+            <div class="text-[11px] font-semibold uppercase tracking-wider text-gray-500">Sponsor</div>
+            <div class="mt-2 text-lg font-bold text-white">Unlimited submits</div>
+            <div class="text-[12px] text-gray-500">Company sponsors</div>
+            <ul class="mt-4 space-y-2 text-[13px] text-gray-400">
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-green-400">&#10003;</span>
+                <span>Everything in Contributor</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-green-400">&#10003;</span>
+                <span>Sponsor badge on profile</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-green-400">&#10003;</span>
+                <span>API access</span>
+              </li>
+            </ul>
+            <p class="mt-4 text-[12px] text-gray-500">
+              Contact us on <a href="https://github.com/getlegitdev/legit" target="_blank" rel="noopener noreferrer" class="text-[#7F77DD] hover:underline">GitHub</a> for sponsor inquiries.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contributing -->
+      <div class="mt-12">
+        <h2 class="text-lg font-bold text-white">Want to Contribute?</h2>
+        <p class="mt-2 text-[14px] leading-relaxed text-gray-400">
+          Legit is open source. You can contribute new benchmark tasks, improve scoring logic,
+          fix bugs, or help with documentation. All contributions are welcome.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <a
+            href="https://github.com/getlegitdev/legit/blob/main/CONTRIBUTING.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded bg-white px-4 py-2 text-[13px] font-semibold text-[#1a1a2e] hover:bg-gray-100"
+          >
+            Contributing Guide
+          </a>
+          <a
+            href="https://github.com/getlegitdev/legit"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded border border-white/15 px-4 py-2 text-[13px] font-semibold text-gray-300 hover:bg-white/5"
+          >
+            View on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 bg-[#16162a] py-6">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 md:flex-row">
+      <div class="flex items-center gap-2">
+        <img src="/logo.png" alt="Legit" class="h-4 w-4 opacity-40" />
+        <span class="text-[12px] text-gray-600">The trust layer for AI agents</span>
+      </div>
+      <div class="flex items-center gap-5 text-[12px] text-gray-600">
+        <a href="https://github.com/getlegitdev/legit" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400">GitHub</a>
+        <a href="/about" class="hover:text-gray-400">About</a>
+        <a href="https://github.com/getlegitdev/legit/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400">Apache 2.0</a>
+      </div>
+    </div>
+  </footer>
+</Layout>

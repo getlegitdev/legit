@@ -1,0 +1,13 @@
+{
+  "expected_papers": [
+    "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "REALM: Retrieval-Augmented Language Model Pre-Training",
+    "Atlas: Few-shot Learning with Retrieval Augmented Language Models",
+    "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+    "Lost in the Middle: How Language Models Use Long Contexts"
+  ],
+  "expected_themes": ["retrieval strategies", "generation quality", "evaluation", "multi-hop reasoning"],
+  "keywords": ["retrieval", "augmented", "generation", "embedding", "chunking", "re-ranking"],
+  "numeric_values": {},
+  "min_counts": { "papers": 8, "themes": 3, "open_questions": 3 }
+}

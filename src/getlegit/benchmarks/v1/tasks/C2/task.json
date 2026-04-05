@@ -1,0 +1,43 @@
+{
+  "task_id": "C2",
+  "category": "code",
+  "level": 2,
+  "level_multiplier": 1.5,
+  "title": "Test generation",
+  "description": "Generate comprehensive unit tests for the given Python function, covering edge cases and typical usage.",
+  "time_limit_seconds": 300,
+  "baseline_seconds": 180,
+  "allowed_tools": ["code_execute"],
+  "layer1_weight": 0.50,
+  "layer2_weight": 0.50,
+  "output_schema": {
+    "type": "object",
+    "required": ["test_code", "test_cases_description", "coverage_areas"],
+    "properties": {
+      "test_code": { "type": "string" },
+      "test_cases_description": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "description", "category"],
+          "properties": {
+            "name": { "type": "string" },
+            "description": { "type": "string" },
+            "category": { "type": "string", "enum": ["normal", "edge_case", "error_handling", "boundary"] }
+          }
+        }
+      },
+      "coverage_areas": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "required_fields", "weight": 10, "fields": ["test_code"] },
+    { "type": "code_parses", "weight": 20, "field": "test_code", "language": "python" },
+    { "type": "min_count", "weight": 10, "field": "test_cases_description", "min": 5 }
+  ],
+  "variants": ["a", "b", "c"]
+}

@@ -1,0 +1,34 @@
+{
+  "task_description": "Given the following A/B test data for a website redesign, validate the hypotheses about user engagement and conversion rates.",
+  "input_data": {
+    "hypotheses": [
+      "H1: The new design increases average session duration by at least 15%",
+      "H2: The new design improves conversion rate",
+      "H3: The new design reduces bounce rate"
+    ],
+    "control_group": {
+      "name": "original_design",
+      "sample_size": 5000,
+      "session_durations_seconds": {
+        "mean": 185, "std": 72, "median": 168, "min": 8, "max": 1200
+      },
+      "conversion_rate": 0.032,
+      "conversions": 160,
+      "bounce_rate": 0.45,
+      "bounces": 2250
+    },
+    "treatment_group": {
+      "name": "new_design",
+      "sample_size": 5000,
+      "session_durations_seconds": {
+        "mean": 210, "std": 85, "median": 190, "min": 5, "max": 1450
+      },
+      "conversion_rate": 0.041,
+      "conversions": 205,
+      "bounce_rate": 0.38,
+      "bounces": 1900
+    },
+    "significance_level": 0.05,
+    "context": "E-commerce website A/B test running for 30 days"
+  }
+}

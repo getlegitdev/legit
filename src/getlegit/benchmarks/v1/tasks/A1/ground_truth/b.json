@@ -1,0 +1,11 @@
+{
+  "numeric_values": {
+    "statistics.count": 30,
+    "statistics.mean": 14.74,
+    "statistics.median": 14.9,
+    "statistics.min": 11.5,
+    "statistics.max": 18.0
+  },
+  "keywords": ["temperature", "warming", "trend"],
+  "min_counts": { "trends": 2, "insights": 2 }
+}

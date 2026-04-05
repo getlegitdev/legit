@@ -1,0 +1,9 @@
+{
+  "task_description": "Conduct a literature survey on neural architecture search (NAS) and efficient model design, covering key papers from 2017 to present.",
+  "input_data": {
+    "topic": "Neural Architecture Search and Efficient Model Design",
+    "context": "Our team is developing edge AI models for mobile devices and needs to understand NAS techniques and efficient architecture design principles. The survey should cover search space design, search algorithms (reinforcement learning, evolutionary, gradient-based), hardware-aware NAS, once-for-all networks, and the evolution from NASNet to modern efficient architectures (EfficientNet, MobileNet variants). Include papers from top venues (CVPR, ICLR, NeurIPS, ICML) and industry research labs.",
+    "time_range": "2017-2025",
+    "min_papers": 10
+  }
+}

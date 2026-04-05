@@ -1,0 +1,42 @@
+{
+  "data_processing": {
+    "workflow_id": "wf-data-001",
+    "steps": [
+      { "step_name": "validation", "output": { "records_validated": 15000, "records_rejected": 23 } },
+      { "step_name": "transformation", "output": { "records_transformed": 14977, "format": "normalized" } },
+      { "step_name": "aggregation", "output": { "aggregated_records": 450, "output_format": "aggregated" } }
+    ],
+    "workflow_output": {
+      "total_input_records": 15000,
+      "total_output_records": 450,
+      "processing_time_ms": 3200
+    }
+  },
+  "report_generation": {
+    "workflow_id": "wf-report-001",
+    "steps": [
+      { "step_name": "data_collection", "output": { "sources_queried": 5, "data_points": 12400 } },
+      { "step_name": "analysis", "output": { "metrics_computed": 28, "anomalies_detected": 3 } },
+      { "step_name": "rendering", "output": { "format": "pdf", "pages": 12, "charts": 8 } }
+    ],
+    "workflow_output": {
+      "report_url": "/reports/monthly_summary_2026_03.pdf",
+      "generated_at": "2026-04-01T12:00:00Z",
+      "processing_time_ms": 5400
+    }
+  },
+  "deployment": {
+    "workflow_id": "wf-deploy-001",
+    "steps": [
+      { "step_name": "build", "output": { "image": "api-gateway:2.5.0", "build_time_s": 45 } },
+      { "step_name": "test", "output": { "tests_passed": 342, "tests_failed": 0, "coverage": 0.87 } },
+      { "step_name": "deploy", "output": { "instances_updated": 4, "strategy": "rolling", "rollback_available": true } }
+    ],
+    "workflow_output": {
+      "service": "api-gateway",
+      "version": "2.5.0",
+      "environment": "staging",
+      "deploy_time_ms": 8200
+    }
+  }
+}

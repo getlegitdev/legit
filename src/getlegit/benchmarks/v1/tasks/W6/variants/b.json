@@ -1,0 +1,33 @@
+{
+  "task_description": "Write an RFP response for a healthcare network seeking an AI-powered clinical decision support system.",
+  "input_data": {
+    "rfp_issuer": "Pacific Northwest Health Alliance (12-hospital network)",
+    "project": "AI Clinical Decision Support System",
+    "responding_company": "MedAI Solutions (health-tech company specializing in clinical AI, 150 employees, FDA-cleared products)",
+    "rfp_requirements": {
+      "scope": "Deploy an AI-powered clinical decision support system across all 12 hospitals that assists physicians with diagnosis suggestions, drug interaction alerts, treatment protocol recommendations, and early deterioration detection from patient vitals.",
+      "timeline": "18-month phased rollout",
+      "budget_range": "$5M - $8M",
+      "key_requirements": [
+        "HIPAA and HITECH compliance",
+        "Integration with Epic EHR system",
+        "FDA 510(k) clearance for clinical decision support modules",
+        "Sub-2-second response time for real-time alerts",
+        "Support for HL7 FHIR data standards",
+        "Clinician training program",
+        "Explainable AI with confidence scores"
+      ],
+      "evaluation_criteria": {
+        "clinical_accuracy_and_safety": "30%",
+        "technical_approach": "25%",
+        "experience_in_healthcare": "20%",
+        "price": "15%",
+        "implementation_and_training": "10%"
+      }
+    },
+    "requirements": {
+      "min_word_count": 1500,
+      "should_include": ["Executive summary", "Clinical AI methodology", "EHR integration approach", "Regulatory compliance strategy", "Phased rollout plan", "Training program details", "Pricing model", "Patient safety measures"]
+    }
+  }
+}

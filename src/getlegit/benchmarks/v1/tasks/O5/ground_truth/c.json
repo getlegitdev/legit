@@ -1,0 +1,39 @@
+{
+  "numeric_values": { "services_called": 3 },
+  "keywords": ["service-a", "service-b", "service-c", "health", "status"],
+  "expected_response_data": {
+    "service_results": [
+      {
+        "service": "service-a",
+        "status": 200,
+        "data": {
+          "service": "user-service",
+          "status": "healthy",
+          "version": "2.4.1",
+          "latency_ms": 12
+        }
+      },
+      {
+        "service": "service-b",
+        "status": 200,
+        "data": {
+          "service": "inventory-service",
+          "status": "healthy",
+          "version": "1.8.3",
+          "latency_ms": 8
+        }
+      },
+      {
+        "service": "service-c",
+        "status": 200,
+        "data": {
+          "service": "order-service",
+          "status": "healthy",
+          "version": "3.1.0",
+          "latency_ms": 15
+        }
+      }
+    ],
+    "all_successful": true
+  }
+}

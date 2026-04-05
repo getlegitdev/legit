@@ -1,0 +1,7 @@
+{
+  "expected_leadership": ["Dylan Field", "Sho Kuwamoto", "Yuhki Yamashita"],
+  "expected_competitors": ["Adobe XD", "Sketch", "InVision", "Canva"],
+  "keywords": ["revenue", "risk", "market", "design", "collaboration", "Adobe"],
+  "numeric_values": {},
+  "min_counts": { "leadership": 3, "risks": 3 }
+}

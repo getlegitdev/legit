@@ -1,0 +1,7 @@
+{
+  "task_description": "Review the following Python code for a user authentication module. Identify bugs, security issues, performance problems, and style violations.",
+  "input_data": {
+    "code": "import hashlib\nimport sqlite3\n\ndef create_user(username, password):\n    conn = sqlite3.connect('users.db')\n    cursor = conn.cursor()\n    hashed = hashlib.md5(password.encode()).hexdigest()\n    query = f\"INSERT INTO users (username, password) VALUES ('{username}', '{hashed}')\"\n    cursor.execute(query)\n    conn.commit()\n    return True\n\ndef login(username, password):\n    conn = sqlite3.connect('users.db')\n    cursor = conn.cursor()\n    hashed = hashlib.md5(password.encode()).hexdigest()\n    query = f\"SELECT * FROM users WHERE username='{username}' AND password='{hashed}'\"\n    cursor.execute(query)\n    result = cursor.fetchone()\n    if result:\n        return True\n    return False\n\ndef get_user(user_id):\n    conn = sqlite3.connect('users.db')\n    cursor = conn.cursor()\n    cursor.execute(f\"SELECT * FROM users WHERE id={user_id}\")\n    return cursor.fetchone()\n\ndef delete_user(user_id):\n    conn = sqlite3.connect('users.db')\n    cursor = conn.cursor()\n    cursor.execute(f\"DELETE FROM users WHERE id={user_id}\")\n    conn.commit()\n    return True",
+    "language": "python"
+  }
+}

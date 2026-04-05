@@ -1,0 +1,8 @@
+{
+  "expected_sections": ["Abstract", "Introduction", "Related Work", "Methodology", "Experiments", "Conclusion"],
+  "expected_table_count": 2,
+  "expected_table_names": ["Main Results", "Ablation Study"],
+  "keywords": ["accuracy", "baseline", "model", "dataset", "training"],
+  "numeric_values": {},
+  "min_counts": { "sections": 3, "tables": 1 }
+}

@@ -1,0 +1,75 @@
+{
+  "task_id": "E4",
+  "category": "extract",
+  "level": 3,
+  "level_multiplier": 2.0,
+  "title": "Multi-source integration",
+  "description": "Extract and merge data from multiple files of different formats (CSV, JSON, text) into a unified, deduplicated, and normalized dataset.",
+  "time_limit_seconds": 600,
+  "baseline_seconds": 300,
+  "allowed_tools": ["file_read"],
+  "layer1_weight": 0.60,
+  "layer2_weight": 0.40,
+  "output_schema": {
+    "type": "object",
+    "required": ["sources", "merged_records", "conflicts", "statistics"],
+    "properties": {
+      "sources": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["file", "format", "record_count"],
+          "properties": {
+            "file": { "type": "string" },
+            "format": { "type": "string" },
+            "record_count": { "type": "integer" },
+            "fields": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      },
+      "merged_records": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["id", "data", "source_files"],
+          "properties": {
+            "id": { "type": "string" },
+            "data": { "type": "object" },
+            "source_files": { "type": "array", "items": { "type": "string" } },
+            "confidence": { "type": "number" }
+          }
+        }
+      },
+      "conflicts": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["record_id", "field", "values", "resolution"],
+          "properties": {
+            "record_id": { "type": "string" },
+            "field": { "type": "string" },
+            "values": { "type": "array", "items": { "type": "string" } },
+            "resolution": { "type": "string" }
+          }
+        }
+      },
+      "statistics": {
+        "type": "object",
+        "required": ["total_input_records", "merged_output_records", "duplicates_found", "conflicts_found"],
+        "properties": {
+          "total_input_records": { "type": "integer" },
+          "merged_output_records": { "type": "integer" },
+          "duplicates_found": { "type": "integer" },
+          "conflicts_found": { "type": "integer" }
+        }
+      }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 20 },
+    { "type": "required_fields", "weight": 15, "fields": ["merged_records", "statistics"] },
+    { "type": "min_count", "weight": 15, "field": "merged_records", "min": 10 },
+    { "type": "numeric_accuracy", "weight": 10, "field": "statistics.total_input_records", "tolerance": 0.10 }
+  ],
+  "variants": ["a", "b", "c"]
+}

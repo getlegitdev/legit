@@ -1,0 +1,63 @@
+{
+  "task_id": "C5",
+  "category": "code",
+  "level": 3,
+  "level_multiplier": 2.0,
+  "title": "API design",
+  "description": "Design and implement a Python API (class or module) based on the given requirements, with proper error handling and documentation.",
+  "time_limit_seconds": 900,
+  "baseline_seconds": 480,
+  "allowed_tools": ["code_execute"],
+  "layer1_weight": 0.40,
+  "layer2_weight": 0.60,
+  "output_schema": {
+    "type": "object",
+    "required": ["api_code", "api_documentation", "usage_examples", "design_decisions"],
+    "properties": {
+      "api_code": { "type": "string" },
+      "api_documentation": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["endpoint", "description", "parameters", "returns"],
+          "properties": {
+            "endpoint": { "type": "string" },
+            "description": { "type": "string" },
+            "parameters": { "type": "array", "items": { "type": "object" } },
+            "returns": { "type": "string" }
+          }
+        }
+      },
+      "usage_examples": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["description", "code"],
+          "properties": {
+            "description": { "type": "string" },
+            "code": { "type": "string" }
+          }
+        }
+      },
+      "design_decisions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["decision", "rationale"],
+          "properties": {
+            "decision": { "type": "string" },
+            "rationale": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "required_fields", "weight": 5, "fields": ["api_code"] },
+    { "type": "code_parses", "weight": 15, "field": "api_code", "language": "python" },
+    { "type": "min_count", "weight": 5, "field": "api_documentation", "min": 3 },
+    { "type": "min_count", "weight": 5, "field": "usage_examples", "min": 2 }
+  ],
+  "variants": ["a", "b", "c"]
+}

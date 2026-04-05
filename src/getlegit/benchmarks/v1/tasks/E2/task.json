@@ -1,0 +1,66 @@
+{
+  "task_id": "E2",
+  "category": "extract",
+  "level": 2,
+  "level_multiplier": 1.5,
+  "title": "Complex PDF extraction",
+  "description": "Extract structured data from a complex PDF document containing tables, headers, and mixed formatting into a clean JSON representation.",
+  "time_limit_seconds": 300,
+  "baseline_seconds": 180,
+  "allowed_tools": ["file_read"],
+  "layer1_weight": 0.70,
+  "layer2_weight": 0.30,
+  "output_schema": {
+    "type": "object",
+    "required": ["document_title", "sections", "tables", "metadata"],
+    "properties": {
+      "document_title": { "type": "string" },
+      "sections": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["heading", "content"],
+          "properties": {
+            "heading": { "type": "string" },
+            "content": { "type": "string" },
+            "page_number": { "type": "integer" }
+          }
+        }
+      },
+      "tables": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["title", "headers", "rows"],
+          "properties": {
+            "title": { "type": "string" },
+            "headers": { "type": "array", "items": { "type": "string" } },
+            "rows": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "metadata": {
+        "type": "object",
+        "properties": {
+          "author": { "type": "string" },
+          "date": { "type": "string" },
+          "page_count": { "type": "integer" },
+          "document_type": { "type": "string" }
+        }
+      }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 25 },
+    { "type": "required_fields", "weight": 20, "fields": ["document_title", "sections", "tables"] },
+    { "type": "min_count", "weight": 15, "field": "sections", "min": 3 },
+    { "type": "min_count", "weight": 10, "field": "tables", "min": 1 }
+  ],
+  "variants": ["a", "b", "c"]
+}

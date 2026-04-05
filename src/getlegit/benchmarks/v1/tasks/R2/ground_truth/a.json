@@ -1,0 +1,6 @@
+{
+  "expected_candidates": ["PostgreSQL", "MongoDB", "CockroachDB", "Amazon Aurora", "Google Cloud Spanner"],
+  "keywords": ["performance", "scalability", "cost", "ACID", "transactions", "e-commerce"],
+  "numeric_values": {},
+  "min_counts": { "candidates": 3 }
+}

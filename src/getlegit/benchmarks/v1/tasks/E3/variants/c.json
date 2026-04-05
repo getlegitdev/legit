@@ -1,0 +1,10 @@
+{
+  "task_description": "Extract restaurant listings from a food directory page, normalizing names, cuisines, locations, ratings, and operating hours.",
+  "input_data": {
+    "page_type": "Restaurant directory",
+    "context": "The input file contains HTML content from a city restaurant guide page. Each listing includes the restaurant name, cuisine type(s), neighborhood, address, phone number, rating (out of 5), price range ($ to $$$$), operating hours, and notable features (e.g., 'outdoor seating', 'delivery available'). Some listings have special badges like 'New' or 'Editors Pick'. There are 15 restaurant listings.",
+    "file_path": "restaurant_directory.html",
+    "expected_item_count": 15,
+    "fields_to_extract": ["name", "cuisine", "neighborhood", "address", "phone", "rating", "price_range", "hours", "features", "badges"]
+  }
+}

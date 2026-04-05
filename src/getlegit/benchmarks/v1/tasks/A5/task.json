@@ -1,0 +1,68 @@
+{
+  "task_id": "A5",
+  "category": "analyze",
+  "level": 3,
+  "level_multiplier": 2.0,
+  "title": "Risk assessment",
+  "description": "Evaluate a project scenario with multiple risk factors and produce a comprehensive risk assessment with mitigation strategies.",
+  "time_limit_seconds": 900,
+  "baseline_seconds": 480,
+  "allowed_tools": ["file_read", "code_execute"],
+  "layer1_weight": 0.20,
+  "layer2_weight": 0.80,
+  "output_schema": {
+    "type": "object",
+    "required": ["risks", "overall_risk_score", "risk_matrix", "mitigation_plan", "contingencies", "summary"],
+    "properties": {
+      "risks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "probability", "impact", "risk_score", "category"],
+          "properties": {
+            "name": { "type": "string" },
+            "probability": { "type": "number" },
+            "impact": { "type": "number" },
+            "risk_score": { "type": "number" },
+            "category": { "type": "string" }
+          }
+        }
+      },
+      "overall_risk_score": { "type": "number" },
+      "risk_matrix": {
+        "type": "object",
+        "required": ["high", "medium", "low"],
+        "properties": {
+          "high": { "type": "array", "items": { "type": "string" } },
+          "medium": { "type": "array", "items": { "type": "string" } },
+          "low": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "mitigation_plan": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["risk_name", "strategy", "cost_estimate", "effectiveness"],
+          "properties": {
+            "risk_name": { "type": "string" },
+            "strategy": { "type": "string" },
+            "cost_estimate": { "type": "string" },
+            "effectiveness": { "type": "number" }
+          }
+        }
+      },
+      "contingencies": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "summary": { "type": "string" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 5 },
+    { "type": "min_count", "weight": 5, "field": "risks", "min": 3 },
+    { "type": "min_count", "weight": 5, "field": "mitigation_plan", "min": 3 },
+    { "type": "min_count", "weight": 5, "field": "contingencies", "min": 2 }
+  ],
+  "variants": ["a", "b", "c"]
+}

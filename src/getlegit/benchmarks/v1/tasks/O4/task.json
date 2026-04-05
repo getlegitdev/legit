@@ -1,0 +1,41 @@
+{
+  "task_id": "O4",
+  "category": "operate",
+  "level": 3,
+  "level_multiplier": 2.0,
+  "title": "Error recovery",
+  "description": "Handle API errors gracefully by implementing retry logic. The target endpoint returns errors on initial attempts but succeeds on retry, testing the agent's ability to detect failures and recover.",
+  "time_limit_seconds": 600,
+  "baseline_seconds": 300,
+  "allowed_tools": ["api_call"],
+  "layer1_weight": 0.60,
+  "layer2_weight": 0.40,
+  "output_schema": {
+    "type": "object",
+    "required": ["attempts", "final_status", "final_response", "errors_encountered"],
+    "properties": {
+      "attempts": { "type": "number" },
+      "final_status": { "type": "number" },
+      "final_response": { "type": "object" },
+      "errors_encountered": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "attempt": { "type": "number" },
+            "status_code": { "type": "number" },
+            "error_message": { "type": "string" }
+          }
+        }
+      },
+      "recovery_successful": { "type": "boolean" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 15 },
+    { "type": "numeric_accuracy", "weight": 20, "field": "final_status", "expected": 200 },
+    { "type": "required_fields", "weight": 15, "fields": ["attempts", "errors_encountered", "final_response"] },
+    { "type": "keyword_present", "weight": 10, "keywords": ["recovered", "retry", "success"] }
+  ],
+  "variants": ["a", "b", "c"]
+}

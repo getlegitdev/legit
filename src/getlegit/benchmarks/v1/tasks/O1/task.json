@@ -1,0 +1,29 @@
+{
+  "task_id": "O1",
+  "category": "operate",
+  "level": 1,
+  "level_multiplier": 1.0,
+  "title": "Single API call",
+  "description": "Make an API call to the specified endpoint and return the parsed response.",
+  "time_limit_seconds": 180,
+  "baseline_seconds": 60,
+  "allowed_tools": ["api_call"],
+  "layer1_weight": 0.80,
+  "layer2_weight": 0.20,
+  "output_schema": {
+    "type": "object",
+    "required": ["status_code", "response_data", "headers"],
+    "properties": {
+      "status_code": { "type": "number" },
+      "response_data": { "type": "object" },
+      "headers": { "type": "object" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 20 },
+    { "type": "numeric_accuracy", "weight": 25, "field": "status_code", "expected": 200 },
+    { "type": "required_fields", "weight": 20, "fields": ["response_data"] },
+    { "type": "keyword_present", "weight": 15, "keywords": ["status", "data"] }
+  ],
+  "variants": ["a", "b", "c"]
+}

@@ -1,0 +1,18 @@
+{
+  "task_description": "Clean and normalize a product catalog dataset containing pricing errors, unit inconsistencies, and corrupted descriptions from a database migration.",
+  "input_data": {
+    "dataset_type": "Product catalog",
+    "context": "An e-commerce company is cleaning a product catalog of 100 items after a botched database migration. Issues include prices stored as strings with mixed currency symbols and formats ($1,234.56 vs 1234.56 vs USD 1234), weight/dimension units inconsistently recorded (lbs vs kg, inches vs cm with some values clearly in wrong units), HTML tags and escape sequences in descriptions, duplicate products with different SKU formats, categories using inconsistent hierarchies, and some records with obviously wrong values (e.g., a laptop weighing 500kg).",
+    "file_path": "product_catalog_dirty.json",
+    "total_records": 100,
+    "known_issues": {
+      "price_format_errors": 30,
+      "unit_inconsistencies": 25,
+      "html_in_descriptions": 20,
+      "duplicates": 12,
+      "outlier_values": 8,
+      "category_inconsistencies": 35
+    },
+    "fields": ["sku", "name", "description", "price", "weight", "dimensions", "category", "brand", "stock_quantity"]
+  }
+}

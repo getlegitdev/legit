@@ -1,0 +1,46 @@
+{
+  "task_id": "A1",
+  "category": "analyze",
+  "level": 1,
+  "level_multiplier": 1.0,
+  "title": "Data summary",
+  "description": "Analyze the given dataset and produce a summary with key statistics and insights.",
+  "time_limit_seconds": 180,
+  "baseline_seconds": 60,
+  "allowed_tools": ["file_read", "code_execute"],
+  "layer1_weight": 0.50,
+  "layer2_weight": 0.50,
+  "output_schema": {
+    "type": "object",
+    "required": ["statistics", "trends", "insights", "summary"],
+    "properties": {
+      "statistics": {
+        "type": "object",
+        "required": ["count", "mean", "median", "min", "max"],
+        "properties": {
+          "count": { "type": "number" },
+          "mean": { "type": "number" },
+          "median": { "type": "number" },
+          "min": { "type": "number" },
+          "max": { "type": "number" }
+        }
+      },
+      "trends": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "insights": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "summary": { "type": "string" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 15 },
+    { "type": "numeric_accuracy", "weight": 20, "fields": ["statistics.count", "statistics.mean", "statistics.min", "statistics.max"] },
+    { "type": "min_count", "weight": 10, "field": "trends", "min": 2 },
+    { "type": "min_count", "weight": 10, "field": "insights", "min": 2 }
+  ],
+  "variants": ["a", "b", "c"]
+}

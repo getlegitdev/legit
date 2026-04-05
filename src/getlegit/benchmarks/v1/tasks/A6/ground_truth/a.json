@@ -1,0 +1,26 @@
+{
+  "hypotheses_results": [
+    {
+      "hypothesis": "H1: The new design increases average session duration by at least 15%",
+      "result": "refuted",
+      "explanation": "Session duration increased by 13.5% (185 to 210 seconds), which is below the 15% threshold. While statistically significant, it does not meet the specified minimum improvement.",
+      "p_value": 0.001,
+      "effect_size": 0.32
+    },
+    {
+      "hypothesis": "H2: The new design improves conversion rate",
+      "result": "supported",
+      "explanation": "Conversion rate improved from 3.2% to 4.1%, a 28% relative increase. Chi-square test of proportions confirms statistical significance.",
+      "p_value": 0.018,
+      "effect_size": 0.24
+    },
+    {
+      "hypothesis": "H3: The new design reduces bounce rate",
+      "result": "supported",
+      "explanation": "Bounce rate decreased from 45% to 38%, a 15.6% relative reduction. Chi-square test confirms significance.",
+      "p_value": 0.001,
+      "effect_size": 0.14
+    }
+  ],
+  "keywords": ["A/B test", "conversion", "bounce rate", "session duration", "chi-square", "t-test", "significance", "effect size"]
+}

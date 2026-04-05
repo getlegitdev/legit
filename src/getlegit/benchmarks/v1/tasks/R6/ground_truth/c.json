@@ -1,0 +1,10 @@
+{
+  "expected_contradictions": [
+    "Productivity measurement: self-reported productivity gains vs. objective output metrics showing mixed results depending on job type",
+    "Collaboration quality: some studies show improved async collaboration vs. Microsoft Research findings of reduced cross-team innovation",
+    "Mental health: improved work-life balance and reduced commute stress vs. increased isolation, burnout, and blurred boundaries"
+  ],
+  "keywords": ["contradiction", "inconsistency", "conflict", "remote work", "productivity", "wellbeing"],
+  "numeric_values": {},
+  "min_counts": { "contradictions": 3, "sources_analyzed": 5 }
+}

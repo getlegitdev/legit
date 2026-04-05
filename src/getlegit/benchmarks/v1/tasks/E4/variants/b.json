@@ -1,0 +1,13 @@
+{
+  "task_description": "Merge product inventory data from three sources (warehouse CSV, e-commerce platform JSON, and supplier text catalog) into a unified product catalog.",
+  "input_data": {
+    "context": "A retailer needs to reconcile product inventory across three systems. The warehouse CSV contains SKU, product name, quantity on hand, bin location, and last counted date. The e-commerce JSON has product ID, title, price, description, and stock status. The supplier text catalog has part numbers, product descriptions, wholesale price, and lead times. Products must be matched across systems using SKU/product ID/part number mapping and name similarity.",
+    "files": [
+      { "path": "warehouse_inventory.csv", "format": "CSV", "records": 120 },
+      { "path": "ecommerce_products.json", "format": "JSON", "records": 95 },
+      { "path": "supplier_catalog.txt", "format": "text", "records": 150 }
+    ],
+    "expected_unique_products": 160,
+    "known_issues": ["SKU format differs between systems", "25 supplier items not yet listed in e-commerce", "Price discrepancies between wholesale and retail"]
+  }
+}

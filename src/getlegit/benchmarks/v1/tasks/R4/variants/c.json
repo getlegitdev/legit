@@ -1,0 +1,9 @@
+{
+  "task_description": "Estimate the market size (TAM/SAM/SOM) for electric vehicle charging infrastructure in Southeast Asia.",
+  "input_data": {
+    "product": "EV charging stations",
+    "context": "An infrastructure company is planning to deploy a network of DC fast-charging stations across Southeast Asia, starting with Thailand, Indonesia, and Vietnam. The business model combines charging fees ($0.30/kWh), advertising revenue on charging station screens, and data services. Target locations include shopping malls, highway rest stops, and commercial parking lots. The company aims to deploy 500 stations in the first 3 years.",
+    "geography": "Southeast Asia (Thailand, Indonesia, Vietnam)",
+    "pricing": "$0.30/kWh charging fee"
+  }
+}

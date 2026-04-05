@@ -1,0 +1,10 @@
+{
+  "expected_ranges": {
+    "tam_usd_billions": { "min": 5, "max": 20 },
+    "sam_usd_billions": { "min": 1, "max": 8 },
+    "som_usd_millions": { "min": 20, "max": 500 }
+  },
+  "keywords": ["TAM", "SAM", "SOM", "market", "developer", "code review", "enterprise"],
+  "numeric_values": { "tam.value_usd": 10000000000 },
+  "min_counts": { "assumptions": 3, "data_sources": 2 }
+}

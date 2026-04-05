@@ -1,0 +1,7 @@
+{
+  "task_description": "Review the following Python code for a simple HTTP API rate limiter. Identify bugs, security issues, performance problems, and style violations.",
+  "input_data": {
+    "code": "import time\nimport threading\n\nrate_limits = {}\nlock = threading.Lock()\n\ndef check_rate_limit(client_ip, max_requests=100, window_seconds=60):\n    now = time.time()\n    if client_ip not in rate_limits:\n        rate_limits[client_ip] = []\n    \n    rate_limits[client_ip].append(now)\n    \n    # Remove old entries\n    rate_limits[client_ip] = [t for t in rate_limits[client_ip] if now - t < window_seconds]\n    \n    if len(rate_limits[client_ip]) > max_requests:\n        return False\n    return True\n\ndef get_remaining(client_ip, max_requests=100, window_seconds=60):\n    now = time.time()\n    if client_ip not in rate_limits:\n        return max_requests\n    count = len([t for t in rate_limits[client_ip] if now - t < window_seconds])\n    return max_requests - count\n\ndef reset_client(client_ip):\n    if client_ip in rate_limits:\n        del rate_limits[client_ip]\n\ndef reset_all():\n    global rate_limits\n    rate_limits = {}\n\ndef get_all_clients():\n    return list(rate_limits.keys())",
+    "language": "python"
+  }
+}

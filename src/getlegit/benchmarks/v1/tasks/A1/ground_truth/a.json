@@ -1,0 +1,11 @@
+{
+  "numeric_values": {
+    "statistics.count": 12,
+    "statistics.mean": 51916.67,
+    "statistics.median": 52000.0,
+    "statistics.min": 42000,
+    "statistics.max": 63000
+  },
+  "keywords": ["revenue", "growth", "increase"],
+  "min_counts": { "trends": 2, "insights": 2 }
+}

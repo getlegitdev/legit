@@ -1,0 +1,40 @@
+{
+  "task_description": "Given employee productivity data before and after implementing a 4-day work week, validate the hypotheses about productivity and satisfaction.",
+  "input_data": {
+    "hypotheses": [
+      "H1: A 4-day work week does not decrease total weekly output",
+      "H2: Employee satisfaction scores increase with the 4-day schedule",
+      "H3: Sick days decrease under the 4-day work week"
+    ],
+    "before_period": {
+      "name": "5_day_week",
+      "weeks_observed": 26,
+      "employees": 120,
+      "weekly_output_units": {
+        "mean": 47.2, "std": 8.5, "values": [45, 48, 46, 50, 44, 49, 47, 51, 43, 48, 46, 50, 45, 49, 47, 52, 44, 48, 46, 50, 45, 49, 47, 51, 44, 48]
+      },
+      "satisfaction_score": {
+        "mean": 6.2, "std": 1.8, "scale": "1-10"
+      },
+      "sick_days_per_month": {
+        "mean": 1.8, "std": 0.6, "values": [1.9, 2.1, 1.7, 1.5, 1.8, 2.0]
+      }
+    },
+    "after_period": {
+      "name": "4_day_week",
+      "weeks_observed": 26,
+      "employees": 120,
+      "weekly_output_units": {
+        "mean": 46.8, "std": 7.9, "values": [44, 47, 48, 49, 45, 50, 46, 48, 47, 51, 45, 49, 46, 50, 47, 48, 46, 51, 45, 49, 47, 50, 46, 48, 47, 50]
+      },
+      "satisfaction_score": {
+        "mean": 8.1, "std": 1.2, "scale": "1-10"
+      },
+      "sick_days_per_month": {
+        "mean": 1.2, "std": 0.4, "values": [1.4, 1.3, 1.1, 1.0, 1.2, 1.2]
+      }
+    },
+    "significance_level": 0.05,
+    "context": "Tech company pilot program, 6 months before and after"
+  }
+}

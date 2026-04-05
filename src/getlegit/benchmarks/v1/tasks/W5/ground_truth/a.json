@@ -1,0 +1,8 @@
+{
+  "keywords": ["YAML", "parallel", "plugin", "TOML", "CVE", "breaking", "migration", "deprecated"],
+  "numeric_values": {},
+  "min_word_count": 300,
+  "expected_version": "3.0.0",
+  "expected_breaking_changes_count": 2,
+  "expected_categories": ["added", "changed", "fixed", "security", "deprecated", "removed"]
+}

@@ -1,0 +1,7 @@
+{
+  "task_description": "Review the following Python code for a file processing utility. Identify bugs, security issues, performance problems, and style violations.",
+  "input_data": {
+    "code": "import os\nimport json\n\ndef process_files(directory):\n    results = []\n    files = os.listdir(directory)\n    for f in files:\n        path = directory + '/' + f\n        file = open(path, 'r')\n        content = file.read()\n        try:\n            data = json.loads(content)\n            results.append(data)\n        except:\n            pass\n    return results\n\ndef merge_json_files(file_list):\n    merged = {}\n    for f in file_list:\n        with open(f) as fp:\n            data = json.load(fp)\n            for key in data:\n                merged[key] = data[key]\n    return merged\n\ndef write_output(data, filename):\n    path = '/tmp/' + filename\n    f = open(path, 'w')\n    f.write(json.dumps(data))\n    return path\n\ndef find_large_files(directory, size_mb=10):\n    large_files = []\n    for root, dirs, files in os.walk(directory):\n        for f in files:\n            path = os.path.join(root, f)\n            size = os.path.getsize(path) / 1024 / 1024\n            if size > size_mb:\n                large_files.append({'path': path, 'size_mb': size})\n    large_files.sort(key=lambda x: x['size_mb'])\n    return large_files",
+    "language": "python"
+  }
+}

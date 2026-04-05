@@ -1,0 +1,13 @@
+{
+  "task_description": "Write a technical blog post about getting started with WebAssembly in 2026.",
+  "input_data": {
+    "topic": "Getting Started with WebAssembly in 2026",
+    "target_audience": "Intermediate web developers who want to learn about WebAssembly",
+    "tone": "Technical but approachable",
+    "requirements": {
+      "min_word_count": 300,
+      "should_include": ["What WebAssembly is", "Current state of tooling", "A simple example", "When to use it"],
+      "tags_suggestion": ["webassembly", "wasm", "web-development", "performance"]
+    }
+  }
+}

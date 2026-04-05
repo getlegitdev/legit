@@ -1,0 +1,15 @@
+{
+  "task_description": "Write a customer response email to a user requesting a feature that is on the roadmap but not yet available.",
+  "input_data": {
+    "customer_name": "Marcus Williams",
+    "company": "Bright Analytics",
+    "account_tier": "Professional",
+    "issue": "Customer is requesting SSO integration with Okta. They are considering switching to a competitor that already offers it. The feature is planned for Q3 2026.",
+    "previous_interactions": "First contact about this feature. Customer has been active for 18 months.",
+    "tone_guidance": "Positive, transparent, solution-oriented",
+    "requirements": {
+      "should_include": ["Feature acknowledgment", "Roadmap timeline without overpromising", "Interim workaround suggestions", "Offer to join beta program", "Value reinforcement"],
+      "max_word_count": 400
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "task_id": "E6",
+  "category": "extract",
+  "level": 4,
+  "level_multiplier": 3.0,
+  "title": "Noisy data cleansing",
+  "description": "Clean and normalize a dataset containing OCR errors, encoding issues, inconsistent formatting, missing values, and duplicate entries, producing a high-quality structured output with a detailed cleaning report.",
+  "time_limit_seconds": 900,
+  "baseline_seconds": 480,
+  "allowed_tools": ["file_read"],
+  "layer1_weight": 0.60,
+  "layer2_weight": 0.40,
+  "output_schema": {
+    "type": "object",
+    "required": ["cleaned_records", "cleaning_report", "data_quality_scores"],
+    "properties": {
+      "cleaned_records": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["id", "data", "issues_found"],
+          "properties": {
+            "id": { "type": "string" },
+            "data": { "type": "object" },
+            "issues_found": { "type": "array", "items": { "type": "string" } },
+            "original_data": { "type": "object" },
+            "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      },
+      "cleaning_report": {
+        "type": "object",
+        "required": ["total_records", "records_modified", "records_removed", "issues_by_type"],
+        "properties": {
+          "total_records": { "type": "integer" },
+          "records_modified": { "type": "integer" },
+          "records_removed": { "type": "integer" },
+          "duplicates_merged": { "type": "integer" },
+          "issues_by_type": {
+            "type": "object",
+            "additionalProperties": { "type": "integer" }
+          }
+        }
+      },
+      "data_quality_scores": {
+        "type": "object",
+        "required": ["completeness", "accuracy", "consistency", "overall"],
+        "properties": {
+          "completeness": { "type": "number", "minimum": 0, "maximum": 1 },
+          "accuracy": { "type": "number", "minimum": 0, "maximum": 1 },
+          "consistency": { "type": "number", "minimum": 0, "maximum": 1 },
+          "overall": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 20 },
+    { "type": "required_fields", "weight": 15, "fields": ["cleaned_records", "cleaning_report", "data_quality_scores"] },
+    { "type": "min_count", "weight": 15, "field": "cleaned_records", "min": 15 },
+    { "type": "numeric_accuracy", "weight": 10, "field": "cleaning_report.total_records", "tolerance": 0.10 }
+  ],
+  "variants": ["a", "b", "c"]
+}

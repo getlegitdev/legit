@@ -1,0 +1,25 @@
+{
+  "task_description": "Start a report generation workflow, monitor its progress through data collection, analysis, and rendering stages, and collect the final report when complete.",
+  "input_data": {
+    "start": {
+      "url": "http://localhost:9999/api/workflow/start",
+      "method": "POST",
+      "headers": { "Content-Type": "application/json" },
+      "body": {
+        "workflow_type": "report_generation",
+        "input": {
+          "report_type": "monthly_summary",
+          "period": "2026-03",
+          "sections": ["revenue", "users", "performance"]
+        }
+      }
+    },
+    "status_check": {
+      "url_template": "http://localhost:9999/api/workflow/{workflow_id}/status",
+      "method": "GET",
+      "headers": { "Accept": "application/json" },
+      "poll_instructions": "Poll the status endpoint using the workflow_id returned from the start call. Continue polling until the status is 'completed' or 'failed'."
+    },
+    "expected_steps": ["data_collection", "analysis", "rendering"]
+  }
+}

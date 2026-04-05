@@ -1,0 +1,6 @@
+{
+  "expected_headers": ["Product", "SKU", "Quantity", "Price"],
+  "numeric_values": { "row_count": 4 },
+  "keywords": ["Wireless Mouse", "WM-1001", "29.99"],
+  "min_counts": { "rows": 4 }
+}

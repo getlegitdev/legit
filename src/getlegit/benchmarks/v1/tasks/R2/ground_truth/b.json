@@ -1,0 +1,6 @@
+{
+  "expected_candidates": ["React", "Angular", "Vue.js", "Svelte", "Solid"],
+  "keywords": ["performance", "scalability", "cost", "TypeScript", "rendering", "accessibility"],
+  "numeric_values": {},
+  "min_counts": { "candidates": 3 }
+}

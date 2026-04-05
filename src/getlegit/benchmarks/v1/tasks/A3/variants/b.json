@@ -1,0 +1,22 @@
+{
+  "task_description": "Compare the sales performance of two regional teams (East and West) over 12 months and identify which team performed better overall.",
+  "input_data": {
+    "datasets": {
+      "east_region": {
+        "monthly_sales": [120000, 135000, 142000, 128000, 155000, 160000, 145000, 170000, 180000, 165000, 190000, 210000],
+        "deals_closed": [45, 52, 48, 42, 58, 62, 55, 65, 70, 60, 72, 80],
+        "avg_deal_size": [2667, 2596, 2958, 3048, 2672, 2581, 2636, 2615, 2571, 2750, 2639, 2625],
+        "customer_retention_rate": 0.85,
+        "team_size": 12
+      },
+      "west_region": {
+        "monthly_sales": [95000, 102000, 115000, 125000, 130000, 138000, 150000, 158000, 172000, 185000, 195000, 220000],
+        "deals_closed": [38, 40, 44, 48, 50, 54, 58, 60, 66, 70, 75, 85],
+        "avg_deal_size": [2500, 2550, 2614, 2604, 2600, 2556, 2586, 2633, 2606, 2643, 2600, 2588],
+        "customer_retention_rate": 0.91,
+        "team_size": 10
+      }
+    },
+    "context": "Annual sales performance review for resource allocation decisions"
+  }
+}

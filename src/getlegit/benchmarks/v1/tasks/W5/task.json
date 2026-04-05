@@ -1,0 +1,42 @@
+{
+  "task_id": "W5",
+  "category": "write",
+  "level": 3,
+  "level_multiplier": 2.0,
+  "title": "Changelog generation",
+  "description": "Generate a well-structured changelog from commit history and release notes, organizing changes by category and writing clear, user-facing descriptions.",
+  "time_limit_seconds": 600,
+  "baseline_seconds": 300,
+  "allowed_tools": ["web_search", "file_read"],
+  "layer1_weight": 0.30,
+  "layer2_weight": 0.70,
+  "output_schema": {
+    "type": "object",
+    "required": ["version", "release_date", "sections", "summary", "breaking_changes"],
+    "properties": {
+      "version": { "type": "string" },
+      "release_date": { "type": "string" },
+      "summary": { "type": "string" },
+      "sections": {
+        "type": "object",
+        "properties": {
+          "added": { "type": "array", "items": { "type": "string" } },
+          "changed": { "type": "array", "items": { "type": "string" } },
+          "fixed": { "type": "array", "items": { "type": "string" } },
+          "deprecated": { "type": "array", "items": { "type": "string" } },
+          "removed": { "type": "array", "items": { "type": "string" } },
+          "security": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "breaking_changes": { "type": "array", "items": { "type": "string" } },
+      "migration_notes": { "type": "string" },
+      "contributors": { "type": "array", "items": { "type": "string" } }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "required_fields", "weight": 10, "fields": ["version", "release_date", "sections", "summary"] },
+    { "type": "keyword_present", "weight": 10, "keywords": [] }
+  ],
+  "variants": ["a", "b", "c"]
+}

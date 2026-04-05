@@ -1,0 +1,9 @@
+{
+  "task_description": "Analyze contradictions across sources regarding the effectiveness and safety of large-scale carbon capture and storage (CCS) technology.",
+  "input_data": {
+    "topic": "Effectiveness of carbon capture and storage technology",
+    "context": "Carbon capture and storage (CCS) is promoted by some as essential for meeting climate targets, while critics argue it is an expensive distraction from renewable energy deployment. Industry reports often project rapid cost declines and massive scaling potential, while independent analyses question capture rates, energy penalties, and long-term storage permanence. Analyze IPCC reports, industry white papers, peer-reviewed studies, and environmental organization analyses to map the contradictions.",
+    "source_types": ["IPCC reports", "industry white papers", "peer-reviewed studies", "environmental NGO reports", "government assessments"],
+    "min_sources": 6
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "expected_clean_records": 55,
+  "expected_total_input": 60,
+  "expected_duplicates_merged": 5,
+  "expected_issue_types": ["medication_misspelling", "date_format", "coding_inconsistency", "impossible_vital", "duplicate", "missing_provider"],
+  "keywords": ["clean", "normalize", "medication", "ICD", "vitals", "date"],
+  "numeric_values": { "cleaning_report.total_records": 60 },
+  "min_counts": { "cleaned_records": 15 }
+}

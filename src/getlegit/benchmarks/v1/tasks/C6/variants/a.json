@@ -1,0 +1,31 @@
+{
+  "task_description": "Debug the following multi-file Python application for an order processing system. There are bugs across files that interact with each other, causing incorrect totals and failed order processing.",
+  "input_data": {
+    "files": {
+      "models.py": "class Product:\n    def __init__(self, name, price, stock):\n        self.name = name\n        self.price = price\n        self.stock = stock\n\nclass OrderItem:\n    def __init__(self, product, quantity):\n        self.product = product\n        self.quantity = quantity\n\n    def subtotal(self):\n        return self.product.price * self.quantity\n\nclass Order:\n    def __init__(self, customer_name):\n        self.customer_name = customer_name\n        self.items = []\n        self.discount = 0\n\n    def add_item(self, item):\n        self.items.append(item)\n\n    def total(self):\n        subtotal = sum(item.subtotal() for item in self.items)\n        return subtotal - self.discount",
+      "inventory.py": "from models import Product\n\nclass Inventory:\n    def __init__(self):\n        self.products = {}\n\n    def add_product(self, name, price, stock):\n        self.products[name] = Product(name, price, stock)\n\n    def check_stock(self, name, quantity):\n        if name not in self.products:\n            return False\n        return self.products[name].stock > quantity\n\n    def reserve_stock(self, name, quantity):\n        if not self.check_stock(name, quantity):\n            raise ValueError(f'Insufficient stock for {name}')\n        self.products[name].stock -= quantity\n\n    def get_product(self, name):\n        return self.products.get(name)",
+      "processor.py": "from models import Order, OrderItem\nfrom inventory import Inventory\n\nclass OrderProcessor:\n    def __init__(self, inventory):\n        self.inventory = inventory\n        self.orders = []\n\n    def create_order(self, customer_name, items, discount_percent=0):\n        order = Order(customer_name)\n        for item_name, qty in items:\n            product = self.inventory.get_product(item_name)\n            if product is None:\n                raise ValueError(f'Product {item_name} not found')\n            self.inventory.reserve_stock(item_name, qty)\n            order.add_item(OrderItem(product, qty))\n        order.discount = discount_percent\n        self.orders.append(order)\n        return order\n\n    def get_order_summary(self, order):\n        return {\n            'customer': order.customer_name,\n            'items': len(order.items),\n            'total': order.total()\n        }"
+    },
+    "test_cases": [
+      {
+        "name": "Basic order total",
+        "setup": "inv = Inventory(); inv.add_product('Widget', 10.0, 100); inv.add_product('Gadget', 25.0, 50)",
+        "action": "proc = OrderProcessor(inv); order = proc.create_order('Alice', [('Widget', 3), ('Gadget', 2)]); summary = proc.get_order_summary(order)",
+        "expected": {"customer": "Alice", "items": 2, "total": 80.0}
+      },
+      {
+        "name": "Order with 10% discount",
+        "setup": "inv = Inventory(); inv.add_product('Widget', 10.0, 100)",
+        "action": "proc = OrderProcessor(inv); order = proc.create_order('Bob', [('Widget', 5)], discount_percent=10); summary = proc.get_order_summary(order)",
+        "expected": {"customer": "Bob", "items": 1, "total": 45.0}
+      },
+      {
+        "name": "Stock check at exact boundary",
+        "setup": "inv = Inventory(); inv.add_product('Widget', 10.0, 5)",
+        "action": "proc = OrderProcessor(inv); order = proc.create_order('Eve', [('Widget', 5)])",
+        "expected": "Should succeed - 5 items with 5 in stock"
+      }
+    ],
+    "language": "python"
+  }
+}

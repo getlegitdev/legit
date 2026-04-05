@@ -1,0 +1,18 @@
+{
+  "task_description": "Clean and normalize a medical records dataset containing transcription errors, inconsistent coding, and corrupted date fields from an EHR export.",
+  "input_data": {
+    "dataset_type": "Medical records",
+    "context": "A hospital is cleaning 60 patient visit records exported from an aging EHR system. Issues include misspelled medication names and dosages, inconsistent date formats (MM/DD/YYYY vs DD-Mon-YY vs YYYY.MM.DD with some impossible dates like 13/32/2024), ICD-10 codes mixed with ICD-9 codes, vital signs with impossible values (e.g., blood pressure 500/300, temperature 200F), free-text diagnosis fields with abbreviations and typos, duplicate visits from system glitches, and missing provider identification numbers.",
+    "file_path": "ehr_export_dirty.txt",
+    "total_records": 60,
+    "known_issues": {
+      "medication_misspellings": 18,
+      "date_format_errors": 25,
+      "coding_inconsistencies": 15,
+      "impossible_vitals": 10,
+      "duplicates": 5,
+      "missing_provider_ids": 12
+    },
+    "fields": ["patient_id", "visit_date", "provider", "diagnosis", "icd_code", "medications", "vitals", "notes"]
+  }
+}

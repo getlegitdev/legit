@@ -1,0 +1,6 @@
+{
+  "expected_competitors": ["Sketch", "Adobe XD", "Canva", "Framer", "Penpot"],
+  "keywords": ["competitor", "market", "design"],
+  "numeric_values": {},
+  "min_counts": { "competitors": 5 }
+}

@@ -1,0 +1,13 @@
+{
+  "task_description": "Call the error endpoint which returns a 500 error on the first attempt. Implement retry logic to eventually get a successful response.",
+  "input_data": {
+    "url": "http://localhost:9999/api/error-endpoint",
+    "method": "GET",
+    "headers": { "Accept": "application/json" },
+    "retry_policy": {
+      "max_retries": 3,
+      "description": "The endpoint returns 500 Internal Server Error on the first call, then 200 OK on subsequent calls. You must retry after receiving the error."
+    },
+    "expected_behavior": "First call returns 500, second call returns 200 with data"
+  }
+}

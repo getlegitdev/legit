@@ -1,0 +1,13 @@
+{
+  "task_description": "Generate comprehensive unit tests for the following Python function that implements a stack with a minimum-value tracker.",
+  "input_data": {
+    "code": "class MinStack:\n    def __init__(self):\n        self.stack = []\n        self.min_stack = []\n\n    def push(self, val):\n        self.stack.append(val)\n        if not self.min_stack or val <= self.min_stack[-1]:\n            self.min_stack.append(val)\n\n    def pop(self):\n        if not self.stack:\n            raise IndexError('pop from empty stack')\n        val = self.stack.pop()\n        if val == self.min_stack[-1]:\n            self.min_stack.pop()\n        return val\n\n    def top(self):\n        if not self.stack:\n            raise IndexError('top from empty stack')\n        return self.stack[-1]\n\n    def get_min(self):\n        if not self.min_stack:\n            raise IndexError('get_min from empty stack')\n        return self.min_stack[-1]",
+    "requirements": [
+      "Test all four methods: push, pop, top, get_min",
+      "Test edge cases: empty stack operations, single element, duplicate values",
+      "Test that minimum tracking is correct after multiple push/pop operations",
+      "Test error handling for operations on empty stack"
+    ],
+    "language": "python"
+  }
+}

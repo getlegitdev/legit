@@ -1,0 +1,7 @@
+{
+  "expected_item_count": 20,
+  "expected_fields": ["title", "speakers", "date", "start_time", "end_time", "track", "room"],
+  "keywords": ["session", "speaker", "track", "keynote", "workshop"],
+  "numeric_values": { "extraction_stats.total_items": 20 },
+  "min_counts": { "extracted_items": 5 }
+}

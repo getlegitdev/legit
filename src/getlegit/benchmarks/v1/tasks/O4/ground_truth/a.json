@@ -1,0 +1,15 @@
+{
+  "numeric_values": { "final_status": 200, "attempts": 2 },
+  "keywords": ["recovered", "retry", "success", "error"],
+  "expected_response_data": {
+    "errors_encountered": [
+      { "attempt": 1, "status_code": 500, "error_message": "Internal Server Error" }
+    ],
+    "final_response": {
+      "status": "ok",
+      "message": "Service recovered successfully",
+      "data": { "recovered": true, "timestamp": "2026-04-01T12:00:00Z" }
+    },
+    "recovery_successful": true
+  }
+}

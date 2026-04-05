@@ -1,0 +1,26 @@
+{
+  "task_description": "Assess the risks of adopting a new AI/ML model for automated credit scoring decisions at a retail bank.",
+  "input_data": {
+    "project": {
+      "name": "AI Credit Scoring Model Deployment",
+      "timeline_months": 4,
+      "team_size": 6,
+      "budget_usd": 800000,
+      "current_approval_rate_percent": 62,
+      "current_default_rate_percent": 3.2,
+      "daily_applications": 5000,
+      "model_accuracy_test": 0.94,
+      "model_type": "gradient_boosted_ensemble"
+    },
+    "risk_factors": [
+      {"name": "Model bias", "description": "Training data may reflect historical lending biases against protected classes"},
+      {"name": "Regulatory scrutiny", "description": "Fair lending laws require explainability; model is partially opaque"},
+      {"name": "Data quality", "description": "15% of historical records have incomplete fields used as features"},
+      {"name": "Concept drift", "description": "Economic conditions may shift, invalidating model assumptions"},
+      {"name": "Operational risk", "description": "Model inference latency must stay under 200ms for real-time decisions"},
+      {"name": "Fallback system", "description": "Legacy scoring system will be decommissioned 2 months after launch"},
+      {"name": "Adversarial inputs", "description": "Applicants may learn to game model features"}
+    ],
+    "context": "Retail bank processing $2B in annual consumer lending"
+  }
+}

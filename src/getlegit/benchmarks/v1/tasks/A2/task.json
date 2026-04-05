@@ -1,0 +1,60 @@
+{
+  "task_id": "A2",
+  "category": "analyze",
+  "level": 2,
+  "level_multiplier": 1.5,
+  "title": "Trend analysis",
+  "description": "Analyze the given time series dataset and identify trends, seasonal patterns, and provide a forecast summary.",
+  "time_limit_seconds": 600,
+  "baseline_seconds": 300,
+  "allowed_tools": ["file_read", "code_execute"],
+  "layer1_weight": 0.40,
+  "layer2_weight": 0.60,
+  "output_schema": {
+    "type": "object",
+    "required": ["trend_direction", "trend_strength", "seasonal_patterns", "anomalies", "forecast", "summary"],
+    "properties": {
+      "trend_direction": { "type": "string", "enum": ["increasing", "decreasing", "stable", "mixed"] },
+      "trend_strength": { "type": "number" },
+      "seasonal_patterns": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["period", "description"],
+          "properties": {
+            "period": { "type": "string" },
+            "description": { "type": "string" }
+          }
+        }
+      },
+      "anomalies": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["index", "value", "explanation"],
+          "properties": {
+            "index": { "type": "number" },
+            "value": { "type": "number" },
+            "explanation": { "type": "string" }
+          }
+        }
+      },
+      "forecast": {
+        "type": "object",
+        "required": ["next_period_estimate", "confidence"],
+        "properties": {
+          "next_period_estimate": { "type": "number" },
+          "confidence": { "type": "string" }
+        }
+      },
+      "summary": { "type": "string" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "required_fields", "weight": 10, "fields": ["trend_direction", "trend_strength", "forecast"] },
+    { "type": "min_count", "weight": 10, "field": "seasonal_patterns", "min": 1 },
+    { "type": "keyword_present", "weight": 10, "keywords": ["trend", "pattern", "seasonal"] }
+  ],
+  "variants": ["a", "b", "c"]
+}

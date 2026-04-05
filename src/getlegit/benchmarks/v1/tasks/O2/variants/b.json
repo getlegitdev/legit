@@ -1,0 +1,22 @@
+{
+  "task_description": "Fetch all orders for user 2 from the API and save a summary report by posting it back.",
+  "input_data": {
+    "fetch": {
+      "url": "http://localhost:9999/api/users/2/orders",
+      "method": "GET",
+      "headers": { "Accept": "application/json" }
+    },
+    "save": {
+      "url": "http://localhost:9999/api/orders",
+      "method": "POST",
+      "headers": { "Content-Type": "application/json" },
+      "body_template": {
+        "customer": "Bob",
+        "items": [{ "product": "Summary Report", "quantity": 1 }],
+        "total": 0,
+        "notes": "Auto-generated summary of fetched orders"
+      }
+    },
+    "transform_instructions": "Calculate the total value of all fetched orders and include it in the save request total field."
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "task_description": "Identify 5 competitors for Notion and create a structured comparison report.",
+  "input_data": {
+    "product": "Notion",
+    "context": "Notion is a productivity and note-taking web application that provides tools for project management, knowledge management, and collaboration. It combines wikis, docs, databases, and project boards into a single workspace. Founded in 2013, Notion has become widely adopted by both individuals and teams for organizing information and workflows."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "expected_competitors": ["Obsidian", "Coda", "Confluence", "ClickUp", "Monday.com"],
+  "keywords": ["competitor", "market", "productivity"],
+  "numeric_values": {},
+  "min_counts": { "competitors": 5 }
+}

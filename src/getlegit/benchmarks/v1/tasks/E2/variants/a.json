@@ -1,0 +1,10 @@
+{
+  "task_description": "Extract structured data from a corporate annual report PDF, including financial tables, executive summary sections, and document metadata.",
+  "input_data": {
+    "document_type": "Corporate annual report",
+    "context": "The PDF is a 2024 annual report for a mid-size technology company. It contains an executive letter, business overview, financial highlights table, revenue breakdown by segment table, balance sheet summary, and forward-looking statements. The document has mixed formatting including two-column layouts, embedded charts (ignore charts, extract only text and tables), and footnotes.",
+    "file_path": "annual_report_2024.pdf",
+    "expected_sections": ["Executive Letter", "Business Overview", "Financial Highlights", "Segment Performance", "Outlook"],
+    "expected_tables": ["Financial Highlights", "Revenue by Segment", "Balance Sheet Summary"]
+  }
+}

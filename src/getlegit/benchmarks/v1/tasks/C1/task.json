@@ -1,0 +1,32 @@
+{
+  "task_id": "C1",
+  "category": "code",
+  "level": 1,
+  "level_multiplier": 1.0,
+  "title": "Bug fix",
+  "description": "Find and fix the bug in the given Python function. Return the corrected code.",
+  "time_limit_seconds": 180,
+  "baseline_seconds": 60,
+  "allowed_tools": ["code_execute"],
+  "layer1_weight": 0.60,
+  "layer2_weight": 0.40,
+  "output_schema": {
+    "type": "object",
+    "required": ["fixed_code", "bug_description", "changes_made"],
+    "properties": {
+      "fixed_code": { "type": "string" },
+      "bug_description": { "type": "string" },
+      "changes_made": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "required_fields", "weight": 10, "fields": ["fixed_code"] },
+    { "type": "code_parses", "weight": 30, "field": "fixed_code", "language": "python" },
+    { "type": "keyword_present", "weight": 10, "keywords": ["bug", "fix", "error"] }
+  ],
+  "variants": ["a", "b", "c"]
+}

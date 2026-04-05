@@ -1,0 +1,5 @@
+{
+  "fixed_code": "def find_max(arr):\n    if not arr:\n        return None\n    max_val = arr[0]\n    for i in range(1, len(arr)):\n        if arr[i] > max_val:\n            max_val = arr[i]\n    return max_val",
+  "bug_description": "Off-by-one error: max_val was initialized with arr[1] instead of arr[0], skipping the first element and causing an IndexError on single-element lists.",
+  "keywords": ["off-by-one", "index", "arr[0]", "fix", "bug"]
+}

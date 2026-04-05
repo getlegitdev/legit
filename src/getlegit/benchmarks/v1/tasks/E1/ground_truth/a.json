@@ -1,0 +1,6 @@
+{
+  "expected_headers": ["Name", "Department", "Salary"],
+  "numeric_values": { "row_count": 5 },
+  "keywords": ["Alice Johnson", "Engineering", "95000"],
+  "min_counts": { "rows": 5 }
+}

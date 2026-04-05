@@ -1,0 +1,23 @@
+{
+  "task_description": "Design and implement a Python class for a simple event bus / pub-sub system with support for topics, filtering, and async dispatch.",
+  "input_data": {
+    "requirements": [
+      "subscribe(topic, callback, filter_fn=None) - Register a callback for a topic with optional filter",
+      "unsubscribe(topic, callback) - Remove a specific callback from a topic",
+      "publish(topic, data) - Publish an event to all subscribers of a topic",
+      "publish_async(topic, data) - Publish an event asynchronously (returns immediately)",
+      "get_subscribers(topic) - List all subscribers for a topic",
+      "history(topic, limit=10) - Return recent events for a topic",
+      "clear_topic(topic) - Remove all subscribers and history for a topic",
+      "stats() - Return dict with topic count, total subscribers, total events published"
+    ],
+    "constraints": [
+      "Thread-safe operations",
+      "Callbacks should receive (topic, data, timestamp) arguments",
+      "Support wildcard topic subscriptions (e.g., 'user.*' matches 'user.created', 'user.deleted')",
+      "Errors in callbacks should not prevent other callbacks from executing",
+      "Raise appropriate exceptions for invalid inputs"
+    ],
+    "language": "python"
+  }
+}

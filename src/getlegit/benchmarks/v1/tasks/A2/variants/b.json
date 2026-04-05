@@ -1,0 +1,27 @@
+{
+  "task_description": "Analyze the following weekly CPU utilization data (percentage) over 52 weeks and identify trends, seasonal patterns, and anomalies.",
+  "input_data": {
+    "time_series": [
+      {"week": 1, "value": 45}, {"week": 2, "value": 48}, {"week": 3, "value": 52},
+      {"week": 4, "value": 55}, {"week": 5, "value": 50}, {"week": 6, "value": 47},
+      {"week": 7, "value": 49}, {"week": 8, "value": 53}, {"week": 9, "value": 58},
+      {"week": 10, "value": 62}, {"week": 11, "value": 65}, {"week": 12, "value": 60},
+      {"week": 13, "value": 55}, {"week": 14, "value": 52}, {"week": 15, "value": 54},
+      {"week": 16, "value": 58}, {"week": 17, "value": 63}, {"week": 18, "value": 67},
+      {"week": 19, "value": 70}, {"week": 20, "value": 65}, {"week": 21, "value": 60},
+      {"week": 22, "value": 58}, {"week": 23, "value": 61}, {"week": 24, "value": 66},
+      {"week": 25, "value": 71}, {"week": 26, "value": 75}, {"week": 27, "value": 72},
+      {"week": 28, "value": 68}, {"week": 29, "value": 65}, {"week": 30, "value": 67},
+      {"week": 31, "value": 72}, {"week": 32, "value": 78}, {"week": 33, "value": 82},
+      {"week": 34, "value": 95}, {"week": 35, "value": 79}, {"week": 36, "value": 74},
+      {"week": 37, "value": 71}, {"week": 38, "value": 73}, {"week": 39, "value": 78},
+      {"week": 40, "value": 82}, {"week": 41, "value": 85}, {"week": 42, "value": 80},
+      {"week": 43, "value": 76}, {"week": 44, "value": 73}, {"week": 45, "value": 75},
+      {"week": 46, "value": 80}, {"week": 47, "value": 84}, {"week": 48, "value": 88},
+      {"week": 49, "value": 85}, {"week": 50, "value": 81}, {"week": 51, "value": 78},
+      {"week": 52, "value": 76}
+    ],
+    "metric_name": "cpu_utilization_percent",
+    "context": "Cloud server performance monitoring"
+  }
+}

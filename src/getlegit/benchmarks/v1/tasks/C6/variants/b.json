@@ -1,0 +1,28 @@
+{
+  "task_description": "Debug the following multi-file Python application for a user authentication and permission system. There are bugs across files that cause authentication failures and incorrect permission checks.",
+  "input_data": {
+    "files": {
+      "user.py": "import hashlib\n\nclass User:\n    def __init__(self, username, password, role='viewer'):\n        self.username = username\n        self.password_hash = self._hash(password)\n        self.role = role\n        self.active = True\n\n    def _hash(self, password):\n        return hashlib.sha256(password).hexdigest()\n\n    def verify_password(self, password):\n        return self._hash(password) == self.password_hash",
+      "auth.py": "from user import User\n\nclass AuthService:\n    def __init__(self):\n        self.users = {}\n        self.sessions = {}\n        self._session_counter = 0\n\n    def register(self, username, password, role='viewer'):\n        if username in self.users:\n            raise ValueError('Username already exists')\n        self.users[username] = User(username, password, role)\n        return True\n\n    def login(self, username, password):\n        user = self.users.get(username)\n        if user is None:\n            return None\n        if not user.active:\n            return None\n        if user.verify_password(password):\n            self._session_counter += 1\n            session_id = str(self._session_counter)\n            self.sessions[session_id] = username\n            return session_id\n        return None\n\n    def get_user_for_session(self, session_id):\n        username = self.sessions.get(session_id)\n        if username:\n            return self.users[username]\n        return None",
+      "permissions.py": "ROLE_PERMISSIONS = {\n    'admin': ['read', 'write', 'delete', 'manage_users'],\n    'editor': ['read', 'write'],\n    'viewer': ['read']\n}\n\nclass PermissionService:\n    def __init__(self, auth_service):\n        self.auth = auth_service\n\n    def check_permission(self, session_id, permission):\n        user = self.auth.get_user_for_session(session_id)\n        if user is None:\n            return False\n        user_perms = ROLE_PERMISSIONS.get(user.role)\n        return permission in user_perms\n\n    def get_permissions(self, session_id):\n        user = self.auth.get_user_for_session(session_id)\n        if user is None:\n            return []\n        return ROLE_PERMISSIONS.get(user.role)\n\n    def require_permission(self, session_id, permission):\n        if not self.check_permission(session_id, permission):\n            raise PermissionError(f'Missing permission: {permission}')\n        return True"
+    },
+    "test_cases": [
+      {
+        "name": "Register and login",
+        "action": "auth = AuthService(); auth.register('alice', 'pass123'); session = auth.login('alice', 'pass123')",
+        "expected": "session should be a non-None string"
+      },
+      {
+        "name": "Permission check for viewer",
+        "action": "auth = AuthService(); auth.register('bob', 'pass'); sid = auth.login('bob', 'pass'); perms = PermissionService(auth); result = perms.check_permission(sid, 'read')",
+        "expected": true
+      },
+      {
+        "name": "Unknown role permissions",
+        "action": "auth = AuthService(); auth.register('charlie', 'pass', role='moderator'); sid = auth.login('charlie', 'pass'); perms = PermissionService(auth); result = perms.check_permission(sid, 'read')",
+        "expected": "Should handle gracefully, not crash with TypeError"
+      }
+    ],
+    "language": "python"
+  }
+}

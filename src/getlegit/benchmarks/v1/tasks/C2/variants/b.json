@@ -1,0 +1,14 @@
+{
+  "task_description": "Generate comprehensive unit tests for the following Python function that validates and parses email addresses.",
+  "input_data": {
+    "code": "import re\n\ndef parse_email(email):\n    \"\"\"Parse an email address and return its components.\"\"\"\n    if not isinstance(email, str):\n        raise TypeError('Email must be a string')\n    email = email.strip()\n    if not email:\n        raise ValueError('Email cannot be empty')\n    pattern = r'^([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+)\\.([a-zA-Z]{2,})$'\n    match = re.match(pattern, email)\n    if not match:\n        raise ValueError(f'Invalid email format: {email}')\n    return {\n        'local': match.group(1),\n        'domain': match.group(2),\n        'tld': match.group(3),\n        'full': email\n    }",
+    "requirements": [
+      "Test valid email addresses with various formats",
+      "Test invalid email formats (missing @, missing domain, etc.)",
+      "Test edge cases: whitespace, empty string, non-string input",
+      "Test that returned components are correct",
+      "Test error types and messages"
+    ],
+    "language": "python"
+  }
+}

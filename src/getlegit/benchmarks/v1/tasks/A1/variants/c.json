@@ -1,0 +1,17 @@
+{
+  "task_description": "Analyze the following weekly website traffic data and produce a summary with key statistics and insights.",
+  "input_data": {
+    "dataset": [
+      { "week": 1, "visitors": 12500 },
+      { "week": 2, "visitors": 13200 },
+      { "week": 3, "visitors": 14800 },
+      { "week": 4, "visitors": 13900 },
+      { "week": 5, "visitors": 15200 },
+      { "week": 6, "visitors": 16100 },
+      { "week": 7, "visitors": 15800 },
+      { "week": 8, "visitors": 17200 }
+    ],
+    "metric": "visitors",
+    "unit": "unique visitors"
+  }
+}

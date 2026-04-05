@@ -1,0 +1,8 @@
+{
+  "expected_unique_records": 50,
+  "expected_total_input": 135,
+  "expected_duplicates": 85,
+  "keywords": ["employee", "merge", "payroll", "benefits", "directory"],
+  "numeric_values": { "statistics.total_input_records": 135, "statistics.merged_output_records": 50 },
+  "min_counts": { "merged_records": 10, "sources": 3 }
+}

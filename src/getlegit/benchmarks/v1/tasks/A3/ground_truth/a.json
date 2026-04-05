@@ -1,0 +1,11 @@
+{
+  "datasets_compared": ["model_a", "model_b", "model_c"],
+  "ranking": [
+    {"dataset": "model_a", "rank": 1, "score": 0.90},
+    {"dataset": "model_b", "rank": 2, "score": 0.85},
+    {"dataset": "model_c", "rank": 3, "score": 0.65}
+  ],
+  "best_model": "model_a",
+  "rationale": "Model A offers the best balance: highest recall (0.95) which is critical for fraud detection, competitive accuracy (0.92), reasonable inference time (45ms), and moderate resource usage. Model B has slightly better accuracy but recall is lower and it requires 4x more memory and 3x more inference time.",
+  "keywords": ["recall", "fraud detection", "model_a", "inference time", "tradeoff", "precision-recall", "production"]
+}

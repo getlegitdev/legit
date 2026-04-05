@@ -1,0 +1,79 @@
+{
+  "task_id": "R6",
+  "category": "research",
+  "level": 4,
+  "level_multiplier": 3.0,
+  "title": "Contradiction detection report",
+  "description": "Analyze multiple sources on a topic to identify contradictions, inconsistencies, and conflicting claims, producing a structured report with evidence and resolution analysis.",
+  "time_limit_seconds": 1200,
+  "baseline_seconds": 600,
+  "allowed_tools": ["web_search", "file_read"],
+  "layer1_weight": 0.30,
+  "layer2_weight": 0.70,
+  "output_schema": {
+    "type": "object",
+    "required": ["topic", "sources_analyzed", "contradictions", "consistent_findings", "reliability_assessment", "summary"],
+    "properties": {
+      "topic": { "type": "string" },
+      "sources_analyzed": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "type", "credibility_score"],
+          "properties": {
+            "name": { "type": "string" },
+            "type": { "type": "string" },
+            "url": { "type": "string" },
+            "date": { "type": "string" },
+            "credibility_score": { "type": "number", "minimum": 0, "maximum": 10 }
+          }
+        }
+      },
+      "contradictions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["claim_a", "claim_b", "source_a", "source_b", "severity", "analysis"],
+          "properties": {
+            "claim_a": { "type": "string" },
+            "claim_b": { "type": "string" },
+            "source_a": { "type": "string" },
+            "source_b": { "type": "string" },
+            "severity": { "type": "string", "enum": ["minor", "moderate", "major", "critical"] },
+            "analysis": { "type": "string" },
+            "likely_resolution": { "type": "string" }
+          }
+        }
+      },
+      "consistent_findings": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["claim", "supporting_sources", "confidence"],
+          "properties": {
+            "claim": { "type": "string" },
+            "supporting_sources": { "type": "array", "items": { "type": "string" } },
+            "confidence": { "type": "string", "enum": ["low", "medium", "high"] }
+          }
+        }
+      },
+      "reliability_assessment": {
+        "type": "object",
+        "required": ["overall_confidence", "key_uncertainties"],
+        "properties": {
+          "overall_confidence": { "type": "string", "enum": ["low", "medium", "high"] },
+          "key_uncertainties": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "summary": { "type": "string" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "required_fields", "weight": 8, "fields": ["contradictions"] },
+    { "type": "min_count", "weight": 6, "field": "contradictions", "min": 3 },
+    { "type": "min_count", "weight": 3, "field": "sources_analyzed", "min": 5 },
+    { "type": "keyword_present", "weight": 3, "keywords": ["contradiction", "inconsistency", "conflict"] }
+  ],
+  "variants": ["a", "b", "c"]
+}

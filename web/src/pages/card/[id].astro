@@ -1,0 +1,246 @@
+---
+export const prerender = false;
+
+import ScoreCard from '../../components/ScoreCard.jsx';
+import { supabase } from '../../lib/supabase';
+import type { Agent as DbAgent, Run, TaskScore } from '../../lib/supabase';
+
+const { id } = Astro.params;
+
+// Mock data — fallback for the original demo agents
+const mockAgents: Record<string, any> = {
+  'researchbot': {
+    name: 'ResearchBot',
+    score: 92,
+    elo: 1782,
+    tier: 'Platinum',
+    categories: { Research: 95, Extract: 88, Analyze: 91, Code: 82, Write: 87, Operate: 85 },
+    percentile: 3,
+  },
+  'codeassist': {
+    name: 'CodeAssist',
+    score: 84,
+    elo: 1654,
+    tier: 'Gold',
+    categories: { Research: 72, Extract: 78, Analyze: 80, Code: 96, Write: 82, Operate: 88 },
+    percentile: 8,
+  },
+  'dataagent': {
+    name: 'DataAgent',
+    score: 78,
+    elo: 1523,
+    tier: 'Gold',
+    categories: { Research: 70, Extract: 92, Analyze: 88, Code: 68, Write: 72, Operate: 75 },
+    percentile: 15,
+  },
+};
+
+// Try mock data first, then Supabase
+let agent: any = null;
+
+if (id && mockAgents[id]) {
+  agent = mockAgents[id];
+} else if (id) {
+  let dbAgent: DbAgent | null = null;
+
+  // Try exact ID match
+  const { data: byId } = await supabase
+    .from('agents')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (byId) {
+    dbAgent = byId;
+  } else {
+    // Try slug-style match
+    const namePattern = id.replace(/-/g, ' ');
+    const { data: byName } = await supabase
+      .from('agents')
+      .select('*')
+      .ilike('name', namePattern)
+      .limit(1)
+      .single();
+    dbAgent = byName;
+  }
+
+  if (dbAgent) {
+    // Get latest completed run
+    const { data: latestRun } = await supabase
+      .from('runs')
+      .select('*')
+      .eq('agent_id', dbAgent.id)
+      .eq('status', 'completed')
+      .order('scored_at', { ascending: false })
+      .limit(1)
+      .single();
+
+    // Get category scores from task_scores
+    let categories: Record<string, number> = {};
+    if (latestRun) {
+      const { data: taskScores } = await supabase
+        .from('task_scores')
+        .select('*')
+        .eq('run_id', latestRun.id);
+
+      const scores: TaskScore[] = taskScores ?? [];
+      const catScores: Record<string, number[]> = {};
+      for (const ts of scores) {
+        const cat = ts.category;
+        const score = ts.combined_score ?? ts.layer1_score ?? 0;
+        if (!catScores[cat]) catScores[cat] = [];
+        catScores[cat].push(score);
+      }
+      for (const [cat, vals] of Object.entries(catScores)) {
+        categories[cat] = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+      }
+    }
+
+    // Compute percentile
+    let percentile: number | null = null;
+    const { data: leaderboard } = await supabase
+      .from('leaderboard')
+      .select('*')
+      .order('rank', { ascending: true });
+
+    if (leaderboard && leaderboard.length > 0) {
+      const entry = leaderboard.find((e: any) => e.agent_id === dbAgent!.id);
+      if (entry && entry.rank) {
+        percentile = Math.round((entry.rank / leaderboard.length) * 100);
+        if (percentile < 1) percentile = 1;
+      }
+    }
+
+    agent = {
+      name: dbAgent.name,
+      score: latestRun?.total_score ?? latestRun?.layer1_score ?? 0,
+      elo: latestRun?.elo_rating ?? 1200,
+      tier: latestRun?.tier ?? 'Unranked',
+      categories,
+      percentile,
+    };
+  }
+}
+
+if (!agent) {
+  return Astro.redirect('/');
+}
+
+const title = `${agent.name} Score Card — Legit`;
+const description = `${agent.name} scored ${agent.score}/100 on the Legit AI agent benchmark. ${agent.tier} tier.`;
+const ogImage = `https://getlegit.dev/api/og/${id}`;
+const cardUrl = `https://getlegit.dev/card/${id}`;
+const tweetText = `${agent.name} just scored ${agent.score}/100 on @getlegitdev — ${agent.tier} tier. Can your agent beat it? #AIAgents\n\n`;
+const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(cardUrl)}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={cardUrl} />
+    <meta property="og:site_name" content="Legit" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:site" content="@getlegitdev" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body class="flex min-h-screen flex-col items-center justify-center bg-[#1a1a2e] p-4">
+    <div class="w-full max-w-[600px]">
+      <!-- Score card (capturable area) -->
+      <div id="score-card">
+        <ScoreCard agent={agent} client:load />
+      </div>
+
+      <!-- Share actions -->
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <!-- Share on X -->
+        <a
+          href={tweetUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2.5 text-[13px] font-semibold text-white hover:bg-white/15 transition-colors"
+        >
+          <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Share on X
+        </a>
+
+        <!-- Copy link -->
+        <button
+          id="copy-link-btn"
+          data-url={cardUrl}
+          class="inline-flex items-center gap-2 rounded-lg border border-white/10 px-4 py-2.5 text-[13px] font-semibold text-gray-300 hover:bg-white/5 transition-colors"
+        >
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+          <span id="copy-link-text">Copy Link</span>
+        </button>
+      </div>
+
+      <!-- Tip text -->
+      <p class="mt-3 text-center text-[11px] text-gray-600">
+        Share your score card on X or copy the link.
+      </p>
+
+      <div class="mt-6 text-center">
+        <a
+          href={`/agent/${id}`}
+          class="text-[13px] text-gray-500 hover:text-[#7F77DD]"
+        >
+          View full agent profile on getlegit.dev
+        </a>
+      </div>
+
+    </div>
+
+    <script>
+      // Copy link functionality
+      document.getElementById('copy-link-btn')?.addEventListener('click', async () => {
+        const btn = document.getElementById('copy-link-btn') as HTMLButtonElement;
+        const text = document.getElementById('copy-link-text') as HTMLSpanElement;
+        const url = btn?.dataset.url || window.location.href;
+        try {
+          await navigator.clipboard.writeText(url);
+          text.textContent = 'Copied!';
+          setTimeout(() => { text.textContent = 'Copy Link'; }, 2000);
+        } catch {
+          // Fallback
+          const input = document.createElement('input');
+          input.value = url;
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand('copy');
+          document.body.removeChild(input);
+          text.textContent = 'Copied!';
+          setTimeout(() => { text.textContent = 'Copy Link'; }, 2000);
+        }
+      });
+    </script>
+
+    <style is:global>
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      }
+      code, .font-mono {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      }
+    </style>
+  </body>
+</html>

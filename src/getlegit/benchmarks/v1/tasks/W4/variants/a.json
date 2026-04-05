@@ -1,0 +1,17 @@
+{
+  "task_description": "Write a technical specification for a real-time notification system that supports web push, email, SMS, and in-app notifications with user preference management.",
+  "input_data": {
+    "feature": "Multi-channel Notification System",
+    "context": "The platform currently has no unified notification system. Notifications are sent ad-hoc from various services. The goal is to build a centralized notification service that handles routing, delivery, user preferences, and delivery tracking across all channels.",
+    "constraints": {
+      "tech_stack": "Python/FastAPI backend, PostgreSQL, Redis, RabbitMQ",
+      "scale": "500K daily active users, up to 5M notifications per day",
+      "latency_requirement": "In-app and push within 2 seconds, email within 30 seconds",
+      "compliance": "GDPR-compliant, must support opt-out per channel"
+    },
+    "requirements": {
+      "min_word_count": 800,
+      "should_include": ["System architecture diagram description", "API endpoint definitions", "Database schema", "Message queue design", "Failure handling", "Rate limiting strategy"]
+    }
+  }
+}

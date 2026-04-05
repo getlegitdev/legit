@@ -1,0 +1,101 @@
+{
+  "task_id": "R3",
+  "category": "research",
+  "level": 3,
+  "level_multiplier": 2.0,
+  "title": "Company due diligence",
+  "description": "Conduct a due diligence investigation of a target company, covering financials, leadership, market position, risks, and strategic outlook.",
+  "time_limit_seconds": 1200,
+  "baseline_seconds": 600,
+  "allowed_tools": ["web_search", "file_read"],
+  "layer1_weight": 0.30,
+  "layer2_weight": 0.70,
+  "output_schema": {
+    "type": "object",
+    "required": ["company_overview", "financials", "leadership", "market_position", "risks", "recommendation"],
+    "properties": {
+      "company_overview": {
+        "type": "object",
+        "required": ["name", "founded", "headquarters", "industry", "description"],
+        "properties": {
+          "name": { "type": "string" },
+          "founded": { "type": "string" },
+          "headquarters": { "type": "string" },
+          "industry": { "type": "string" },
+          "description": { "type": "string" },
+          "employee_count": { "type": "string" }
+        }
+      },
+      "financials": {
+        "type": "object",
+        "required": ["revenue", "funding_history", "financial_health"],
+        "properties": {
+          "revenue": { "type": "string" },
+          "funding_history": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "round": { "type": "string" },
+                "amount": { "type": "string" },
+                "date": { "type": "string" },
+                "investors": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          },
+          "financial_health": { "type": "string" }
+        }
+      },
+      "leadership": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "title", "background"],
+          "properties": {
+            "name": { "type": "string" },
+            "title": { "type": "string" },
+            "background": { "type": "string" }
+          }
+        }
+      },
+      "market_position": {
+        "type": "object",
+        "required": ["market_share", "competitors", "differentiators"],
+        "properties": {
+          "market_share": { "type": "string" },
+          "competitors": { "type": "array", "items": { "type": "string" } },
+          "differentiators": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "risks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["category", "description", "severity"],
+          "properties": {
+            "category": { "type": "string" },
+            "description": { "type": "string" },
+            "severity": { "type": "string", "enum": ["low", "medium", "high", "critical"] }
+          }
+        }
+      },
+      "recommendation": {
+        "type": "object",
+        "required": ["verdict", "rationale", "conditions"],
+        "properties": {
+          "verdict": { "type": "string", "enum": ["proceed", "proceed_with_caution", "decline"] },
+          "rationale": { "type": "string" },
+          "conditions": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "required_fields", "weight": 10, "fields": ["company_overview", "financials", "leadership", "risks"] },
+    { "type": "min_count", "weight": 5, "field": "leadership", "min": 3 },
+    { "type": "min_count", "weight": 3, "field": "risks", "min": 3 },
+    { "type": "keyword_present", "weight": 2, "keywords": ["revenue", "risk", "market"] }
+  ],
+  "variants": ["a", "b", "c"]
+}

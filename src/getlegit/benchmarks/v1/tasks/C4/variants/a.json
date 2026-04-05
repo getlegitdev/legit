@@ -1,0 +1,16 @@
+{
+  "task_description": "Refactor the following Python code that calculates shipping costs. The code has significant duplication and poor structure. Preserve all behavior while improving readability and maintainability.",
+  "input_data": {
+    "code": "def calculate_shipping(weight, destination, is_express, is_fragile):\n    if destination == 'domestic':\n        if weight <= 1:\n            base_cost = 5.99\n        elif weight <= 5:\n            base_cost = 9.99\n        elif weight <= 10:\n            base_cost = 14.99\n        elif weight <= 25:\n            base_cost = 19.99\n        else:\n            base_cost = 29.99\n        if is_express:\n            if weight <= 1:\n                base_cost = 5.99 * 2\n            elif weight <= 5:\n                base_cost = 9.99 * 2\n            elif weight <= 10:\n                base_cost = 14.99 * 2\n            elif weight <= 25:\n                base_cost = 19.99 * 2\n            else:\n                base_cost = 29.99 * 2\n        if is_fragile:\n            base_cost = base_cost + 4.99\n        tax = base_cost * 0.08\n        total = base_cost + tax\n        return total\n    elif destination == 'international':\n        if weight <= 1:\n            base_cost = 15.99\n        elif weight <= 5:\n            base_cost = 24.99\n        elif weight <= 10:\n            base_cost = 39.99\n        elif weight <= 25:\n            base_cost = 59.99\n        else:\n            base_cost = 89.99\n        if is_express:\n            if weight <= 1:\n                base_cost = 15.99 * 2.5\n            elif weight <= 5:\n                base_cost = 24.99 * 2.5\n            elif weight <= 10:\n                base_cost = 39.99 * 2.5\n            elif weight <= 25:\n                base_cost = 59.99 * 2.5\n            else:\n                base_cost = 89.99 * 2.5\n        if is_fragile:\n            base_cost = base_cost + 9.99\n        tax = base_cost * 0.0\n        total = base_cost + tax\n        return total\n    else:\n        return -1",
+    "test_cases": [
+      {"args": [0.5, "domestic", false, false], "expected": 6.4692},
+      {"args": [3, "domestic", true, false], "expected": 21.5784},
+      {"args": [3, "domestic", true, true], "expected": 26.9676},
+      {"args": [0.5, "international", false, false], "expected": 15.99},
+      {"args": [3, "international", true, true], "expected": 72.465},
+      {"args": [30, "domestic", false, true], "expected": 37.7784},
+      {"args": [1, "unknown", false, false], "expected": -1}
+    ],
+    "language": "python"
+  }
+}

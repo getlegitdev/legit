@@ -1,0 +1,16 @@
+{
+  "trend_direction": "increasing",
+  "trend_strength": 0.90,
+  "seasonal_patterns": [
+    {"period": "monthly", "description": "CPU utilization follows a cyclical pattern with peaks every 4-5 weeks followed by dips, suggesting batch processing or periodic workloads."},
+    {"period": "quarterly", "description": "Gradual upward trend throughout the year indicating growing resource demand."}
+  ],
+  "anomalies": [
+    {"index": 33, "value": 95, "explanation": "Week 34 shows a dramatic spike to 95% CPU, likely a runaway process or unexpected load surge, followed by immediate recovery."}
+  ],
+  "forecast": {
+    "next_period_estimate": 80,
+    "confidence": "medium"
+  },
+  "keywords": ["increasing", "CPU", "spike", "capacity planning", "cyclical", "utilization", "upward trend"]
+}

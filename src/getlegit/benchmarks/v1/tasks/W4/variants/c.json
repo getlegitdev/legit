@@ -1,0 +1,17 @@
+{
+  "task_description": "Write a technical specification for a file upload and processing pipeline that handles large files, supports multiple formats, generates thumbnails, and extracts metadata.",
+  "input_data": {
+    "feature": "File Upload and Processing Pipeline",
+    "context": "Users need to upload files (images, PDFs, videos up to 5GB) which must be processed asynchronously. Processing includes virus scanning, format validation, thumbnail generation, metadata extraction, and storage in a CDN-backed object store. The system should support resumable uploads for large files.",
+    "constraints": {
+      "tech_stack": "Go backend, S3-compatible object storage, PostgreSQL for metadata, Redis for job queues",
+      "scale": "50K uploads per day, files up to 5GB, 100TB total storage",
+      "latency_requirement": "Upload initiation under 500ms, processing completion within 5 minutes for files under 100MB",
+      "compliance": "Content scanning required, HIPAA-compatible storage encryption"
+    },
+    "requirements": {
+      "min_word_count": 800,
+      "should_include": ["Upload flow with resumable support", "Processing pipeline stages", "API endpoints", "Database schema for file metadata", "CDN integration", "Error recovery for failed processing", "Storage lifecycle policies"]
+    }
+  }
+}

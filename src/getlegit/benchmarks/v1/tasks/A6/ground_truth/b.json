@@ -1,0 +1,26 @@
+{
+  "hypotheses_results": [
+    {
+      "hypothesis": "H1: A 4-day work week does not decrease total weekly output",
+      "result": "supported",
+      "explanation": "Mean weekly output changed from 47.2 to 46.8 units, a negligible 0.8% decrease. A two-sample t-test shows this difference is not statistically significant (p > 0.05), supporting the hypothesis that productivity was maintained.",
+      "p_value": 0.72,
+      "effect_size": 0.05
+    },
+    {
+      "hypothesis": "H2: Employee satisfaction scores increase with the 4-day schedule",
+      "result": "supported",
+      "explanation": "Satisfaction increased from 6.2 to 8.1 on a 10-point scale, a 30.6% improvement. Highly statistically significant with a large effect size.",
+      "p_value": 0.0001,
+      "effect_size": 1.24
+    },
+    {
+      "hypothesis": "H3: Sick days decrease under the 4-day work week",
+      "result": "supported",
+      "explanation": "Sick days decreased from 1.8 to 1.2 per month, a 33% reduction. Paired t-test on monthly data confirms statistical significance.",
+      "p_value": 0.008,
+      "effect_size": 1.17
+    }
+  ],
+  "keywords": ["4-day work week", "productivity", "satisfaction", "sick days", "t-test", "non-inferiority", "effect size"]
+}

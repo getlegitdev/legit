@@ -1,0 +1,14 @@
+{
+  "task_description": "Generate comprehensive unit tests for the following Python function that implements a simple LRU (Least Recently Used) cache.",
+  "input_data": {
+    "code": "from collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity):\n        if capacity <= 0:\n            raise ValueError('Capacity must be positive')\n        self.capacity = capacity\n        self.cache = OrderedDict()\n\n    def get(self, key):\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n\n    def put(self, key, value):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=False)\n\n    def size(self):\n        return len(self.cache)\n\n    def clear(self):\n        self.cache.clear()",
+    "requirements": [
+      "Test get and put operations",
+      "Test LRU eviction when capacity is exceeded",
+      "Test cache update behavior (overwriting existing keys)",
+      "Test edge cases: capacity of 1, invalid capacity, clear operation",
+      "Test access order tracking (LRU property)"
+    ],
+    "language": "python"
+  }
+}

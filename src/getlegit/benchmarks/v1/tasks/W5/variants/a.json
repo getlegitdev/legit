@@ -1,0 +1,27 @@
+{
+  "task_description": "Generate a changelog for version 3.0.0 of an open-source CLI tool from the provided commit history.",
+  "input_data": {
+    "project": "DataForge CLI",
+    "version": "3.0.0",
+    "previous_version": "2.4.1",
+    "release_date": "2026-04-01",
+    "commits": [
+      { "hash": "a1b2c3d", "message": "feat: add YAML output format support", "author": "alice" },
+      { "hash": "e4f5g6h", "message": "feat: add --parallel flag for concurrent file processing", "author": "bob" },
+      { "hash": "i7j8k9l", "message": "fix: resolve memory leak when processing files over 2GB", "author": "carol" },
+      { "hash": "m0n1o2p", "message": "BREAKING: remove deprecated --legacy-format flag", "author": "alice" },
+      { "hash": "q3r4s5t", "message": "feat: add plugin system for custom transformers", "author": "dave" },
+      { "hash": "u6v7w8x", "message": "fix: correct CSV parsing for quoted fields with newlines", "author": "bob" },
+      { "hash": "y9z0a1b", "message": "BREAKING: change config file format from INI to TOML", "author": "alice" },
+      { "hash": "c2d3e4f", "message": "chore: upgrade dependency openssl from 1.1 to 3.0", "author": "carol" },
+      { "hash": "g5h6i7j", "message": "feat: add progress bar for long-running operations", "author": "dave" },
+      { "hash": "k8l9m0n", "message": "security: patch CVE-2026-1234 in XML parser", "author": "carol" },
+      { "hash": "o1p2q3r", "message": "deprecate: mark --verbose flag in favor of --log-level", "author": "alice" },
+      { "hash": "s4t5u6v", "message": "docs: update migration guide for v3", "author": "bob" }
+    ],
+    "requirements": {
+      "format": "Keep a Changelog style",
+      "should_include": ["Summary paragraph", "Categorized entries", "Breaking changes section", "Migration notes", "Contributor attribution"]
+    }
+  }
+}

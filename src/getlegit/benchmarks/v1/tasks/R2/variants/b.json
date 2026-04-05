@@ -1,0 +1,8 @@
+{
+  "task_description": "Evaluate front-end JavaScript frameworks for a large enterprise dashboard application with complex data visualizations, and recommend the best option.",
+  "input_data": {
+    "use_case": "Enterprise analytics dashboard",
+    "context": "A financial services firm is building an internal analytics dashboard that displays real-time market data, interactive charts, and complex tabular data with thousands of rows. The application needs to handle frequent data updates via WebSocket, support accessibility standards (WCAG 2.1 AA), and integrate with an existing design system built on Web Components. The development team of 15 engineers has mixed experience across frameworks.",
+    "requirements": ["real-time data handling", "large dataset rendering", "accessibility compliance", "Web Components interop", "TypeScript support", "strong ecosystem"]
+  }
+}

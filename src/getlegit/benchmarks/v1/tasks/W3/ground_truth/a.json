@@ -1,0 +1,7 @@
+{
+  "keywords": ["refund", "billing", "apology", "double-charged", "$4,500", "prevention", "enterprise"],
+  "numeric_values": {},
+  "min_word_count": 150,
+  "required_tone": "empathetic",
+  "must_include_resolution": true
+}

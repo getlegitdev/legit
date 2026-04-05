@@ -1,0 +1,31 @@
+{
+  "task_description": "Perform full CRUD operations on the orders API: create an order for Bob, read it back, update the shipping status, then delete it.",
+  "input_data": {
+    "base_url": "http://localhost:9999/api/orders",
+    "create": {
+      "method": "POST",
+      "headers": { "Content-Type": "application/json" },
+      "body": {
+        "customer": "Bob",
+        "items": [{ "product": "Gadget X", "quantity": 2 }],
+        "total": 99.98
+      }
+    },
+    "read": {
+      "method": "GET",
+      "note": "Use the ID returned from the create step"
+    },
+    "update": {
+      "method": "PUT",
+      "body": {
+        "status": "shipped",
+        "tracking_number": "TRK-12345"
+      },
+      "note": "Update the order status to shipped with a tracking number"
+    },
+    "delete": {
+      "method": "DELETE",
+      "note": "Delete the order created in the first step"
+    }
+  }
+}

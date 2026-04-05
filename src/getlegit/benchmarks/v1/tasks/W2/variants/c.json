@@ -1,0 +1,15 @@
+{
+  "task_description": "Write an incident report for a memory leak in a payment processing microservice that caused cascading failures across the checkout flow.",
+  "input_data": {
+    "incident_type": "Memory leak causing cascading failure",
+    "system": "Payment processing microservice in Kubernetes cluster",
+    "duration": "1 hour 20 minutes",
+    "date": "2026-03-25",
+    "context": "A memory leak introduced in a recent deployment of the payment service caused pods to be OOM-killed repeatedly. The Kubernetes HPA scaled up new pods, but each new pod also leaked memory and crashed within 15 minutes. This caused timeouts in the checkout service which depends on the payment service, leading to a backlog of unprocessed orders.",
+    "requirements": {
+      "should_include": ["Timeline with at least 5 entries", "Root cause analysis including the code change that introduced the leak", "Financial impact estimate", "Remediation actions taken", "Deployment safeguards to add"],
+      "severity_options": ["SEV1", "SEV2", "SEV3"],
+      "expected_severity": "SEV1"
+    }
+  }
+}

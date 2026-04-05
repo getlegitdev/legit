@@ -1,0 +1,20 @@
+{
+  "root_cause": {
+    "description": "The v2.4.1 deployment introduced a cache invalidation that forced all requests to hit the database directly. A new unoptimized query (full table scan joining orders and products without proper indexing) caused database connections to saturate the 200-connection pool, leading to cascading request queuing and timeouts.",
+    "confidence": 0.95
+  },
+  "contributing_factors": [
+    {"factor": "Missing database index on orders.created_at and orders.product_id columns", "impact_level": "high"},
+    {"factor": "Full cache invalidation instead of selective invalidation", "impact_level": "high"},
+    {"factor": "Database connection pool sized too small for the load pattern", "impact_level": "medium"}
+  ],
+  "causal_chain": [
+    "Deployment of v2.4.1 triggered full cache invalidation",
+    "All user requests began hitting the database instead of cache",
+    "Slow unoptimized query on /api/orders consumed connections for 3+ seconds each",
+    "Connection pool saturated at 200/200",
+    "New requests queued waiting for connections",
+    "Response times escalated to 2+ seconds causing user-facing timeouts"
+  ],
+  "keywords": ["deployment", "cache invalidation", "slow query", "connection pool", "saturation", "index", "cascade"]
+}

@@ -1,0 +1,14 @@
+{
+  "task_description": "Make a GET request to the /api/orders endpoint and return the parsed response.",
+  "input_data": {
+    "url": "http://localhost:9999/api/orders",
+    "method": "GET",
+    "headers": { "Accept": "application/json" },
+    "expected_response": {
+      "orders": [
+        { "id": 101, "customer": "Alice", "total": 149.97, "status": "shipped" },
+        { "id": 102, "customer": "Bob", "total": 89.98, "status": "processing" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "expected_papers": [
+    "Communication-Efficient Learning of Deep Networks from Decentralized Data",
+    "Federated Learning: Challenges, Methods, and Future Directions",
+    "The Future of Digital Health with Federated Learning",
+    "Federated Learning for Mobile Keyboard Prediction",
+    "Advances and Open Problems in Federated Learning"
+  ],
+  "expected_themes": ["privacy preservation", "heterogeneous data", "clinical applications", "communication efficiency"],
+  "keywords": ["federated", "privacy", "healthcare", "differential privacy", "aggregation", "clinical"],
+  "numeric_values": {},
+  "min_counts": { "papers": 8, "themes": 3, "open_questions": 3 }
+}

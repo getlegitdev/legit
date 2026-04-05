@@ -1,0 +1,18 @@
+{
+  "numeric_values": { "steps_completed": 3 },
+  "keywords": ["completed", "workflow", "validation", "transformation", "aggregation"],
+  "expected_response_data": {
+    "workflow_id": "wf-data-001",
+    "final_status": "completed",
+    "step_results": [
+      { "step_name": "validation", "status": "completed", "output": { "records_validated": 15000, "records_rejected": 23 } },
+      { "step_name": "transformation", "status": "completed", "output": { "records_transformed": 14977, "format": "normalized" } },
+      { "step_name": "aggregation", "status": "completed", "output": { "aggregated_records": 450, "output_format": "aggregated" } }
+    ],
+    "workflow_output": {
+      "total_input_records": 15000,
+      "total_output_records": 450,
+      "processing_time_ms": 3200
+    }
+  }
+}

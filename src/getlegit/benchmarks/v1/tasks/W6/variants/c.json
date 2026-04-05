@@ -1,0 +1,34 @@
+{
+  "task_description": "Write an RFP response for a multinational retailer seeking an omnichannel inventory management and fulfillment platform.",
+  "input_data": {
+    "rfp_issuer": "GlobalMart International (Fortune 500 retailer, 2000+ stores across 15 countries)",
+    "project": "Omnichannel Inventory and Fulfillment Platform",
+    "responding_company": "SupplySync Technologies (enterprise supply chain software company, 500 employees, serving 50+ retail brands)",
+    "rfp_requirements": {
+      "scope": "Replace fragmented regional inventory systems with a unified platform providing real-time inventory visibility across all stores, warehouses, and online channels. Enable ship-from-store, BOPIS, and dynamic fulfillment routing to minimize delivery time and cost.",
+      "timeline": "30-month phased global rollout",
+      "budget_range": "$15M - $25M",
+      "key_requirements": [
+        "Real-time inventory accuracy above 98%",
+        "Support for 50M+ SKUs across all regions",
+        "Multi-currency and multi-language support",
+        "Integration with existing SAP ERP and Salesforce Commerce Cloud",
+        "Sub-second inventory availability checks for e-commerce",
+        "Demand forecasting with ML-based predictions",
+        "Support for regional compliance (EU, APAC, Americas)"
+      ],
+      "evaluation_criteria": {
+        "technical_capability": "30%",
+        "global_deployment_experience": "20%",
+        "price_and_TCO": "20%",
+        "implementation_approach": "15%",
+        "innovation_and_roadmap": "10%",
+        "risk_management": "5%"
+      }
+    },
+    "requirements": {
+      "min_word_count": 1500,
+      "should_include": ["Executive summary", "Platform architecture", "Integration strategy", "Global rollout plan by region", "Team and governance structure", "TCO analysis", "Risk register", "Innovation roadmap"]
+    }
+  }
+}

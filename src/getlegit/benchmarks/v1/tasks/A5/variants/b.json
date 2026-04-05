@@ -1,0 +1,25 @@
+{
+  "task_description": "Assess the risks of launching a new SaaS product in the healthcare market, considering regulatory, technical, and market risks.",
+  "input_data": {
+    "project": {
+      "name": "HealthTrack SaaS Platform Launch",
+      "timeline_months": 9,
+      "team_size": 15,
+      "budget_usd": 2000000,
+      "target_market": "healthcare providers, clinics, small hospitals",
+      "target_users_year1": 500,
+      "competitors": 4,
+      "development_progress_percent": 60
+    },
+    "risk_factors": [
+      {"name": "HIPAA compliance", "description": "All patient data must be HIPAA compliant; audit pending"},
+      {"name": "Market timing", "description": "Two competitors launching similar products within 3 months"},
+      {"name": "Integration requirements", "description": "Must integrate with 5 major EHR systems (Epic, Cerner, etc.)"},
+      {"name": "Regulatory approval", "description": "May require FDA 510(k) clearance depending on feature set"},
+      {"name": "Data breach liability", "description": "Healthcare data breaches average $10.9M in costs"},
+      {"name": "Vendor lock-in", "description": "Core infrastructure built on single cloud provider"},
+      {"name": "Talent retention", "description": "3 key engineers have competing offers"}
+    ],
+    "context": "Series A startup with 18 months of runway"
+  }
+}

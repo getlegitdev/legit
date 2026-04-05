@@ -1,0 +1,7 @@
+{
+  "task_description": "Identify 5 competitors for Figma and create a structured comparison report.",
+  "input_data": {
+    "product": "Figma",
+    "context": "Figma is a collaborative interface design tool that runs in the browser. It enables teams to design, prototype, and gather feedback in a single platform. Figma supports real-time collaboration, component libraries, and design systems. It was acquired by Adobe in 2023 and is widely used for UI/UX design across the tech industry."
+  }
+}

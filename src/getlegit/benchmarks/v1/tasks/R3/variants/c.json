@@ -1,0 +1,8 @@
+{
+  "task_description": "Conduct a due diligence investigation of Figma as a strategic design platform investment.",
+  "input_data": {
+    "company": "Figma",
+    "context": "A venture capital firm is evaluating a secondary market purchase of Figma shares. Following the blocked Adobe acquisition, we need to assess Figma's standalone viability, growth trajectory, and long-term competitive positioning. The investment would represent $200M at the latest secondary valuation. We need to understand if the company can sustain its growth independently.",
+    "focus_areas": ["post-acquisition-block trajectory", "product-led growth metrics", "enterprise adoption", "competitive threats", "path to IPO"]
+  }
+}

@@ -1,0 +1,9 @@
+# Scoring logic — requires owner review
+src/getlegit/judges/ @alethios000
+
+# CI/CD pipelines — requires owner review
+.github/workflows/ @alethios000
+
+# Dependencies — requires owner review
+pyproject.toml @alethios000
+web/package.json @alethios000

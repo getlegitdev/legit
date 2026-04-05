@@ -1,0 +1,7 @@
+{
+  "keywords": ["upload", "resumable", "thumbnail", "metadata", "S3", "CDN", "pipeline", "processing", "virus scan"],
+  "numeric_values": {},
+  "min_word_count": 800,
+  "required_sections": ["architecture", "api_design", "data_model", "implementation_plan"],
+  "must_address_scale": true
+}

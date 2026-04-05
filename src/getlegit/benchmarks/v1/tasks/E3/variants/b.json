@@ -1,0 +1,10 @@
+{
+  "task_description": "Extract event listings from a conference schedule page, normalizing session titles, speakers, times, tracks, and room assignments.",
+  "input_data": {
+    "page_type": "Conference schedule",
+    "context": "The input file contains HTML content from a tech conference's schedule page. Events span 3 days and include keynotes, breakout sessions, workshops, and networking events. Each entry has a title, speaker name(s), time slot, track/category (e.g., 'AI/ML', 'DevOps', 'Security'), room assignment, and difficulty level. Some sessions have multiple speakers. There are 20 sessions listed.",
+    "file_path": "conference_schedule.html",
+    "expected_item_count": 20,
+    "fields_to_extract": ["title", "speakers", "date", "start_time", "end_time", "track", "room", "difficulty_level", "session_type"]
+  }
+}

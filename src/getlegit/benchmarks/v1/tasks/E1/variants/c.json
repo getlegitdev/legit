@@ -1,0 +1,7 @@
+{
+  "task_description": "Extract the data from the following student grades table into structured JSON format.",
+  "input_data": {
+    "table_text": "+----------------+-------------+-------+------+\n| Student        | Subject     | Grade | GPA  |\n+----------------+-------------+-------+------+\n| Maria Garcia   | Mathematics | A     | 4.0  |\n| James Lee      | Physics     | B+    | 3.3  |\n| Sarah Chen     | Chemistry   | A-    | 3.7  |\n| Tom Wilson     | Mathematics | B     | 3.0  |\n| Lisa Park      | Physics     | A     | 4.0  |\n| Ryan Murphy    | Chemistry   | B+    | 3.3  |\n+----------------+-------------+-------+------+",
+    "expected_rows": 6
+  }
+}

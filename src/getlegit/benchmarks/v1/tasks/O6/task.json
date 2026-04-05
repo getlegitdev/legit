@@ -1,0 +1,44 @@
+{
+  "task_id": "O6",
+  "category": "operate",
+  "level": 4,
+  "level_multiplier": 3.0,
+  "title": "Workflow automation",
+  "description": "Start a multi-step workflow via API, poll for status updates, and handle the workflow lifecycle including intermediate states and final completion.",
+  "time_limit_seconds": 1200,
+  "baseline_seconds": 600,
+  "allowed_tools": ["api_call"],
+  "layer1_weight": 0.40,
+  "layer2_weight": 0.60,
+  "output_schema": {
+    "type": "object",
+    "required": ["workflow_id", "final_status", "steps_completed", "total_duration_ms"],
+    "properties": {
+      "workflow_id": { "type": "string" },
+      "final_status": { "type": "string" },
+      "steps_completed": { "type": "number" },
+      "total_duration_ms": { "type": "number" },
+      "step_results": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "step_name": { "type": "string" },
+            "status": { "type": "string" },
+            "output": { "type": "object" }
+          }
+        }
+      },
+      "start_response": { "type": "object" },
+      "status_checks": { "type": "number" },
+      "workflow_output": { "type": "object" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "required_fields", "weight": 10, "fields": ["workflow_id", "final_status", "steps_completed"] },
+    { "type": "keyword_present", "weight": 10, "keywords": ["completed", "workflow"] },
+    { "type": "numeric_accuracy", "weight": 10, "field": "steps_completed", "expected": 3 }
+  ],
+  "variants": ["a", "b", "c"]
+}

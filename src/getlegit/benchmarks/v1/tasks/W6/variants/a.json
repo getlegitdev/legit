@@ -1,0 +1,32 @@
+{
+  "task_description": "Write an RFP response for a state government agency seeking a cloud migration partner to modernize their legacy systems.",
+  "input_data": {
+    "rfp_issuer": "State Department of Revenue",
+    "project": "Legacy Tax System Cloud Migration",
+    "responding_company": "CloudPath Consulting (mid-size cloud consultancy, AWS Advanced Partner, 200 employees)",
+    "rfp_requirements": {
+      "scope": "Migrate 15 legacy COBOL/mainframe applications to cloud-native architecture on AWS. Applications handle tax filing, payment processing, refund management, and taxpayer accounts.",
+      "timeline": "24-month maximum implementation window",
+      "budget_range": "$8M - $12M",
+      "key_requirements": [
+        "Zero data loss during migration",
+        "Maximum 4 hours downtime per application cutover",
+        "FedRAMP High compliance",
+        "Maintain 99.95% uptime SLA post-migration",
+        "Staff augmentation and knowledge transfer to state IT team",
+        "PCI DSS compliance for payment processing components"
+      ],
+      "evaluation_criteria": {
+        "technical_approach": "35%",
+        "experience_and_qualifications": "25%",
+        "price": "20%",
+        "implementation_timeline": "15%",
+        "risk_management": "5%"
+      }
+    },
+    "requirements": {
+      "min_word_count": 1500,
+      "should_include": ["Executive summary", "Detailed technical approach", "Migration strategy per application type", "Timeline with phases", "Team structure", "Pricing breakdown", "Risk register", "Compliance approach"]
+    }
+  }
+}

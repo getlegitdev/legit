@@ -1,0 +1,8 @@
+{
+  "task_description": "Conduct a due diligence investigation of Databricks as a potential acquisition target for our enterprise data analytics division.",
+  "input_data": {
+    "company": "Databricks",
+    "context": "Our enterprise software conglomerate is considering acquiring Databricks to strengthen our data analytics and AI platform offerings. We need a thorough due diligence report assessing their financials, technology moat, talent, customer base, and any deal risks. The estimated acquisition price range is $35-45 billion.",
+    "focus_areas": ["valuation justification", "technology differentiation", "customer retention", "competitive threats from Snowflake and cloud providers", "integration complexity"]
+  }
+}

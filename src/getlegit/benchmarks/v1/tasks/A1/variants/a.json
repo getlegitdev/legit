@@ -1,0 +1,21 @@
+{
+  "task_description": "Analyze the following monthly revenue data for a SaaS company and produce a summary with key statistics and insights.",
+  "input_data": {
+    "dataset": [
+      { "month": "January", "revenue": 42000 },
+      { "month": "February", "revenue": 45000 },
+      { "month": "March", "revenue": 43500 },
+      { "month": "April", "revenue": 48000 },
+      { "month": "May", "revenue": 51000 },
+      { "month": "June", "revenue": 49500 },
+      { "month": "July", "revenue": 53000 },
+      { "month": "August", "revenue": 55000 },
+      { "month": "September", "revenue": 54000 },
+      { "month": "October", "revenue": 58000 },
+      { "month": "November", "revenue": 61000 },
+      { "month": "December", "revenue": 63000 }
+    ],
+    "metric": "revenue",
+    "unit": "USD"
+  }
+}

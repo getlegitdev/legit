@@ -1,0 +1,15 @@
+{
+  "task_description": "Write an incident report for a DNS misconfiguration that caused intermittent API failures affecting mobile app users for 2 hours.",
+  "input_data": {
+    "incident_type": "DNS misconfiguration",
+    "system": "Cloud DNS configuration for mobile backend API",
+    "duration": "2 hours",
+    "date": "2026-03-20",
+    "context": "A routine DNS record update for the API gateway accidentally removed a CNAME record for the mobile API subdomain. The issue was intermittent because cached DNS entries continued to work for some users while others received NXDOMAIN errors. The on-call engineer initially misdiagnosed it as a load balancer issue.",
+    "requirements": {
+      "should_include": ["Timeline with at least 5 entries", "Root cause analysis", "User impact breakdown by platform", "Remediation actions taken", "Process improvement recommendations"],
+      "severity_options": ["SEV1", "SEV2", "SEV3"],
+      "expected_severity": "SEV2"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "expected_clean_records": 72,
+  "expected_total_input": 80,
+  "expected_duplicates_merged": 8,
+  "expected_issue_types": ["ocr_error", "encoding_issue", "format_inconsistency", "duplicate", "missing_value", "invalid_email"],
+  "keywords": ["clean", "normalize", "OCR", "encoding", "duplicate", "format"],
+  "numeric_values": { "cleaning_report.total_records": 80 },
+  "min_counts": { "cleaned_records": 15 }
+}

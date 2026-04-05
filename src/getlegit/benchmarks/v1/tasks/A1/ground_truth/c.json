@@ -1,0 +1,11 @@
+{
+  "numeric_values": {
+    "statistics.count": 8,
+    "statistics.mean": 14837.5,
+    "statistics.median": 15000.0,
+    "statistics.min": 12500,
+    "statistics.max": 17200
+  },
+  "keywords": ["traffic", "growth", "visitors"],
+  "min_counts": { "trends": 2, "insights": 2 }
+}

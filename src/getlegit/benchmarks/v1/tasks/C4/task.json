@@ -1,0 +1,52 @@
+{
+  "task_id": "C4",
+  "category": "code",
+  "level": 3,
+  "level_multiplier": 2.0,
+  "title": "Refactoring",
+  "description": "Refactor the given Python code to improve readability, maintainability, and performance while preserving behavior.",
+  "time_limit_seconds": 900,
+  "baseline_seconds": 480,
+  "allowed_tools": ["code_execute"],
+  "layer1_weight": 0.50,
+  "layer2_weight": 0.50,
+  "output_schema": {
+    "type": "object",
+    "required": ["refactored_code", "changes", "design_patterns_applied", "before_after_comparison"],
+    "properties": {
+      "refactored_code": { "type": "string" },
+      "changes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["description", "rationale", "category"],
+          "properties": {
+            "description": { "type": "string" },
+            "rationale": { "type": "string" },
+            "category": { "type": "string", "enum": ["readability", "performance", "maintainability", "design_pattern", "simplification"] }
+          }
+        }
+      },
+      "design_patterns_applied": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "before_after_comparison": {
+        "type": "object",
+        "required": ["lines_before", "lines_after", "complexity_change"],
+        "properties": {
+          "lines_before": { "type": "number" },
+          "lines_after": { "type": "number" },
+          "complexity_change": { "type": "string" }
+        }
+      }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "required_fields", "weight": 10, "fields": ["refactored_code"] },
+    { "type": "code_parses", "weight": 20, "field": "refactored_code", "language": "python" },
+    { "type": "min_count", "weight": 10, "field": "changes", "min": 3 }
+  ],
+  "variants": ["a", "b", "c"]
+}

@@ -1,0 +1,22 @@
+{
+  "root_cause": {
+    "description": "The kafka-connector-v3.2 upgrade caused a consumer group rebalance that doubled the partition assignment from 3 to 6 partitions. Without deduplication configured, the pipeline consumed the same messages from previously-read partitions again, effectively processing each record twice and doubling the revenue aggregates.",
+    "confidence": 0.90
+  },
+  "contributing_factors": [
+    {"factor": "No deduplication mechanism in the ETL pipeline", "impact_level": "high"},
+    {"factor": "Kafka consumer group rebalance assigned all 6 partitions instead of previous 3", "impact_level": "high"},
+    {"factor": "Connector upgrade changed partition assignment strategy", "impact_level": "medium"},
+    {"factor": "No data quality checks comparing input volume to historical baselines", "impact_level": "low"}
+  ],
+  "causal_chain": [
+    "New kafka-connector-v3.2 deployed during ETL window on March 27",
+    "Connector triggered consumer group rebalance on March 28",
+    "Pipeline assigned 6 partitions instead of previous 3",
+    "Records from partitions 0-2 were re-consumed from earlier offsets",
+    "Without deduplication, duplicate records flowed through the pipeline",
+    "Revenue aggregates doubled (records_processed ~2x, avg_revenue ~2x)",
+    "Output row count stayed the same because aggregation grouped by key"
+  ],
+  "keywords": ["Kafka", "consumer group", "rebalance", "partition", "deduplication", "duplicate", "connector upgrade"]
+}

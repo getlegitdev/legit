@@ -1,0 +1,22 @@
+# Cloudflare Workers configuration
+# LLM API keys set via: wrangler secret put LLM_API_KEY_1 (etc.)
+
+name = "legit-api"
+main = "api/submit.ts"
+compatibility_date = "2024-01-01"
+
+routes = [
+  { pattern = "getlegit.dev/api/*", zone_name = "getlegit.dev" }
+]
+
+[[kv_namespaces]]
+binding = "QUOTA_KV"
+id = "0a327373f5ef4cb6993cfe0aed803cfd"
+
+[[kv_namespaces]]
+binding = "RUNS_KV"
+id = "fd6bec448e9541a8bb15fe87bf9bc4f8"
+
+[[kv_namespaces]]
+binding = "LEADERBOARD_KV"
+id = "230c6894235a492f91d640d4e70aeff3"

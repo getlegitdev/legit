@@ -1,0 +1,29 @@
+{
+  "task_description": "Call three independent services (A, B, C) to gather user analytics, product inventory, and order metrics, then aggregate the results into a unified dashboard payload.",
+  "input_data": {
+    "services": [
+      {
+        "name": "service-a",
+        "url": "http://localhost:9999/api/service-a",
+        "method": "GET",
+        "headers": { "Accept": "application/json" },
+        "description": "Returns user analytics data (active users, signups, churn rate)"
+      },
+      {
+        "name": "service-b",
+        "url": "http://localhost:9999/api/service-b",
+        "method": "GET",
+        "headers": { "Accept": "application/json" },
+        "description": "Returns product inventory data (total SKUs, low stock items, reorder needed)"
+      },
+      {
+        "name": "service-c",
+        "url": "http://localhost:9999/api/service-c",
+        "method": "GET",
+        "headers": { "Accept": "application/json" },
+        "description": "Returns order metrics (total orders, revenue, average order value)"
+      }
+    ],
+    "aggregation_instructions": "Combine all three service responses into a single dashboard object with sections for users, inventory, and orders."
+  }
+}

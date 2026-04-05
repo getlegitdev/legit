@@ -1,0 +1,8 @@
+{
+  "expected_unique_records": 160,
+  "expected_total_input": 365,
+  "expected_duplicates": 205,
+  "keywords": ["product", "inventory", "SKU", "catalog", "warehouse"],
+  "numeric_values": { "statistics.total_input_records": 365, "statistics.merged_output_records": 160 },
+  "min_counts": { "merged_records": 10, "sources": 3 }
+}

@@ -1,0 +1,10 @@
+{
+  "task_description": "Extract product listings from an e-commerce category page for laptop computers, normalizing names, prices, specs, and ratings.",
+  "input_data": {
+    "page_type": "E-commerce product listing",
+    "context": "The input file contains HTML content from an electronics retailer's laptop category page. Each product card includes the laptop name, brand, price (some with sale prices), star rating, number of reviews, and key specs (processor, RAM, storage, screen size). Some entries have 'Sponsored' labels that should be flagged. There are 12 laptop listings on the page.",
+    "file_path": "laptop_listings.html",
+    "expected_item_count": 12,
+    "fields_to_extract": ["name", "brand", "price", "sale_price", "rating", "review_count", "processor", "ram", "storage", "screen_size", "is_sponsored"]
+  }
+}

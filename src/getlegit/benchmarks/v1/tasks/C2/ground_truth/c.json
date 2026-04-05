@@ -1,0 +1,15 @@
+{
+  "test_code": "import pytest\nfrom collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity):\n        if capacity <= 0:\n            raise ValueError('Capacity must be positive')\n        self.capacity = capacity\n        self.cache = OrderedDict()\n\n    def get(self, key):\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n\n    def put(self, key, value):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=False)\n\n    def size(self):\n        return len(self.cache)\n\n    def clear(self):\n        self.cache.clear()\n\ndef test_put_and_get():\n    cache = LRUCache(2)\n    cache.put('a', 1)\n    assert cache.get('a') == 1\n\ndef test_get_missing_key():\n    cache = LRUCache(2)\n    assert cache.get('missing') == -1\n\ndef test_eviction():\n    cache = LRUCache(2)\n    cache.put('a', 1)\n    cache.put('b', 2)\n    cache.put('c', 3)\n    assert cache.get('a') == -1\n    assert cache.get('b') == 2\n    assert cache.get('c') == 3\n\ndef test_access_updates_order():\n    cache = LRUCache(2)\n    cache.put('a', 1)\n    cache.put('b', 2)\n    cache.get('a')\n    cache.put('c', 3)\n    assert cache.get('a') == 1\n    assert cache.get('b') == -1\n\ndef test_update_existing_key():\n    cache = LRUCache(2)\n    cache.put('a', 1)\n    cache.put('a', 10)\n    assert cache.get('a') == 10\n    assert cache.size() == 1\n\ndef test_capacity_one():\n    cache = LRUCache(1)\n    cache.put('a', 1)\n    cache.put('b', 2)\n    assert cache.get('a') == -1\n    assert cache.get('b') == 2\n\ndef test_invalid_capacity():\n    with pytest.raises(ValueError):\n        LRUCache(0)\n    with pytest.raises(ValueError):\n        LRUCache(-1)\n\ndef test_clear():\n    cache = LRUCache(3)\n    cache.put('a', 1)\n    cache.put('b', 2)\n    cache.clear()\n    assert cache.size() == 0\n    assert cache.get('a') == -1\n\ndef test_size():\n    cache = LRUCache(3)\n    assert cache.size() == 0\n    cache.put('a', 1)\n    assert cache.size() == 1\n    cache.put('b', 2)\n    assert cache.size() == 2",
+  "test_cases_description": [
+    {"name": "test_put_and_get", "category": "normal"},
+    {"name": "test_get_missing_key", "category": "normal"},
+    {"name": "test_eviction", "category": "normal"},
+    {"name": "test_access_updates_order", "category": "edge_case"},
+    {"name": "test_update_existing_key", "category": "edge_case"},
+    {"name": "test_capacity_one", "category": "boundary"},
+    {"name": "test_invalid_capacity", "category": "error_handling"},
+    {"name": "test_clear", "category": "normal"},
+    {"name": "test_size", "category": "normal"}
+  ],
+  "keywords": ["LRUCache", "eviction", "capacity", "get", "put", "order", "clear", "size"]
+}

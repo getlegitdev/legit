@@ -1,0 +1,41 @@
+{
+  "task_id": "C3",
+  "category": "code",
+  "level": 2,
+  "level_multiplier": 1.5,
+  "title": "Code review",
+  "description": "Review the given Python code and identify bugs, security issues, performance problems, and style violations.",
+  "time_limit_seconds": 600,
+  "baseline_seconds": 300,
+  "allowed_tools": ["code_execute"],
+  "layer1_weight": 0.30,
+  "layer2_weight": 0.70,
+  "output_schema": {
+    "type": "object",
+    "required": ["issues", "improved_code", "review_summary"],
+    "properties": {
+      "issues": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["line", "severity", "category", "description", "suggestion"],
+          "properties": {
+            "line": { "type": "number" },
+            "severity": { "type": "string", "enum": ["critical", "major", "minor", "info"] },
+            "category": { "type": "string", "enum": ["bug", "security", "performance", "style", "maintainability"] },
+            "description": { "type": "string" },
+            "suggestion": { "type": "string" }
+          }
+        }
+      },
+      "improved_code": { "type": "string" },
+      "review_summary": { "type": "string" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "min_count", "weight": 10, "field": "issues", "min": 3 },
+    { "type": "code_parses", "weight": 10, "field": "improved_code", "language": "python" }
+  ],
+  "variants": ["a", "b", "c"]
+}

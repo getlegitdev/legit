@@ -1,0 +1,13 @@
+{
+  "task_description": "Fetch data from an endpoint that returns a 429 Too Many Requests error initially. Implement backoff and retry to eventually get the data.",
+  "input_data": {
+    "url": "http://localhost:9999/api/error-endpoint",
+    "method": "GET",
+    "headers": { "Accept": "application/json", "X-Scenario": "rate-limited" },
+    "retry_policy": {
+      "max_retries": 3,
+      "description": "The endpoint returns 429 Too Many Requests on the first call, then 200 OK on subsequent calls. You must retry after receiving the error."
+    },
+    "expected_behavior": "First call returns 429, second call returns 200 with data"
+  }
+}

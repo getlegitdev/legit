@@ -1,0 +1,9 @@
+{
+  "task_description": "Analyze contradictions in published research and industry reports about the health effects of intermittent fasting.",
+  "input_data": {
+    "topic": "Health effects of intermittent fasting",
+    "context": "There is significant debate in the nutrition science community about the benefits and risks of intermittent fasting (IF). Some studies claim IF improves metabolic health, reduces inflammation, and extends lifespan, while others suggest it may lead to muscle loss, hormonal disruption, and disordered eating patterns. Analyze peer-reviewed studies, meta-analyses, and authoritative health organization positions to identify key contradictions and assess overall evidence quality.",
+    "source_types": ["peer-reviewed studies", "meta-analyses", "health organization guidelines", "clinical trials"],
+    "min_sources": 6
+  }
+}

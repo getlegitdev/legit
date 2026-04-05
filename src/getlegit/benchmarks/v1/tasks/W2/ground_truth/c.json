@@ -1,0 +1,8 @@
+{
+  "keywords": ["memory leak", "payment", "OOM", "Kubernetes", "cascading", "checkout", "pods"],
+  "numeric_values": {},
+  "min_word_count": 400,
+  "required_sections": ["timeline", "root_cause", "impact", "remediation"],
+  "expected_severity": "SEV1",
+  "min_timeline_entries": 5
+}

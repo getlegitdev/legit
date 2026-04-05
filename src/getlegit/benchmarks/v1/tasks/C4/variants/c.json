@@ -1,0 +1,13 @@
+{
+  "task_description": "Refactor the following Python code that implements a simple task scheduler. The code uses global state, has poor error handling, and mixes concerns. Preserve all behavior while improving the design.",
+  "input_data": {
+    "code": "import time\n\ntasks = []\nnext_id = 1\n\ndef add_task(name, priority, due_timestamp):\n    global next_id\n    task = {\n        'id': next_id,\n        'name': name,\n        'priority': priority,\n        'due': due_timestamp,\n        'completed': False,\n        'created': time.time()\n    }\n    next_id = next_id + 1\n    tasks.append(task)\n    return task['id']\n\ndef complete_task(task_id):\n    for t in tasks:\n        if t['id'] == task_id:\n            t['completed'] = True\n            return True\n    return False\n\ndef get_pending():\n    pending = []\n    for t in tasks:\n        if t['completed'] == False:\n            pending.append(t)\n    result = []\n    for t in pending:\n        result.append(t)\n    # Sort by priority (higher first) then by due date\n    for i in range(len(result)):\n        for j in range(i + 1, len(result)):\n            if result[j]['priority'] > result[i]['priority']:\n                temp = result[i]\n                result[i] = result[j]\n                result[j] = temp\n            elif result[j]['priority'] == result[i]['priority']:\n                if result[j]['due'] < result[i]['due']:\n                    temp = result[i]\n                    result[i] = result[j]\n                    result[j] = temp\n    return result\n\ndef get_overdue():\n    now = time.time()\n    overdue = []\n    for t in tasks:\n        if t['completed'] == False and t['due'] < now:\n            overdue.append(t)\n    return overdue\n\ndef delete_task(task_id):\n    global tasks\n    new_tasks = []\n    for t in tasks:\n        if t['id'] != task_id:\n            new_tasks.append(t)\n    tasks = new_tasks\n\ndef get_stats():\n    total = len(tasks)\n    completed = 0\n    pending = 0\n    for t in tasks:\n        if t['completed']:\n            completed = completed + 1\n        else:\n            pending = pending + 1\n    return {'total': total, 'completed': completed, 'pending': pending}",
+    "test_cases": [
+      {"action": "add_task", "args": ["Task A", 3, 1700000000], "expected_type": "int"},
+      {"action": "add_task", "args": ["Task B", 5, 1700000100], "expected_type": "int"},
+      {"action": "complete_task", "args": [1], "expected": true},
+      {"action": "get_stats", "args": [], "expected": {"total": 2, "completed": 1, "pending": 1}}
+    ],
+    "language": "python"
+  }
+}

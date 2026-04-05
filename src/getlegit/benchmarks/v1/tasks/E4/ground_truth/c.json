@@ -1,0 +1,8 @@
+{
+  "expected_unique_records": 210,
+  "expected_total_input": 575,
+  "expected_duplicates": 365,
+  "keywords": ["appointment", "patient", "encounter", "billing", "scheduling"],
+  "numeric_values": { "statistics.total_input_records": 575, "statistics.merged_output_records": 210 },
+  "min_counts": { "merged_records": 10, "sources": 3 }
+}

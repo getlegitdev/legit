@@ -1,0 +1,25 @@
+{
+  "task_description": "Start a data processing workflow, monitor its progress through multiple stages, and collect the final results when complete.",
+  "input_data": {
+    "start": {
+      "url": "http://localhost:9999/api/workflow/start",
+      "method": "POST",
+      "headers": { "Content-Type": "application/json" },
+      "body": {
+        "workflow_type": "data_processing",
+        "input": {
+          "source": "raw_events",
+          "filters": ["valid_only", "last_24h"],
+          "output_format": "aggregated"
+        }
+      }
+    },
+    "status_check": {
+      "url_template": "http://localhost:9999/api/workflow/{workflow_id}/status",
+      "method": "GET",
+      "headers": { "Accept": "application/json" },
+      "poll_instructions": "Poll the status endpoint using the workflow_id returned from the start call. Continue polling until the status is 'completed' or 'failed'."
+    },
+    "expected_steps": ["validation", "transformation", "aggregation"]
+  }
+}

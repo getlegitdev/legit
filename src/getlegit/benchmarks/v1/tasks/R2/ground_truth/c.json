@@ -1,0 +1,6 @@
+{
+  "expected_candidates": ["Kubernetes (EKS)", "Amazon ECS", "Google Kubernetes Engine", "Azure Kubernetes Service", "Nomad"],
+  "keywords": ["performance", "scalability", "cost", "HIPAA", "compliance", "orchestration"],
+  "numeric_values": {},
+  "min_counts": { "candidates": 3 }
+}

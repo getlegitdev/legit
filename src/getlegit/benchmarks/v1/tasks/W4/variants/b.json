@@ -1,0 +1,17 @@
+{
+  "task_description": "Write a technical specification for a role-based access control (RBAC) system with support for hierarchical permissions, resource-level policies, and audit logging.",
+  "input_data": {
+    "feature": "Hierarchical RBAC System",
+    "context": "The application currently uses a simple user/admin boolean flag. As the product scales to support enterprise customers, a proper RBAC system is needed with organization-level roles, team-level roles, and resource-level permissions. Must integrate with existing JWT-based authentication.",
+    "constraints": {
+      "tech_stack": "Node.js/Express backend, PostgreSQL, Redis for caching",
+      "scale": "10K organizations, 500K users, permission checks on every API call",
+      "latency_requirement": "Permission evaluation under 5ms using cached policies",
+      "compliance": "SOC2 audit logging requirements"
+    },
+    "requirements": {
+      "min_word_count": 800,
+      "should_include": ["Permission model design", "Role hierarchy", "API endpoints for role management", "Database schema", "Caching strategy", "Audit log format", "Migration plan from current system"]
+    }
+  }
+}

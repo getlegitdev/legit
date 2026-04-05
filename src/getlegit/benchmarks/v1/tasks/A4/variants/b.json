@@ -1,0 +1,34 @@
+{
+  "task_description": "A microservices-based payment system started returning intermittent 500 errors at a rate of 15% starting Monday morning. Analyze the metrics and logs to find the root cause.",
+  "input_data": {
+    "metrics": {
+      "error_rate_percent": [
+        {"time": "Sun 23:00", "value": 0.1}, {"time": "Mon 00:00", "value": 0.2},
+        {"time": "Mon 06:00", "value": 0.3}, {"time": "Mon 08:00", "value": 5.2},
+        {"time": "Mon 09:00", "value": 8.7}, {"time": "Mon 10:00", "value": 15.1},
+        {"time": "Mon 11:00", "value": 14.8}, {"time": "Mon 12:00", "value": 15.3}
+      ],
+      "request_volume": [
+        {"time": "Sun 23:00", "value": 500}, {"time": "Mon 00:00", "value": 200},
+        {"time": "Mon 06:00", "value": 800}, {"time": "Mon 08:00", "value": 3500},
+        {"time": "Mon 09:00", "value": 5200}, {"time": "Mon 10:00", "value": 6800},
+        {"time": "Mon 11:00", "value": 7100}, {"time": "Mon 12:00", "value": 7500}
+      ],
+      "service_latency_ms": {
+        "payment_gateway": [50, 52, 48, 55, 60, 58, 62, 55],
+        "auth_service": [10, 12, 11, 350, 420, 510, 480, 520],
+        "order_service": [30, 32, 28, 35, 38, 40, 42, 38]
+      }
+    },
+    "event_logs": [
+      {"time": "Sun 22:00", "source": "ops", "message": "SSL certificate renewed for auth-service.internal"},
+      {"time": "Sun 23:30", "source": "auth_service", "message": "Config reload: new TLS certificate applied"},
+      {"time": "Mon 07:55", "source": "auth_service", "message": "TLS handshake failures increasing"},
+      {"time": "Mon 08:10", "source": "payment_gateway", "message": "Upstream auth_service returning 503 intermittently"},
+      {"time": "Mon 09:00", "source": "auth_service", "message": "Certificate chain validation errors from payment_gateway"},
+      {"time": "Mon 09:15", "source": "ops", "message": "Noticed auth_service intermediate CA cert not included in bundle"}
+    ],
+    "architecture": "payment_gateway -> auth_service -> order_service -> database",
+    "context": "Payment processing microservices with mTLS between services"
+  }
+}

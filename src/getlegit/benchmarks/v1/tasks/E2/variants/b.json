@@ -1,0 +1,10 @@
+{
+  "task_description": "Extract structured data from a scientific research paper PDF, including abstract, methodology sections, results tables, and references metadata.",
+  "input_data": {
+    "document_type": "Scientific research paper",
+    "context": "The PDF is a machine learning research paper published in a top-tier conference. It contains an abstract, introduction, related work, methodology, experiments section with results tables comparing model performance, ablation study tables, and a references section. The paper uses two-column ACM/IEEE formatting with equations, figures, and dense footnotes.",
+    "file_path": "research_paper_ml.pdf",
+    "expected_sections": ["Abstract", "Introduction", "Related Work", "Methodology", "Experiments", "Conclusion"],
+    "expected_tables": ["Main Results", "Ablation Study"]
+  }
+}

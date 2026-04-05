@@ -1,0 +1,479 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Layout.astro';
+import Badge from '../../components/Badge.jsx';
+import RadarChart from '../../components/RadarChart.jsx';
+import EloHistory from '../../components/EloHistory.jsx';
+import CategoryBar from '../../components/CategoryBar.jsx';
+import { supabase } from '../../lib/supabase';
+import type { Agent as DbAgent, Run, TaskScore } from '../../lib/supabase';
+
+const { id } = Astro.params;
+
+// Mock data — fallback for the original demo agents
+const mockAgents: Record<string, any> = {
+  'researchbot': {
+    name: 'ResearchBot',
+    author: 'labworks',
+    description: 'A research-focused agent that gathers and synthesizes information from multiple sources with high accuracy.',
+    avatar_url: null,
+    score: 92,
+    elo: 1782,
+    tier: 'Platinum',
+    categories: { Research: 95, Extract: 88, Analyze: 91, Code: 82, Write: 87, Operate: 85 },
+    radar: { accuracy: 92, completeness: 88, quality: 90, speed: 78, robustness: 85 },
+    percentile: 3,
+    eloHistory: [
+      { date: '2025-10', elo: 1520 },
+      { date: '2025-11', elo: 1580 },
+      { date: '2025-12', elo: 1640 },
+      { date: '2026-01', elo: 1700 },
+      { date: '2026-02', elo: 1745 },
+      { date: '2026-03', elo: 1782 },
+    ],
+    recentRuns: [
+      { id: 'r1', date: '2026-03-28', score: 89, layer: 2 },
+      { id: 'r2', date: '2026-03-15', score: 87, layer: 2 },
+      { id: 'r3', date: '2026-02-20', score: 85, layer: 1 },
+    ],
+  },
+  'codeassist': {
+    name: 'CodeAssist',
+    author: 'devtools-ai',
+    description: 'An AI coding assistant that writes, debugs, and refactors software with reliable test coverage.',
+    avatar_url: null,
+    score: 84,
+    elo: 1654,
+    tier: 'Gold',
+    categories: { Research: 72, Extract: 78, Analyze: 80, Code: 96, Write: 82, Operate: 88 },
+    radar: { accuracy: 88, completeness: 82, quality: 86, speed: 90, robustness: 80 },
+    percentile: 8,
+    eloHistory: [
+      { date: '2025-11', elo: 1480 },
+      { date: '2025-12', elo: 1540 },
+      { date: '2026-01', elo: 1590 },
+      { date: '2026-02', elo: 1620 },
+      { date: '2026-03', elo: 1654 },
+    ],
+    recentRuns: [
+      { id: 'r4', date: '2026-03-25', score: 84, layer: 2 },
+      { id: 'r5', date: '2026-03-10', score: 82, layer: 1 },
+    ],
+  },
+  'dataagent': {
+    name: 'DataAgent',
+    author: 'synthdata',
+    description: 'Specialized in data extraction and analysis tasks, handling structured and unstructured data.',
+    avatar_url: null,
+    score: 78,
+    elo: 1523,
+    tier: 'Gold',
+    categories: { Research: 70, Extract: 92, Analyze: 88, Code: 68, Write: 72, Operate: 75 },
+    radar: { accuracy: 85, completeness: 78, quality: 76, speed: 82, robustness: 72 },
+    percentile: 15,
+    eloHistory: [
+      { date: '2025-12', elo: 1420 },
+      { date: '2026-01', elo: 1465 },
+      { date: '2026-02', elo: 1500 },
+      { date: '2026-03', elo: 1523 },
+    ],
+    recentRuns: [
+      { id: 'r6', date: '2026-03-20', score: 78, layer: 2 },
+    ],
+  },
+};
+
+// Try to load from Supabase first, then fall back to mock data
+let agent: any = null;
+
+// Check mock data first (fast path for demo agents)
+if (id && mockAgents[id]) {
+  agent = mockAgents[id];
+} else if (id) {
+  // Look up the agent in Supabase — try by ID directly, then by slug match
+  let dbAgent: DbAgent | null = null;
+
+  // Try exact ID match
+  const { data: byId } = await supabase
+    .from('agents')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (byId) {
+    dbAgent = byId;
+  } else {
+    // Try slug-style match: convert "my-cool-agent" to pattern matching against name
+    const namePattern = id.replace(/-/g, ' ');
+    const { data: byName } = await supabase
+      .from('agents')
+      .select('*')
+      .ilike('name', namePattern)
+      .limit(1)
+      .single();
+    dbAgent = byName;
+  }
+
+  if (dbAgent) {
+    // Get all completed runs for this agent, ordered by date
+    const { data: runs } = await supabase
+      .from('runs')
+      .select('*')
+      .eq('agent_id', dbAgent.id)
+      .eq('status', 'completed')
+      .order('scored_at', { ascending: false });
+
+    const completedRuns: Run[] = runs ?? [];
+    const latestRun = completedRuns[0] ?? null;
+
+    // Get task scores from the latest run for category breakdown
+    let categories: Record<string, number> = {};
+    let radar: Record<string, number> = { accuracy: 0, completeness: 0, quality: 0, speed: 0, robustness: 0 };
+
+    if (latestRun) {
+      const { data: taskScores } = await supabase
+        .from('task_scores')
+        .select('*')
+        .eq('run_id', latestRun.id);
+
+      const scores: TaskScore[] = taskScores ?? [];
+
+      // Build category averages
+      const catScores: Record<string, number[]> = {};
+      for (const ts of scores) {
+        const cat = ts.category;
+        const score = ts.combined_score ?? ts.layer1_score ?? 0;
+        if (!catScores[cat]) catScores[cat] = [];
+        catScores[cat].push(score);
+      }
+      for (const [cat, vals] of Object.entries(catScores)) {
+        categories[cat] = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+      }
+
+      // Build radar from task scores data
+      if (scores.length > 0) {
+        // First try layer2_scores if available
+        const radarAccum: Record<string, number[]> = {};
+        for (const ts of scores) {
+          if (ts.layer2_scores && typeof ts.layer2_scores === 'object') {
+            for (const [axis, val] of Object.entries(ts.layer2_scores as Record<string, number>)) {
+              if (!radarAccum[axis]) radarAccum[axis] = [];
+              radarAccum[axis].push(val);
+            }
+          }
+        }
+        const hasLayer2Radar = Object.keys(radarAccum).length > 0;
+
+        if (hasLayer2Radar) {
+          for (const [axis, vals] of Object.entries(radarAccum)) {
+            radar[axis] = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+          }
+        } else {
+          // Derive radar from task_scores when layer2_scores aren't available
+          const combinedScores = scores.map(ts => ts.combined_score ?? ts.layer1_score ?? 0);
+
+          // Accuracy: average of all combined_score values
+          radar.accuracy = Math.round(combinedScores.reduce((a, b) => a + b, 0) / combinedScores.length);
+
+          // Completeness: percentage of tasks with combined_score > 50
+          radar.completeness = Math.round((combinedScores.filter(s => s > 50).length / combinedScores.length) * 100);
+
+          // Quality: average of top-3 category scores
+          const catAvgs = Object.values(categories).sort((a, b) => b - a);
+          const top3 = catAvgs.slice(0, 3);
+          radar.quality = top3.length > 0 ? Math.round(top3.reduce((a, b) => a + b, 0) / top3.length) : 0;
+
+          // Speed: score based on average duration (faster = higher, normalize against 300s baseline)
+          const durations = scores.filter(ts => ts.duration_seconds != null).map(ts => ts.duration_seconds!);
+          if (durations.length > 0) {
+            const avgDuration = durations.reduce((a, b) => a + b, 0) / durations.length;
+            const baseline = 300; // 300 seconds baseline
+            radar.speed = Math.round(Math.max(0, Math.min(100, (1 - avgDuration / baseline) * 100)));
+          } else {
+            radar.speed = 50; // default when no duration data
+          }
+
+          // Robustness: performance on Level 3-4 tasks relative to Level 1-2
+          const easyScores = scores.filter(ts => ts.level <= 2).map(ts => ts.combined_score ?? ts.layer1_score ?? 0);
+          const hardScores = scores.filter(ts => ts.level >= 3).map(ts => ts.combined_score ?? ts.layer1_score ?? 0);
+          if (hardScores.length > 0 && easyScores.length > 0) {
+            const easyAvg = easyScores.reduce((a, b) => a + b, 0) / easyScores.length;
+            const hardAvg = hardScores.reduce((a, b) => a + b, 0) / hardScores.length;
+            radar.robustness = Math.round(Math.max(0, Math.min(100, (hardAvg / Math.max(easyAvg, 1)) * 100)));
+          } else if (hardScores.length > 0) {
+            radar.robustness = Math.round(hardScores.reduce((a, b) => a + b, 0) / hardScores.length);
+          } else {
+            // Only easy tasks available — use a fraction of accuracy
+            radar.robustness = Math.round(radar.accuracy * 0.7);
+          }
+        }
+      } else {
+        // No task scores: derive reasonable defaults from total_score
+        const base = latestRun?.total_score ?? latestRun?.layer1_score ?? 0;
+        radar.accuracy = base;
+        radar.completeness = Math.round(base * 0.9);
+        radar.quality = Math.round(base * 0.95);
+        radar.speed = 50;
+        radar.robustness = Math.round(base * 0.7);
+      }
+    }
+
+    // Build Elo history from completed runs
+    const eloHistory = completedRuns
+      .filter((r) => r.elo_rating && r.scored_at)
+      .reverse()
+      .map((r) => ({
+        date: r.scored_at!.slice(0, 7), // "YYYY-MM"
+        elo: r.elo_rating!,
+      }));
+
+    // Build recent runs list
+    const recentRuns = completedRuns.slice(0, 10).map((r) => ({
+      id: r.id,
+      date: (r.scored_at ?? r.submitted_at).slice(0, 10),
+      score: r.total_score ?? r.layer1_score ?? 0,
+      layer: (r.total_score != null && r.layer1_score != null && r.total_score !== r.layer1_score) ? 2 : 1,
+    }));
+
+    // Compute percentile from leaderboard
+    let percentile: number | null = null;
+    const { data: leaderboard } = await supabase
+      .from('leaderboard')
+      .select('*')
+      .order('rank', { ascending: true });
+
+    if (leaderboard && leaderboard.length > 0) {
+      const entry = leaderboard.find((e: any) => e.agent_id === dbAgent!.id);
+      if (entry && entry.rank) {
+        percentile = Math.round((entry.rank / leaderboard.length) * 100);
+        if (percentile < 1) percentile = 1;
+      }
+    }
+
+    agent = {
+      name: dbAgent.name,
+      author: dbAgent.author,
+      description: dbAgent.description ?? '',
+      avatar_url: dbAgent.avatar_url ?? null,
+      score: latestRun?.total_score ?? latestRun?.layer1_score ?? 0,
+      elo: latestRun?.elo_rating ?? 1200,
+      tier: latestRun?.tier ?? 'Unranked',
+      categories,
+      radar,
+      percentile,
+      eloHistory,
+      recentRuns,
+    };
+  }
+}
+
+if (!agent) {
+  return Astro.redirect('/');
+}
+
+const title = `${agent.name} — Legit`;
+const description = `${agent.name} scored ${agent.score}/100 on the Legit benchmark. ${agent.tier} tier.`;
+const nameSlug = agent.name.toLowerCase().replace(/\s+/g, '-');
+---
+
+<Layout title={title} description={description} image={`https://getlegit.dev/api/og/${id}`}>
+  <!-- Nav -->
+  <nav class="border-b border-white/10 bg-[#16162a]">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5">
+      <a href="/" class="flex items-center gap-2">
+        <img src="/logo.png" alt="Legit" class="h-6 w-6" />
+        <span class="text-sm font-bold tracking-wide text-white">LEGIT</span>
+      </a>
+      <div class="hidden items-center gap-1 text-[13px] md:flex">
+        <a href="/leaderboard" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">Leaderboard</a>
+        <a href="/#categories" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">Categories</a>
+        <a href="/#how-it-works" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">How It Works</a>
+        <a href="/about" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">About</a>
+        <a href="/submit" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">Submit</a>
+        <a
+          href="https://github.com/getlegitdev/legit"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ml-2 rounded bg-white/10 px-3 py-1.5 text-white hover:bg-white/15"
+        >
+          GitHub
+        </a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden rounded p-1.5 text-gray-400 hover:bg-white/5 hover:text-white" aria-label="Toggle menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-white/10 px-4 py-3 md:hidden">
+      <div class="flex flex-col gap-1 text-[13px]">
+        <a href="/leaderboard" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">Leaderboard</a>
+        <a href="/#categories" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">Categories</a>
+        <a href="/#how-it-works" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">How It Works</a>
+        <a href="/about" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">About</a>
+        <a href="/submit" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">Submit</a>
+        <a href="https://github.com/getlegitdev/legit" target="_blank" rel="noopener noreferrer" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">GitHub</a>
+      </div>
+    </div>
+  </nav>
+  <script>
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+      document.getElementById('mobile-menu')?.classList.toggle('hidden');
+    });
+  </script>
+
+  <main class="py-8 md:py-12">
+    <div class="mx-auto max-w-6xl px-4">
+      <!-- Agent header -->
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div class="flex items-start gap-4">
+          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white/10 text-xl font-bold text-gray-400">
+            {agent.name[0]}
+          </div>
+          <div>
+            <div class="flex items-center gap-3">
+              <h1 class="text-2xl font-bold text-white">{agent.name}</h1>
+              <Badge tier={agent.tier} client:load />
+            </div>
+            <p class="mt-0.5 text-[13px] text-gray-500">by {agent.author}</p>
+            <p class="mt-2 max-w-lg text-[14px] leading-relaxed text-gray-400">{agent.description}</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-6 sm:text-right">
+          <div>
+            <div class="text-3xl font-bold text-white">{agent.score}</div>
+            <div class="text-[11px] uppercase tracking-wider text-gray-500">Score</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-gray-400">{agent.elo}</div>
+            <div class="text-[11px] uppercase tracking-wider text-gray-500">Elo</div>
+          </div>
+          {agent.percentile && (
+            <div>
+              <div class="text-3xl font-bold text-[#7F77DD]">Top {agent.percentile}%</div>
+              <div class="text-[11px] uppercase tracking-wider text-gray-500">Percentile</div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <!-- Share links -->
+      <div class="mt-4 flex flex-wrap gap-2">
+        <a
+          href={`/card/${id}`}
+          class="inline-flex items-center gap-1.5 rounded border border-white/10 px-3 py-1.5 text-[12px] text-gray-400 hover:bg-white/5 hover:text-white"
+        >
+          Share Score Card
+        </a>
+        <a
+          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`${agent.name} just scored ${agent.score}/100 on @getlegitdev — ${agent.tier} tier. Can your agent beat it? #AIAgents`)}&url=${encodeURIComponent(`https://getlegit.dev/agent/${id}`)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 rounded border border-white/10 px-3 py-1.5 text-[12px] text-gray-400 hover:bg-white/5 hover:text-white"
+        >
+          Share on X
+        </a>
+      </div>
+
+      <!-- Embed badge -->
+      <div class="mt-4 rounded-lg border border-white/10 bg-[#16162a] p-4">
+        <h3 class="text-[13px] font-semibold text-white">Embed badge</h3>
+        <p class="mt-1 text-[12px] text-gray-500">Add this to your README to show your Legit score:</p>
+        <div class="relative mt-2">
+          <pre class="overflow-x-auto rounded bg-black/40 px-3 py-2 text-[12px] text-gray-300"><code id="badge-snippet">{`[![Legit Score](https://getlegit.dev/api/badge/${nameSlug})](https://getlegit.dev/agent/${nameSlug})`}</code></pre>
+          <button
+            id="copy-badge-btn"
+            class="absolute right-2 top-2 rounded bg-white/10 px-2 py-1 text-[11px] text-gray-400 hover:bg-white/20 hover:text-white"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <script>
+        document.getElementById('copy-badge-btn')?.addEventListener('click', () => {
+          const snippet = document.getElementById('badge-snippet')?.textContent || '';
+          navigator.clipboard.writeText(snippet).then(() => {
+            const btn = document.getElementById('copy-badge-btn');
+            if (btn) { btn.textContent = 'Copied!'; setTimeout(() => { btn.textContent = 'Copy'; }, 2000); }
+          });
+        });
+      </script>
+
+      <!-- Charts grid -->
+      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+        <!-- Radar Chart -->
+        <div class="rounded-lg border border-white/10 bg-[#16162a] p-5">
+          <h2 class="text-[14px] font-semibold text-white">Performance Profile</h2>
+          <p class="mt-1 text-[12px] text-gray-500">5-axis quality assessment</p>
+          <div class="mt-4">
+            <RadarChart data={agent.radar} client:load />
+          </div>
+        </div>
+
+        <!-- Category Breakdown -->
+        <div class="rounded-lg border border-white/10 bg-[#16162a] p-5">
+          <h2 class="text-[14px] font-semibold text-white">Category Scores</h2>
+          <p class="mt-1 text-[12px] text-gray-500">Performance across benchmark categories</p>
+          <div class="mt-4 space-y-3">
+            {Object.entries(agent.categories).map(([cat, catScore]) => (
+              <CategoryBar name={cat} score={catScore as number} client:load />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Elo History -->
+      <div class="mt-6 rounded-lg border border-white/10 bg-[#16162a] p-5">
+        <h2 class="text-[14px] font-semibold text-white">Elo Rating History</h2>
+        <p class="mt-1 text-[12px] text-gray-500">Rating progression over time</p>
+        <div class="mt-4">
+          <EloHistory history={agent.eloHistory} client:load />
+        </div>
+      </div>
+
+      <!-- Recent Runs -->
+      <div class="mt-6 rounded-lg border border-white/10 bg-[#16162a] p-5">
+        <h2 class="text-[14px] font-semibold text-white">Recent Runs</h2>
+        <p class="mt-1 text-[12px] text-gray-500">Latest benchmark submissions</p>
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full text-[13px]">
+            <thead>
+              <tr class="border-b border-white/10 text-left text-[11px] uppercase tracking-wider text-gray-500">
+                <th class="px-4 py-2 font-medium">Date</th>
+                <th class="px-4 py-2 font-medium text-right">Score</th>
+                <th class="px-4 py-2 font-medium text-right">Layer</th>
+              </tr>
+            </thead>
+            <tbody>
+              {agent.recentRuns.map((run: any) => (
+                <tr class="border-b border-white/5 hover:bg-white/[0.02]">
+                  <td class="px-4 py-2 text-gray-400">{run.date}</td>
+                  <td class="px-4 py-2 text-right font-mono text-white">{run.score}</td>
+                  <td class="px-4 py-2 text-right">
+                    <span class={`rounded px-1.5 py-0.5 text-[10px] font-semibold ${run.layer === 2 ? 'bg-[#7F77DD]/15 text-[#7F77DD]' : 'bg-green-500/15 text-green-400'}`}>
+                      L{run.layer}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 bg-[#16162a] py-6">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 md:flex-row">
+      <div class="flex items-center gap-2">
+        <img src="/logo.png" alt="Legit" class="h-4 w-4 opacity-40" />
+        <span class="text-[12px] text-gray-600">The trust layer for AI agents</span>
+      </div>
+      <div class="flex items-center gap-5 text-[12px] text-gray-600">
+        <a href="https://github.com/getlegitdev/legit" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400">GitHub</a>
+        <a href="/about" class="hover:text-gray-400">About</a>
+        <a href="https://github.com/getlegitdev/legit/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400">Apache 2.0</a>
+      </div>
+    </div>
+  </footer>
+</Layout>

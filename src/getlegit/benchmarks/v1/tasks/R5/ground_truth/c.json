@@ -1,0 +1,13 @@
+{
+  "expected_papers": [
+    "Neural Architecture Search with Reinforcement Learning",
+    "DARTS: Differentiable Architecture Search",
+    "EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks",
+    "Once-for-All: Train One Network and Specialize it for Efficient Deployment",
+    "FBNet: Hardware-Aware Efficient ConvNet Design via Differentiable Neural Architecture Search"
+  ],
+  "expected_themes": ["search algorithms", "hardware-aware design", "efficiency metrics", "search space design"],
+  "keywords": ["architecture", "search", "efficient", "latency", "hardware", "mobile"],
+  "numeric_values": {},
+  "min_counts": { "papers": 8, "themes": 3, "open_questions": 3 }
+}

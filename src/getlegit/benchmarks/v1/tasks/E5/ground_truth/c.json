@@ -1,0 +1,8 @@
+{
+  "expected_entities": ["engineering team", "vendor", "mobile app", "lost revenue", "launch date"],
+  "expected_entity_types": ["person", "organization", "date", "product", "money"],
+  "expected_relationships": ["responsible_for", "caused_by", "vendor_of"],
+  "keywords": ["post-mortem", "root cause", "failure", "remediation", "impact"],
+  "numeric_values": {},
+  "min_counts": { "entities": 5, "key_facts": 3, "action_items": 2 }
+}

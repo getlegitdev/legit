@@ -1,0 +1,15 @@
+{
+  "task_description": "Write a customer response email to a customer who experienced data loss due to a bug in a recent product update.",
+  "input_data": {
+    "customer_name": "David Park",
+    "company": "Velocity Media Group",
+    "account_tier": "Business",
+    "issue": "A bug in version 4.2.1 caused the customer's saved dashboard configurations (12 custom dashboards built over 6 months) to be deleted during the automatic update. The data cannot be recovered from the application but may be partially available from backups.",
+    "previous_interactions": "Emergency ticket filed 2 hours ago. Customer is requesting compensation and a guarantee this will not happen again.",
+    "tone_guidance": "Deeply apologetic, urgent, executive-level seriousness",
+    "requirements": {
+      "should_include": ["Sincere apology", "Data recovery plan with timeline", "Compensation offer", "Technical explanation of what went wrong", "Prevention measures"],
+      "max_word_count": 500
+    }
+  }
+}

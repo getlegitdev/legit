@@ -1,0 +1,13 @@
+{
+  "task_description": "Fetch user data from an endpoint that initially returns a 503 Service Unavailable. Retry until you get the data successfully.",
+  "input_data": {
+    "url": "http://localhost:9999/api/error-endpoint",
+    "method": "GET",
+    "headers": { "Accept": "application/json", "X-Scenario": "service-unavailable" },
+    "retry_policy": {
+      "max_retries": 3,
+      "description": "The endpoint returns 503 Service Unavailable on the first call, then 200 OK on subsequent calls. You must retry after receiving the error."
+    },
+    "expected_behavior": "First call returns 503, second call returns 200 with data"
+  }
+}

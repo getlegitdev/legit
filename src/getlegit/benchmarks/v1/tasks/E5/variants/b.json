@@ -1,0 +1,10 @@
+{
+  "task_description": "Extract entities, relationships, key facts, and action items from a chain of legal correspondence emails regarding a contract dispute.",
+  "input_data": {
+    "document_type": "Legal correspondence email chain",
+    "context": "The input file contains a chain of 8 emails between attorneys representing two companies in a contract dispute over a software licensing agreement. The emails reference specific contract clauses, dollar amounts, deadlines, and proposed settlement terms. The correspondence spans 3 weeks and involves escalating demands, counter-proposals, and references to prior agreements and court precedents.",
+    "file_path": "legal_correspondence.txt",
+    "expected_entity_types": ["person", "organization", "money", "date", "event"],
+    "expected_action_items": 4
+  }
+}

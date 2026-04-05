@@ -1,0 +1,36 @@
+{
+  "task_id": "O3",
+  "category": "operate",
+  "level": 2,
+  "level_multiplier": 1.5,
+  "title": "CRUD operations",
+  "description": "Perform a complete set of CRUD (Create, Read, Update, Delete) operations on an API resource, verifying each step succeeds before proceeding to the next.",
+  "time_limit_seconds": 300,
+  "baseline_seconds": 180,
+  "allowed_tools": ["api_call"],
+  "layer1_weight": 0.70,
+  "layer2_weight": 0.30,
+  "output_schema": {
+    "type": "object",
+    "required": ["create_status", "read_status", "update_status", "delete_status", "created_id"],
+    "properties": {
+      "create_status": { "type": "number" },
+      "create_response": { "type": "object" },
+      "read_status": { "type": "number" },
+      "read_response": { "type": "object" },
+      "update_status": { "type": "number" },
+      "update_response": { "type": "object" },
+      "delete_status": { "type": "number" },
+      "delete_response": { "type": "object" },
+      "created_id": { "type": "number" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 15 },
+    { "type": "numeric_accuracy", "weight": 15, "field": "create_status", "expected": 201 },
+    { "type": "numeric_accuracy", "weight": 15, "field": "read_status", "expected": 200 },
+    { "type": "numeric_accuracy", "weight": 15, "field": "update_status", "expected": 200 },
+    { "type": "numeric_accuracy", "weight": 10, "field": "delete_status", "expected": 204 }
+  ],
+  "variants": ["a", "b", "c"]
+}

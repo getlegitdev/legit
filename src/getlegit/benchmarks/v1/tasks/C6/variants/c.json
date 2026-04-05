@@ -1,0 +1,33 @@
+{
+  "task_description": "Debug the following multi-file Python application for a simple caching HTTP client. There are bugs across files that cause cache misses, incorrect headers, and memory issues.",
+  "input_data": {
+    "files": {
+      "cache.py": "import time\n\nclass Cache:\n    def __init__(self, max_size=100, default_ttl=300):\n        self.store = {}\n        self.max_size = max_size\n        self.default_ttl = default_ttl\n        self.hits = 0\n        self.misses = 0\n\n    def get(self, key):\n        entry = self.store.get(key)\n        if entry is None:\n            self.misses += 1\n            return None\n        if entry['expires'] < time.time():\n            self.misses += 1\n            return entry['value']\n        self.hits += 1\n        return entry['value']\n\n    def set(self, key, value, ttl=None):\n        if len(self.store) >= self.max_size:\n            self._evict()\n        ttl = ttl or self.default_ttl\n        self.store[key] = {\n            'value': value,\n            'expires': time.time() + ttl,\n            'created': time.time()\n        }\n\n    def _evict(self):\n        oldest_key = None\n        oldest_time = float('inf')\n        for key, entry in self.store.items():\n            if entry['created'] < oldest_time:\n                oldest_time = entry['created']\n                oldest_key = key\n        if oldest_key:\n            del self.store[oldest_key]\n\n    def stats(self):\n        total = self.hits + self.misses\n        return {\n            'hits': self.hits,\n            'misses': self.misses,\n            'hit_rate': self.hits / total if total else 0,\n            'size': len(self.store)\n        }",
+      "client.py": "import json\nfrom cache import Cache\n\nclass HttpClient:\n    def __init__(self, cache=None):\n        self.cache = cache or Cache()\n        self.default_headers = {'Content-Type': 'application/json'}\n\n    def _build_headers(self, extra_headers=None):\n        headers = self.default_headers\n        if extra_headers:\n            headers.update(extra_headers)\n        return headers\n\n    def get(self, url, headers=None, use_cache=True):\n        if use_cache:\n            cached = self.cache.get(url)\n            if cached is not None:\n                return cached\n        final_headers = self._build_headers(headers)\n        response = self._make_request('GET', url, final_headers)\n        if use_cache and response['status'] == 200:\n            self.cache.set(url, response)\n        return response\n\n    def post(self, url, data, headers=None):\n        final_headers = self._build_headers(headers)\n        response = self._make_request('POST', url, final_headers, data)\n        return response\n\n    def _make_request(self, method, url, headers, data=None):\n        return {\n            'status': 200,\n            'body': '{\"mock\": true}',\n            'headers': headers,\n            'url': url\n        }",
+      "api.py": "from client import HttpClient\n\nclass ApiClient:\n    def __init__(self, base_url, api_key):\n        self.base_url = base_url\n        self.client = HttpClient()\n        self.api_key = api_key\n\n    def _get_auth_headers(self):\n        return {'Authorization': f'Bearer {self.api_key}'}\n\n    def get_resource(self, resource_id):\n        url = f'{self.base_url}/resources/{resource_id}'\n        response = self.client.get(url, headers=self._get_auth_headers())\n        if response['status'] == 200:\n            return json.loads(response['body'])\n        return None\n\n    def create_resource(self, data):\n        url = f'{self.base_url}/resources'\n        response = self.client.post(url, data=data, headers=self._get_auth_headers())\n        return response\n\n    def list_resources(self, page=1):\n        url = f'{self.base_url}/resources?page={page}'\n        response = self.client.get(url)\n        if response['status'] == 200:\n            return json.loads(response['body'])\n        return None"
+    },
+    "test_cases": [
+      {
+        "name": "Cache returns expired entries",
+        "description": "cache.get() returns expired entries instead of treating them as misses",
+        "expected": "Expired entries should return None and be cleaned up"
+      },
+      {
+        "name": "Default headers mutated",
+        "description": "_build_headers modifies self.default_headers dict when merging extra_headers",
+        "expected": "default_headers should not be modified between requests"
+      },
+      {
+        "name": "Missing json import in api.py",
+        "description": "api.py uses json.loads but does not import json",
+        "expected": "Should import json module"
+      },
+      {
+        "name": "Auth headers missing on list_resources",
+        "description": "list_resources does not pass auth headers, unlike other methods",
+        "expected": "Should include auth headers"
+      }
+    ],
+    "language": "python"
+  }
+}

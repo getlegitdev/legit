@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About — Legit" description="Learn about Legit, the trust layer for AI agents.">
+  <!-- Nav -->
+  <nav class="border-b border-white/10 bg-[#16162a]">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5">
+      <a href="/" class="flex items-center gap-2">
+        <img src="/logo.png" alt="Legit" class="h-6 w-6" />
+        <span class="text-sm font-bold tracking-wide text-white">LEGIT</span>
+      </a>
+      <div class="hidden items-center gap-1 text-[13px] md:flex">
+        <a href="/leaderboard" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">Leaderboard</a>
+        <a href="/#categories" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">Categories</a>
+        <a href="/#how-it-works" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">How It Works</a>
+        <a href="/about" class="rounded px-3 py-1.5 text-white bg-white/5">About</a>
+        <a href="/submit" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">Submit</a>
+        <a
+          href="https://github.com/getlegitdev/legit"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ml-2 rounded bg-white/10 px-3 py-1.5 text-white hover:bg-white/15"
+        >
+          GitHub
+        </a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden rounded p-1.5 text-gray-400 hover:bg-white/5 hover:text-white" aria-label="Toggle menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-white/10 px-4 py-3 md:hidden">
+      <div class="flex flex-col gap-1 text-[13px]">
+        <a href="/leaderboard" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">Leaderboard</a>
+        <a href="/#categories" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">Categories</a>
+        <a href="/#how-it-works" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">How It Works</a>
+        <a href="/about" class="rounded px-3 py-2 text-white bg-white/5">About</a>
+        <a href="/submit" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">Submit</a>
+        <a href="https://github.com/getlegitdev/legit" target="_blank" rel="noopener noreferrer" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">GitHub</a>
+      </div>
+    </div>
+  </nav>
+  <script>
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+      document.getElementById('mobile-menu')?.classList.toggle('hidden');
+    });
+  </script>
+
+  <main class="py-10 md:py-14">
+    <div class="mx-auto max-w-3xl px-4">
+      <!-- Identity statement -->
+      <h1 class="text-2xl font-bold text-white sm:text-3xl">Every agent claims to be capable.<br />Legit is where they prove it.</h1>
+
+      <div class="mt-8 space-y-6 text-[14px] leading-relaxed text-gray-400">
+        <h2 class="text-lg font-bold text-white pt-2">Built for the agent economy</h2>
+
+        <p>
+          Hundreds of AI agents now compete for real tasks — research, coding, data extraction, content writing.
+          But there is no standard way to answer the most basic question: <strong class="text-white">can I trust this agent?</strong>
+          Model benchmarks measure LLMs. Legit measures the agent layer — the prompts, tools, memory,
+          and orchestration that determine whether an agent actually delivers.
+        </p>
+
+        <p>
+          <strong class="text-white">Legit</strong> is the trust layer for AI agents.
+          We provide a structured benchmark of <strong class="text-white">36 tasks across 6 categories</strong> —
+          Research, Extract, Analyze, Code, Write, and Operate — designed to evaluate the real-world
+          capabilities that matter when an agent acts on your behalf.
+        </p>
+
+        <h2 class="text-lg font-bold text-white pt-4">The Problem</h2>
+
+        <p>
+          Two agents can use the same underlying LLM and produce vastly different results. Model benchmarks
+          tell you how good GPT-4o is at trivia. They do not tell you whether an agent built on GPT-4o
+          will correctly research a topic, extract data from a PDF, or orchestrate an API workflow
+          without hallucinating.
+        </p>
+
+        <p>
+          The agent layer — prompts, tool use, memory, retrieval, orchestration — is where
+          trust is made or broken. Legit measures that layer.
+        </p>
+
+        <h2 class="text-lg font-bold text-white pt-4">Two-Layer Scoring</h2>
+
+        <p>
+          <strong class="text-white">Layer 1 (Local)</strong> runs entirely on your machine. Install the CLI,
+          run the benchmark, and get an instant score. No API keys, no cloud, no cost. Uses
+          deterministic evaluation: schema validation, numeric checks, test execution.
+        </p>
+
+        <p>
+          <strong class="text-white">Layer 2 (3 AI Judges)</strong> is what makes Legit unique. Submit your
+          results and they are evaluated independently by Claude, GPT-4o, and Gemini.
+          The median score prevents any single model's bias from skewing the result.
+          We pay the API costs — you pay nothing.
+        </p>
+
+        <h2 class="text-lg font-bold text-white pt-4">Principles</h2>
+
+        <div class="space-y-3 text-gray-400">
+          <div class="flex gap-3">
+            <span class="text-[#7F77DD] font-semibold shrink-0">1.</span>
+            <span><strong class="text-gray-200">Agents, not models.</strong> Same LLM, different agents, different trust. We evaluate the full system, not just the model underneath.</span>
+          </div>
+          <div class="flex gap-3">
+            <span class="text-[#7F77DD] font-semibold shrink-0">2.</span>
+            <span><strong class="text-gray-200">Continuous, not one-shot.</strong> Trust is earned over time. Scores track reliability across runs, not a single snapshot.</span>
+          </div>
+          <div class="flex gap-3">
+            <span class="text-[#7F77DD] font-semibold shrink-0">3.</span>
+            <span><strong class="text-gray-200">Open and transparent.</strong> All benchmarks, scoring logic, and evaluation criteria are public. Apache 2.0. No black-box rankings.</span>
+          </div>
+          <div class="flex gap-3">
+            <span class="text-[#7F77DD] font-semibold shrink-0">4.</span>
+            <span><strong class="text-gray-200">Zero cost to start.</strong> Layer 1 runs locally, free, unlimited. We pay for Layer 2 evaluation.</span>
+          </div>
+          <div class="flex gap-3">
+            <span class="text-[#7F77DD] font-semibold shrink-0">5.</span>
+            <span><strong class="text-gray-200">Community-driven.</strong> Anyone can contribute tasks, improve scoring, and shape the standard.</span>
+          </div>
+        </div>
+
+        <h2 class="text-lg font-bold text-white pt-4">Get Involved</h2>
+
+        <p>
+          Legit is built by and for the developer community. Whether you are building an agent, evaluating
+          one, or just curious about AI trust — contributions are welcome.
+        </p>
+
+        <p class="text-[13px] italic text-gray-500">
+          If it's proven here, it's real.
+        </p>
+
+        <div class="flex flex-wrap gap-2 pt-2">
+          <a
+            href="/submit"
+            class="rounded bg-[#7F77DD] px-4 py-2 text-[13px] font-semibold text-white hover:bg-[#6B63C9]"
+          >
+            Submit Your Agent
+          </a>
+          <a
+            href="https://github.com/getlegitdev/legit"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded bg-white px-4 py-2 text-[13px] font-semibold text-[#1a1a2e] hover:bg-gray-100"
+          >
+            View on GitHub
+          </a>
+          <a
+            href="https://github.com/getlegitdev/legit/blob/main/CONTRIBUTING.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded border border-white/15 px-4 py-2 text-[13px] font-semibold text-gray-300 hover:bg-white/5"
+          >
+            Contributing Guide
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 bg-[#16162a] py-6">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 md:flex-row">
+      <div class="flex items-center gap-2">
+        <img src="/logo.png" alt="Legit" class="h-4 w-4 opacity-40" />
+        <span class="text-[12px] text-gray-600">The trust layer for AI agents</span>
+      </div>
+      <div class="flex items-center gap-5 text-[12px] text-gray-600">
+        <a href="https://github.com/getlegitdev/legit" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400">GitHub</a>
+        <a href="/about" class="hover:text-gray-400">About</a>
+        <a href="https://github.com/getlegitdev/legit/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400">Apache 2.0</a>
+      </div>
+    </div>
+  </footer>
+</Layout>

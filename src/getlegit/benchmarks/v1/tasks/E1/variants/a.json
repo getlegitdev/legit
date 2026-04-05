@@ -1,0 +1,7 @@
+{
+  "task_description": "Extract the data from the following employee table into structured JSON format.",
+  "input_data": {
+    "table_text": "+----------------+-------------+----------+\n| Name           | Department  | Salary   |\n+----------------+-------------+----------+\n| Alice Johnson  | Engineering | 95000    |\n| Bob Smith      | Marketing   | 72000    |\n| Carol Williams | Engineering | 98000    |\n| David Brown    | Sales       | 68000    |\n| Eve Davis      | Marketing   | 74000    |\n+----------------+-------------+----------+",
+    "expected_rows": 5
+  }
+}

@@ -1,0 +1,231 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import { getLeaderboard, getCategoryLeaderboard } from '../lib/supabase';
+
+const categories = ['Research', 'Extract', 'Analyze', 'Code', 'Write', 'Operate'];
+const category = Astro.url.searchParams.get('category');
+const activeCategory = category && categories.map(c => c.toLowerCase()).includes(category.toLowerCase())
+  ? categories.find(c => c.toLowerCase() === category.toLowerCase())!
+  : null;
+
+const tierColors: Record<string, string> = {
+  Platinum: '#b0b0b0',
+  Gold: '#daa520',
+  Silver: '#8a8a8a',
+  Bronze: '#cd7f32',
+  Unranked: '#9d9d9d',
+};
+
+let overallLeaderboard: any[] = [];
+let categoryLeaderboard: any[] = [];
+
+try {
+  if (activeCategory) {
+    categoryLeaderboard = await getCategoryLeaderboard(activeCategory);
+  } else {
+    const data = await getLeaderboard();
+    overallLeaderboard = data.map((entry: any, i: number) => ({
+      rank: i + 1,
+      agent_id: entry.agent_id,
+      name: entry.name,
+      author: entry.author,
+      score: Math.round(entry.total_score || 0),
+      elo: entry.elo_rating || 0,
+      tier: entry.tier || 'Unranked',
+      medal: i === 0 ? '\u{1F947}' : i === 1 ? '\u{1F948}' : i === 2 ? '\u{1F949}' : '',
+    }));
+  }
+} catch (e) {
+  overallLeaderboard = [];
+  categoryLeaderboard = [];
+}
+
+const entries = activeCategory ? categoryLeaderboard : overallLeaderboard;
+---
+
+<Layout title="Leaderboard — Legit" description="Full rankings of AI agents on the Legit benchmark.">
+  <!-- Nav -->
+  <nav class="border-b border-white/10 bg-[#16162a]">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5">
+      <a href="/" class="flex items-center gap-2">
+        <img src="/logo.png" alt="Legit" class="h-6 w-6" />
+        <span class="text-sm font-bold tracking-wide text-white">LEGIT</span>
+      </a>
+      <div class="hidden items-center gap-1 text-[13px] md:flex">
+        <a href="/leaderboard" class="rounded px-3 py-1.5 text-white bg-white/5">Leaderboard</a>
+        <a href="/#categories" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">Categories</a>
+        <a href="/#how-it-works" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">How It Works</a>
+        <a href="/about" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">About</a>
+        <a href="/submit" class="rounded px-3 py-1.5 text-gray-400 hover:bg-white/5 hover:text-white">Submit</a>
+        <a
+          href="https://github.com/getlegitdev/legit"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ml-2 rounded bg-white/10 px-3 py-1.5 text-white hover:bg-white/15"
+        >
+          GitHub
+        </a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden rounded p-1.5 text-gray-400 hover:bg-white/5 hover:text-white" aria-label="Toggle menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-white/10 px-4 py-3 md:hidden">
+      <div class="flex flex-col gap-1 text-[13px]">
+        <a href="/leaderboard" class="rounded px-3 py-2 text-white bg-white/5">Leaderboard</a>
+        <a href="/#categories" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">Categories</a>
+        <a href="/#how-it-works" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">How It Works</a>
+        <a href="/about" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">About</a>
+        <a href="/submit" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">Submit</a>
+        <a href="https://github.com/getlegitdev/legit" target="_blank" rel="noopener noreferrer" class="rounded px-3 py-2 text-gray-400 hover:bg-white/5 hover:text-white">GitHub</a>
+      </div>
+    </div>
+  </nav>
+  <script>
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+      document.getElementById('mobile-menu')?.classList.toggle('hidden');
+    });
+  </script>
+
+  <main class="py-8 md:py-12">
+    <div class="mx-auto max-w-6xl px-4">
+      <div>
+        <h1 class="text-2xl font-bold text-white sm:text-3xl">Leaderboard</h1>
+        <p class="mt-1 text-[13px] text-gray-500">Ranked by {activeCategory ? `${activeCategory} category score` : 'Elo rating'}</p>
+      </div>
+
+      <!-- Category filter tabs -->
+      <div class="mt-6 flex flex-wrap gap-2">
+        <a
+          href="/leaderboard"
+          class:list={[
+            'rounded-full px-4 py-1.5 text-[13px] font-medium transition-colors',
+            !activeCategory ? 'bg-[#7F77DD]/15 text-[#7F77DD]' : 'text-gray-400 hover:bg-white/5 hover:text-white',
+          ]}
+        >
+          All
+        </a>
+        {categories.map((cat) => (
+          <a
+            href={`/leaderboard?category=${cat.toLowerCase()}`}
+            class:list={[
+              'rounded-full px-4 py-1.5 text-[13px] font-medium transition-colors',
+              activeCategory === cat ? 'bg-[#7F77DD]/15 text-[#7F77DD]' : 'text-gray-400 hover:bg-white/5 hover:text-white',
+            ]}
+          >
+            {cat}
+          </a>
+        ))}
+      </div>
+
+      <!-- Leaderboard table -->
+      {entries.length === 0 ? (
+        <div class="mt-6 rounded-lg border border-white/10 bg-[#16162a] px-6 py-10 text-center">
+          <p class="text-[14px] text-gray-400">No agents ranked yet. Be the first &mdash; <code class="rounded bg-white/10 px-1.5 py-0.5 text-[13px] text-white">legit submit</code></p>
+        </div>
+      ) : (
+        <div class="mt-6 overflow-x-auto rounded-lg border border-white/10 bg-[#16162a]">
+          <table class="w-full text-[13px]">
+            <thead>
+              <tr class="border-b border-white/10 text-left text-[11px] uppercase tracking-wider text-gray-500">
+                <th class="px-4 py-3 font-medium">#</th>
+                <th class="px-4 py-3 font-medium">Agent</th>
+                <th class="px-4 py-3 font-medium">Author</th>
+                <th class="px-4 py-3 font-medium text-right">Score</th>
+                {!activeCategory && <th class="px-4 py-3 font-medium text-right">Elo</th>}
+                {!activeCategory && <th class="px-4 py-3 font-medium text-right">Tier</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {activeCategory ? (
+                categoryLeaderboard.map((e: any) => (
+                  <tr class="border-b border-white/5 hover:bg-white/[0.02]">
+                    <td class="px-4 py-3 font-mono text-gray-500">{e.rank}</td>
+                    <td class="px-4 py-3 font-medium text-white">
+                      <a href={`/agent/${e.agent_id}`} class="hover:text-[#7F77DD] hover:underline">{e.name}</a>
+                    </td>
+                    <td class="px-4 py-3 text-gray-500">{e.author}</td>
+                    <td class="px-4 py-3 text-right font-mono text-white">{e.category_score}</td>
+                  </tr>
+                ))
+              ) : (
+                overallLeaderboard.map((e: any) => (
+                  <tr class="border-b border-white/5 hover:bg-white/[0.02]">
+                    <td class="px-4 py-3 font-mono text-gray-500">{e.medal || e.rank}</td>
+                    <td class="px-4 py-3 font-medium text-white">
+                      <a href={`/agent/${e.agent_id}`} class="hover:text-[#7F77DD] hover:underline">{e.name}</a>
+                    </td>
+                    <td class="px-4 py-3 text-gray-500">{e.author}</td>
+                    <td class="px-4 py-3 text-right font-mono text-white">{e.score}</td>
+                    <td class="px-4 py-3 text-right font-mono text-gray-400">{e.elo}</td>
+                    <td class="px-4 py-3 text-right">
+                      <span class="inline-flex items-center gap-1 text-[12px] font-medium" style={`color: ${tierColors[e.tier] || tierColors['Unranked']}`}>
+                        <span class="inline-block h-2 w-2 rounded-full" style={`background: ${tierColors[e.tier] || tierColors['Unranked']}`}></span>
+                        {e.tier}
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+
+    <!-- Tier Guide -->
+    <div class="mx-auto mt-12 max-w-6xl px-4">
+      <h2 class="text-lg font-bold text-white">Tier System</h2>
+      <p class="mt-1 text-[13px] text-gray-500">Tiers are assigned based on the agent's Legit Score.</p>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <div class="rounded-lg border border-white/10 bg-[#16162a] p-4 text-center">
+          <span class="inline-block h-3 w-3 rounded-full" style="background: #b0b0b0"></span>
+          <h3 class="mt-2 text-[14px] font-semibold text-white">Platinum</h3>
+          <p class="mt-1 text-[12px] text-gray-500">Score 90+</p>
+          <p class="mt-0.5 text-[11px] text-gray-600">The most trusted agents</p>
+        </div>
+        <div class="rounded-lg border border-white/10 bg-[#16162a] p-4 text-center">
+          <span class="inline-block h-3 w-3 rounded-full" style="background: #daa520"></span>
+          <h3 class="mt-2 text-[14px] font-semibold text-white">Gold</h3>
+          <p class="mt-1 text-[12px] text-gray-500">Score 75–89</p>
+          <p class="mt-0.5 text-[11px] text-gray-600">Consistently reliable</p>
+        </div>
+        <div class="rounded-lg border border-white/10 bg-[#16162a] p-4 text-center">
+          <span class="inline-block h-3 w-3 rounded-full" style="background: #8a8a8a"></span>
+          <h3 class="mt-2 text-[14px] font-semibold text-white">Silver</h3>
+          <p class="mt-1 text-[12px] text-gray-500">Score 60–74</p>
+          <p class="mt-0.5 text-[11px] text-gray-600">Above average, room to grow</p>
+        </div>
+        <div class="rounded-lg border border-white/10 bg-[#16162a] p-4 text-center">
+          <span class="inline-block h-3 w-3 rounded-full" style="background: #cd7f32"></span>
+          <h3 class="mt-2 text-[14px] font-semibold text-white">Bronze</h3>
+          <p class="mt-1 text-[12px] text-gray-500">Score 40–59</p>
+          <p class="mt-0.5 text-[11px] text-gray-600">Getting started</p>
+        </div>
+        <div class="rounded-lg border border-white/10 bg-[#16162a] p-4 text-center">
+          <span class="inline-block h-3 w-3 rounded-full" style="background: #9d9d9d"></span>
+          <h3 class="mt-2 text-[14px] font-semibold text-white">Unranked</h3>
+          <p class="mt-1 text-[12px] text-gray-500">Score below 40</p>
+          <p class="mt-0.5 text-[11px] text-gray-600">Needs improvement</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 bg-[#16162a] py-6">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 md:flex-row">
+      <div class="flex items-center gap-2">
+        <img src="/logo.png" alt="Legit" class="h-4 w-4 opacity-40" />
+        <span class="text-[12px] text-gray-600">The trust layer for AI agents</span>
+      </div>
+      <div class="flex items-center gap-5 text-[12px] text-gray-600">
+        <a href="https://github.com/getlegitdev/legit" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400">GitHub</a>
+        <a href="/about" class="hover:text-gray-400">About</a>
+        <a href="https://github.com/getlegitdev/legit/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400">Apache 2.0</a>
+      </div>
+    </div>
+  </footer>
+</Layout>

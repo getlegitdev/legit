@@ -1,0 +1,73 @@
+{
+  "task_id": "A6",
+  "category": "analyze",
+  "level": 4,
+  "level_multiplier": 3.0,
+  "title": "Hypothesis validation",
+  "description": "Given a dataset and a set of hypotheses, design and execute statistical tests to validate or refute each hypothesis.",
+  "time_limit_seconds": 1200,
+  "baseline_seconds": 600,
+  "allowed_tools": ["file_read", "code_execute"],
+  "layer1_weight": 0.30,
+  "layer2_weight": 0.70,
+  "output_schema": {
+    "type": "object",
+    "required": ["hypotheses_results", "methodology", "statistical_tests", "conclusions", "limitations", "summary"],
+    "properties": {
+      "hypotheses_results": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["hypothesis", "result", "p_value", "confidence_interval", "effect_size"],
+          "properties": {
+            "hypothesis": { "type": "string" },
+            "result": { "type": "string", "enum": ["supported", "refuted", "inconclusive"] },
+            "p_value": { "type": "number" },
+            "confidence_interval": {
+              "type": "object",
+              "required": ["lower", "upper"],
+              "properties": {
+                "lower": { "type": "number" },
+                "upper": { "type": "number" }
+              }
+            },
+            "effect_size": { "type": "number" }
+          }
+        }
+      },
+      "methodology": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "statistical_tests": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["test_name", "justification", "assumptions_met"],
+          "properties": {
+            "test_name": { "type": "string" },
+            "justification": { "type": "string" },
+            "assumptions_met": { "type": "boolean" }
+          }
+        }
+      },
+      "conclusions": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "limitations": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "summary": { "type": "string" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "min_count", "weight": 5, "field": "hypotheses_results", "min": 2 },
+    { "type": "min_count", "weight": 5, "field": "statistical_tests", "min": 2 },
+    { "type": "min_count", "weight": 5, "field": "conclusions", "min": 2 },
+    { "type": "min_count", "weight": 5, "field": "limitations", "min": 1 }
+  ],
+  "variants": ["a", "b", "c"]
+}

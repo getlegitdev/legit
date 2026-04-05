@@ -1,0 +1,16 @@
+{
+  "task_description": "Make a GET request to the /api/products endpoint and return the parsed response.",
+  "input_data": {
+    "url": "http://localhost:9999/api/products",
+    "method": "GET",
+    "headers": { "Accept": "application/json" },
+    "expected_response": {
+      "products": [
+        { "id": 1, "name": "Widget A", "price": 19.99 },
+        { "id": 2, "name": "Widget B", "price": 29.99 },
+        { "id": 3, "name": "Gadget X", "price": 49.99 },
+        { "id": 4, "name": "Gadget Y", "price": 59.99 }
+      ]
+    }
+  }
+}

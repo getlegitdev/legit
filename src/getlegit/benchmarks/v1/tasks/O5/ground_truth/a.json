@@ -1,0 +1,36 @@
+{
+  "numeric_values": { "services_called": 3 },
+  "keywords": ["service-a", "service-b", "service-c", "dashboard", "aggregated"],
+  "expected_response_data": {
+    "service_results": [
+      {
+        "service": "service-a",
+        "status": 200,
+        "data": {
+          "active_users": 15234,
+          "new_signups_today": 142,
+          "churn_rate": 0.023
+        }
+      },
+      {
+        "service": "service-b",
+        "status": 200,
+        "data": {
+          "total_skus": 4521,
+          "low_stock_items": 23,
+          "reorder_needed": 8
+        }
+      },
+      {
+        "service": "service-c",
+        "status": 200,
+        "data": {
+          "total_orders_today": 892,
+          "revenue_today": 45230.50,
+          "average_order_value": 50.71
+        }
+      }
+    ],
+    "all_successful": true
+  }
+}

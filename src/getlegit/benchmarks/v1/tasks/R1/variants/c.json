@@ -1,0 +1,7 @@
+{
+  "task_description": "Identify 5 competitors for Slack and create a structured comparison report.",
+  "input_data": {
+    "product": "Slack",
+    "context": "Slack is a business communication platform that offers real-time messaging, file sharing, and integrations with third-party tools. Organized around channels, Slack is used by teams for internal communication, project coordination, and workflow automation. Owned by Salesforce since 2021, Slack competes in the enterprise messaging and collaboration market."
+  }
+}

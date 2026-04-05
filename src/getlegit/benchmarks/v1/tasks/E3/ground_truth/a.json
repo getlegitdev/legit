@@ -1,0 +1,7 @@
+{
+  "expected_item_count": 12,
+  "expected_fields": ["name", "brand", "price", "rating", "processor", "ram", "storage", "screen_size"],
+  "keywords": ["laptop", "price", "rating", "processor", "RAM"],
+  "numeric_values": { "extraction_stats.total_items": 12 },
+  "min_counts": { "extracted_items": 5 }
+}

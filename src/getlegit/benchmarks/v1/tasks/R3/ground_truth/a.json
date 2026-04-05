@@ -1,0 +1,7 @@
+{
+  "expected_leadership": ["Patrick Collison", "John Collison", "David Singleton"],
+  "expected_competitors": ["Adyen", "Square", "PayPal", "Braintree"],
+  "keywords": ["revenue", "risk", "market", "payment", "compliance", "API"],
+  "numeric_values": {},
+  "min_counts": { "leadership": 3, "risks": 3 }
+}

@@ -1,0 +1,29 @@
+{
+  "task_description": "Call three services to perform a cross-service health check, collecting status, latency, and version info from each, then produce a combined health report.",
+  "input_data": {
+    "services": [
+      {
+        "name": "service-a",
+        "url": "http://localhost:9999/api/service-a",
+        "method": "GET",
+        "headers": { "Accept": "application/json", "X-Scenario": "health" },
+        "description": "Returns health status of the user service"
+      },
+      {
+        "name": "service-b",
+        "url": "http://localhost:9999/api/service-b",
+        "method": "GET",
+        "headers": { "Accept": "application/json", "X-Scenario": "health" },
+        "description": "Returns health status of the inventory service"
+      },
+      {
+        "name": "service-c",
+        "url": "http://localhost:9999/api/service-c",
+        "method": "GET",
+        "headers": { "Accept": "application/json", "X-Scenario": "health" },
+        "description": "Returns health status of the order service"
+      }
+    ],
+    "aggregation_instructions": "Collect health status from all three services and produce a combined health report indicating overall system status (healthy only if all services are healthy)."
+  }
+}

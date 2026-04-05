@@ -1,0 +1,21 @@
+{
+  "root_cause": {
+    "description": "The SSL certificate renewal on Sunday night deployed an incomplete certificate bundle to auth_service, missing the intermediate CA certificate. During low-traffic hours the issue was masked by connection reuse, but as Monday morning traffic increased, new TLS handshakes failed certificate chain validation, causing intermittent 503 errors from auth_service.",
+    "confidence": 0.92
+  },
+  "contributing_factors": [
+    {"factor": "Incomplete certificate bundle missing intermediate CA cert", "impact_level": "high"},
+    {"factor": "No automated certificate chain validation in deployment pipeline", "impact_level": "high"},
+    {"factor": "Low overnight traffic masked the issue due to connection pooling/reuse", "impact_level": "medium"}
+  ],
+  "causal_chain": [
+    "SSL certificate renewed and deployed Sunday night without intermediate CA",
+    "Low overnight traffic used existing connections, masking the problem",
+    "Monday morning traffic surge required new TLS connections",
+    "New connections failed certificate chain validation",
+    "auth_service returned 503 errors on failed handshakes",
+    "payment_gateway propagated errors as 500s to end users",
+    "Error rate scaled with traffic volume reaching 15%"
+  ],
+  "keywords": ["TLS", "certificate", "intermediate CA", "mTLS", "handshake", "certificate chain", "503"]
+}

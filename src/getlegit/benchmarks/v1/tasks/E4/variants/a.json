@@ -1,0 +1,13 @@
+{
+  "task_description": "Merge employee records from three HR systems (CSV payroll export, JSON benefits database, and text-based directory listing) into a unified employee dataset.",
+  "input_data": {
+    "context": "A company is consolidating employee data from three legacy HR systems during a migration. The payroll CSV has employee ID, name, salary, department, and hire date. The benefits JSON has employee email, name (sometimes differently formatted), benefit selections, and dependent count. The text directory has name, phone, office location, and title. Records must be matched by name (with fuzzy matching for format differences) and employee ID where available.",
+    "files": [
+      { "path": "payroll_export.csv", "format": "CSV", "records": 45 },
+      { "path": "benefits_db.json", "format": "JSON", "records": 42 },
+      { "path": "employee_directory.txt", "format": "text", "records": 48 }
+    ],
+    "expected_unique_employees": 50,
+    "known_issues": ["Name format varies (First Last vs Last, First)", "3 employees in directory not yet in payroll", "Benefits missing for 8 new hires"]
+  }
+}

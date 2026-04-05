@@ -1,0 +1,16 @@
+{
+  "numeric_values": { "fetch_status": 200, "save_status": 201, "fetched_records": 1 },
+  "keywords": ["orders", "Carol", "total"],
+  "expected_response_data": {
+    "fetch_response": {
+      "orders": [
+        { "id": 105, "product": "Widget A", "quantity": 5, "total": 99.95, "status": "shipped" }
+      ]
+    },
+    "save_response": {
+      "id": 203,
+      "status": "created",
+      "message": "Order created successfully"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "task_description": "Make a GET request to the /api/users endpoint and return the parsed response.",
+  "input_data": {
+    "url": "http://localhost:9999/api/users",
+    "method": "GET",
+    "headers": { "Accept": "application/json" },
+    "expected_response": {
+      "users": [
+        { "id": 1, "name": "Alice", "email": "alice@example.com" },
+        { "id": 2, "name": "Bob", "email": "bob@example.com" },
+        { "id": 3, "name": "Carol", "email": "carol@example.com" }
+      ]
+    }
+  }
+}

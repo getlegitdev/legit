@@ -1,0 +1,24 @@
+{
+  "task_description": "Design and implement a Python class for a simple in-memory key-value store with support for TTL (time-to-live), namespaces, and batch operations.",
+  "input_data": {
+    "requirements": [
+      "set(key, value, ttl_seconds=None) - Store a key-value pair with optional TTL",
+      "get(key) - Retrieve a value, returning None if expired or missing",
+      "delete(key) - Remove a key",
+      "exists(key) - Check if key exists and is not expired",
+      "set_namespace(namespace) - Set the current namespace to scope keys",
+      "batch_set(items: dict, ttl_seconds=None) - Set multiple key-value pairs at once",
+      "batch_get(keys: list) - Get multiple values at once",
+      "keys(pattern=None) - List all non-expired keys, optionally filtered by prefix pattern",
+      "clear() - Remove all keys in the current namespace",
+      "stats() - Return dict with count, namespaces, and memory estimate"
+    ],
+    "constraints": [
+      "Thread-safe operations",
+      "Lazy expiration (check TTL on access, don't use background threads)",
+      "Keys must be strings, values can be any serializable type",
+      "Raise appropriate exceptions for invalid inputs"
+    ],
+    "language": "python"
+  }
+}

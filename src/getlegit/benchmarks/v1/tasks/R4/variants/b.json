@@ -1,0 +1,9 @@
+{
+  "task_description": "Estimate the market size (TAM/SAM/SOM) for plant-based pet food in the United States.",
+  "input_data": {
+    "product": "Plant-based dog food",
+    "context": "A consumer packaged goods company is launching a premium plant-based dog food line. The product uses novel plant proteins to provide complete nutrition for dogs, positioned as healthier and more sustainable than traditional meat-based food. Pricing is $65 for a 20lb bag, approximately 2x premium over conventional dog food. Initial distribution through DTC e-commerce and specialty pet retailers. The company targets health-conscious millennial and Gen Z dog owners.",
+    "geography": "United States",
+    "pricing": "$65 per 20lb bag"
+  }
+}

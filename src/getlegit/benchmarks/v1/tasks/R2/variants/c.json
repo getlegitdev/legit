@@ -1,0 +1,8 @@
+{
+  "task_description": "Evaluate container orchestration platforms for a healthcare SaaS company migrating from virtual machines, and recommend the best option.",
+  "input_data": {
+    "use_case": "Container orchestration for healthcare SaaS",
+    "context": "A healthcare SaaS company running 40 microservices on VMs wants to adopt container orchestration. The platform must meet HIPAA compliance requirements, support blue-green deployments, handle sensitive patient data encryption at rest and in transit, and integrate with existing CI/CD pipelines using GitHub Actions. The operations team has 3 DevOps engineers. Monthly infrastructure budget is $15,000.",
+    "requirements": ["HIPAA compliance", "blue-green deployments", "secrets management", "auto-scaling", "monitoring and logging", "CI/CD integration"]
+  }
+}

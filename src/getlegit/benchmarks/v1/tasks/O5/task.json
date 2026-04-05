@@ -1,0 +1,40 @@
+{
+  "task_id": "O5",
+  "category": "operate",
+  "level": 3,
+  "level_multiplier": 2.0,
+  "title": "Multi-service orchestration",
+  "description": "Coordinate calls across multiple API services, aggregating data from each and producing a combined result. Services may depend on each other's outputs.",
+  "time_limit_seconds": 900,
+  "baseline_seconds": 480,
+  "allowed_tools": ["api_call"],
+  "layer1_weight": 0.50,
+  "layer2_weight": 0.50,
+  "output_schema": {
+    "type": "object",
+    "required": ["services_called", "aggregated_data", "all_successful"],
+    "properties": {
+      "services_called": { "type": "number" },
+      "service_results": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "service": { "type": "string" },
+            "status": { "type": "number" },
+            "data": { "type": "object" }
+          }
+        }
+      },
+      "aggregated_data": { "type": "object" },
+      "all_successful": { "type": "boolean" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "numeric_accuracy", "weight": 20, "field": "services_called", "expected": 3 },
+    { "type": "required_fields", "weight": 10, "fields": ["service_results", "aggregated_data"] },
+    { "type": "keyword_present", "weight": 10, "keywords": ["service-a", "service-b", "service-c"] }
+  ],
+  "variants": ["a", "b", "c"]
+}

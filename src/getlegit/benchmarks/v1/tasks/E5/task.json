@@ -1,0 +1,79 @@
+{
+  "task_id": "E5",
+  "category": "extract",
+  "level": 3,
+  "level_multiplier": 2.0,
+  "title": "Unstructured text extraction",
+  "description": "Extract structured entities, relationships, and key facts from unstructured natural language text such as emails, meeting notes, or legal documents.",
+  "time_limit_seconds": 600,
+  "baseline_seconds": 300,
+  "allowed_tools": ["file_read"],
+  "layer1_weight": 0.50,
+  "layer2_weight": 0.50,
+  "output_schema": {
+    "type": "object",
+    "required": ["document_type", "entities", "relationships", "key_facts", "action_items"],
+    "properties": {
+      "document_type": { "type": "string" },
+      "entities": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "type", "mentions"],
+          "properties": {
+            "name": { "type": "string" },
+            "type": { "type": "string", "enum": ["person", "organization", "location", "date", "money", "product", "event"] },
+            "mentions": { "type": "integer" },
+            "context": { "type": "string" }
+          }
+        }
+      },
+      "relationships": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["entity_a", "entity_b", "relationship_type"],
+          "properties": {
+            "entity_a": { "type": "string" },
+            "entity_b": { "type": "string" },
+            "relationship_type": { "type": "string" },
+            "evidence": { "type": "string" }
+          }
+        }
+      },
+      "key_facts": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["fact", "confidence", "source_quote"],
+          "properties": {
+            "fact": { "type": "string" },
+            "confidence": { "type": "string", "enum": ["low", "medium", "high"] },
+            "source_quote": { "type": "string" }
+          }
+        }
+      },
+      "action_items": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["description", "assignee"],
+          "properties": {
+            "description": { "type": "string" },
+            "assignee": { "type": "string" },
+            "deadline": { "type": "string" },
+            "priority": { "type": "string", "enum": ["low", "medium", "high"] }
+          }
+        }
+      }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 15 },
+    { "type": "required_fields", "weight": 15, "fields": ["entities", "key_facts"] },
+    { "type": "min_count", "weight": 10, "field": "entities", "min": 5 },
+    { "type": "min_count", "weight": 5, "field": "key_facts", "min": 3 },
+    { "type": "min_count", "weight": 5, "field": "action_items", "min": 2 }
+  ],
+  "variants": ["a", "b", "c"]
+}

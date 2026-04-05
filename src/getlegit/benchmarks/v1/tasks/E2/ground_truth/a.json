@@ -1,0 +1,8 @@
+{
+  "expected_sections": ["Executive Letter", "Business Overview", "Financial Highlights", "Segment Performance", "Outlook"],
+  "expected_table_count": 3,
+  "expected_table_names": ["Financial Highlights", "Revenue by Segment", "Balance Sheet Summary"],
+  "keywords": ["revenue", "net income", "operating", "segment", "growth"],
+  "numeric_values": {},
+  "min_counts": { "sections": 3, "tables": 1 }
+}

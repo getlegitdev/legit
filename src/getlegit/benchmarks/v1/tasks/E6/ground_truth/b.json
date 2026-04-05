@@ -1,0 +1,9 @@
+{
+  "expected_clean_records": 88,
+  "expected_total_input": 100,
+  "expected_duplicates_merged": 12,
+  "expected_issue_types": ["price_format", "unit_inconsistency", "html_artifact", "duplicate", "outlier_value", "category_inconsistency"],
+  "keywords": ["clean", "normalize", "price", "unit", "duplicate", "catalog"],
+  "numeric_values": { "cleaning_report.total_records": 100 },
+  "min_counts": { "cleaned_records": 15 }
+}

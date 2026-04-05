@@ -1,0 +1,14 @@
+{
+  "test_code": "import pytest\n\nclass MinStack:\n    def __init__(self):\n        self.stack = []\n        self.min_stack = []\n\n    def push(self, val):\n        self.stack.append(val)\n        if not self.min_stack or val <= self.min_stack[-1]:\n            self.min_stack.append(val)\n\n    def pop(self):\n        if not self.stack:\n            raise IndexError('pop from empty stack')\n        val = self.stack.pop()\n        if val == self.min_stack[-1]:\n            self.min_stack.pop()\n        return val\n\n    def top(self):\n        if not self.stack:\n            raise IndexError('top from empty stack')\n        return self.stack[-1]\n\n    def get_min(self):\n        if not self.min_stack:\n            raise IndexError('get_min from empty stack')\n        return self.min_stack[-1]\n\ndef test_push_and_top():\n    s = MinStack()\n    s.push(5)\n    assert s.top() == 5\n    s.push(3)\n    assert s.top() == 3\n\ndef test_pop_returns_value():\n    s = MinStack()\n    s.push(10)\n    assert s.pop() == 10\n\ndef test_get_min_single():\n    s = MinStack()\n    s.push(42)\n    assert s.get_min() == 42\n\ndef test_get_min_after_pushes():\n    s = MinStack()\n    s.push(5)\n    s.push(3)\n    s.push(7)\n    assert s.get_min() == 3\n\ndef test_get_min_after_pop():\n    s = MinStack()\n    s.push(5)\n    s.push(3)\n    s.pop()\n    assert s.get_min() == 5\n\ndef test_duplicate_min_values():\n    s = MinStack()\n    s.push(2)\n    s.push(2)\n    s.pop()\n    assert s.get_min() == 2\n\ndef test_empty_stack_pop():\n    s = MinStack()\n    with pytest.raises(IndexError):\n        s.pop()\n\ndef test_empty_stack_top():\n    s = MinStack()\n    with pytest.raises(IndexError):\n        s.top()\n\ndef test_empty_stack_get_min():\n    s = MinStack()\n    with pytest.raises(IndexError):\n        s.get_min()\n\ndef test_negative_values():\n    s = MinStack()\n    s.push(-1)\n    s.push(-5)\n    s.push(-3)\n    assert s.get_min() == -5\n    s.pop()\n    assert s.get_min() == -5\n    s.pop()\n    assert s.get_min() == -1",
+  "test_cases_description": [
+    {"name": "test_push_and_top", "category": "normal"},
+    {"name": "test_get_min_after_pushes", "category": "normal"},
+    {"name": "test_get_min_after_pop", "category": "normal"},
+    {"name": "test_duplicate_min_values", "category": "edge_case"},
+    {"name": "test_empty_stack_pop", "category": "error_handling"},
+    {"name": "test_empty_stack_top", "category": "error_handling"},
+    {"name": "test_empty_stack_get_min", "category": "error_handling"},
+    {"name": "test_negative_values", "category": "boundary"}
+  ],
+  "keywords": ["MinStack", "push", "pop", "get_min", "empty stack", "duplicate", "negative", "IndexError"]
+}

@@ -1,0 +1,7 @@
+{
+  "expected_leadership": ["Ali Ghodsi", "Matei Zaharia", "Naveen Rao"],
+  "expected_competitors": ["Snowflake", "AWS", "Google BigQuery", "Microsoft Fabric"],
+  "keywords": ["revenue", "risk", "market", "data", "lakehouse", "AI"],
+  "numeric_values": {},
+  "min_counts": { "leadership": 3, "risks": 3 }
+}

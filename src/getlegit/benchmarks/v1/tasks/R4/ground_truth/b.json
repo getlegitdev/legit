@@ -1,0 +1,10 @@
+{
+  "expected_ranges": {
+    "tam_usd_billions": { "min": 30, "max": 60 },
+    "sam_usd_billions": { "min": 1, "max": 5 },
+    "som_usd_millions": { "min": 10, "max": 200 }
+  },
+  "keywords": ["TAM", "SAM", "SOM", "market", "pet food", "plant-based", "dog"],
+  "numeric_values": { "tam.value_usd": 42000000000 },
+  "min_counts": { "assumptions": 3, "data_sources": 2 }
+}

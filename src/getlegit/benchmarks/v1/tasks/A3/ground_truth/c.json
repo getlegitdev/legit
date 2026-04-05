@@ -1,0 +1,16 @@
+{
+  "datasets_compared": ["postgresql", "mongodb", "redis"],
+  "ranking": [
+    {"dataset": "postgresql", "rank": 1, "score": 0.80},
+    {"dataset": "mongodb", "rank": 2, "score": 0.75},
+    {"dataset": "redis", "rank": 3, "score": 0.70}
+  ],
+  "recommendations": {
+    "OLTP": "postgresql",
+    "caching": "redis",
+    "analytics": "postgresql",
+    "session_management": "redis"
+  },
+  "rationale": "Each database excels in different areas: PostgreSQL is best for OLTP and analytics due to strong consistency and efficient complex queries. Redis dominates caching and session management with 100K+ read ops/sec and sub-millisecond latency. MongoDB fits high-throughput document workloads but lacks PostgreSQL's query sophistication and Redis's raw speed.",
+  "keywords": ["OLTP", "caching", "consistency", "latency", "throughput", "tradeoff", "microservices"]
+}

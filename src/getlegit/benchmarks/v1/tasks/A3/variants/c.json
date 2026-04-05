@@ -1,0 +1,24 @@
+{
+  "task_description": "Compare three database systems (PostgreSQL, MongoDB, Redis) based on benchmark results for different workload types and recommend the best fit for each use case.",
+  "input_data": {
+    "datasets": {
+      "postgresql": {
+        "read_ops_per_sec": 15000, "write_ops_per_sec": 8000, "complex_query_ms": 25,
+        "simple_query_ms": 2, "concurrent_connections": 500, "data_consistency": "strong",
+        "storage_efficiency_pct": 75, "recovery_time_sec": 30
+      },
+      "mongodb": {
+        "read_ops_per_sec": 25000, "write_ops_per_sec": 20000, "complex_query_ms": 80,
+        "simple_query_ms": 1, "concurrent_connections": 2000, "data_consistency": "eventual",
+        "storage_efficiency_pct": 55, "recovery_time_sec": 15
+      },
+      "redis": {
+        "read_ops_per_sec": 100000, "write_ops_per_sec": 80000, "complex_query_ms": 500,
+        "simple_query_ms": 0.2, "concurrent_connections": 10000, "data_consistency": "eventual",
+        "storage_efficiency_pct": 30, "recovery_time_sec": 5
+      }
+    },
+    "workload_types": ["OLTP", "caching", "analytics", "session_management"],
+    "context": "Selecting databases for a microservices architecture"
+  }
+}

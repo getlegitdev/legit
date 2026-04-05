@@ -1,0 +1,82 @@
+{
+  "task_id": "R5",
+  "category": "research",
+  "level": 4,
+  "level_multiplier": 3.0,
+  "title": "Paper survey",
+  "description": "Conduct a literature survey on a research topic, identifying key papers, summarizing findings, mapping relationships between works, and identifying open research questions.",
+  "time_limit_seconds": 1800,
+  "baseline_seconds": 900,
+  "allowed_tools": ["web_search", "file_read"],
+  "layer1_weight": 0.20,
+  "layer2_weight": 0.80,
+  "output_schema": {
+    "type": "object",
+    "required": ["topic", "papers", "themes", "timeline", "open_questions", "summary"],
+    "properties": {
+      "topic": {
+        "type": "object",
+        "required": ["title", "scope", "search_terms"],
+        "properties": {
+          "title": { "type": "string" },
+          "scope": { "type": "string" },
+          "search_terms": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "papers": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["title", "authors", "year", "venue", "key_contribution", "methodology", "relevance"],
+          "properties": {
+            "title": { "type": "string" },
+            "authors": { "type": "array", "items": { "type": "string" } },
+            "year": { "type": "integer" },
+            "venue": { "type": "string" },
+            "key_contribution": { "type": "string" },
+            "methodology": { "type": "string" },
+            "results_summary": { "type": "string" },
+            "relevance": { "type": "string" },
+            "citations": { "type": "integer" }
+          }
+        }
+      },
+      "themes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "description", "paper_indices"],
+          "properties": {
+            "name": { "type": "string" },
+            "description": { "type": "string" },
+            "paper_indices": { "type": "array", "items": { "type": "integer" } }
+          }
+        }
+      },
+      "timeline": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["year", "milestone"],
+          "properties": {
+            "year": { "type": "integer" },
+            "milestone": { "type": "string" }
+          }
+        }
+      },
+      "open_questions": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "summary": { "type": "string" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 6 },
+    { "type": "required_fields", "weight": 6, "fields": ["papers"] },
+    { "type": "min_count", "weight": 4, "field": "papers", "min": 8 },
+    { "type": "min_count", "weight": 2, "field": "themes", "min": 3 },
+    { "type": "min_count", "weight": 2, "field": "open_questions", "min": 3 }
+  ],
+  "variants": ["a", "b", "c"]
+}

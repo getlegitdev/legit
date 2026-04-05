@@ -1,0 +1,10 @@
+{
+  "numeric_values": { "status_code": 200 },
+  "keywords": ["status", "data", "orders"],
+  "expected_response_data": {
+    "orders": [
+      { "id": 101, "customer": "Alice", "total": 149.97, "status": "shipped" },
+      { "id": 102, "customer": "Bob", "total": 89.98, "status": "processing" }
+    ]
+  }
+}

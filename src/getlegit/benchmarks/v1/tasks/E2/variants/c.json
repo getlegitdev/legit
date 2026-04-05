@@ -1,0 +1,10 @@
+{
+  "task_description": "Extract structured data from a government regulatory filing PDF, including compliance sections, fee schedule tables, and filing metadata.",
+  "input_data": {
+    "document_type": "Regulatory filing",
+    "context": "The PDF is a regulatory compliance document from a financial services regulator. It contains applicant information, compliance checklist sections, fee schedule tables, penalty structure tables, regulatory requirements with subsections, and appendices with reference tables. The document uses formal legal formatting with numbered sections, cross-references, and dense footnotes.",
+    "file_path": "regulatory_filing.pdf",
+    "expected_sections": ["Applicant Information", "Compliance Requirements", "Fee Schedule", "Penalties", "Appendices"],
+    "expected_tables": ["Fee Schedule", "Penalty Structure", "Compliance Checklist"]
+  }
+}

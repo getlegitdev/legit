@@ -1,0 +1,58 @@
+{
+  "service-a": {
+    "default": {
+      "active_users": 15234,
+      "new_signups_today": 142,
+      "churn_rate": 0.023
+    },
+    "auth-token": {
+      "token": "auth-token-abc123",
+      "expires_in": 3600
+    },
+    "health": {
+      "service": "user-service",
+      "status": "healthy",
+      "version": "2.4.1",
+      "latency_ms": 12
+    }
+  },
+  "service-b": {
+    "default": {
+      "total_skus": 4521,
+      "low_stock_items": 23,
+      "reorder_needed": 8
+    },
+    "with-token": {
+      "enriched_data": {
+        "user_segments": ["enterprise", "growth", "starter"],
+        "total_accounts": 1250
+      }
+    },
+    "health": {
+      "service": "inventory-service",
+      "status": "healthy",
+      "version": "1.8.3",
+      "latency_ms": 8
+    }
+  },
+  "service-c": {
+    "default": {
+      "total_orders_today": 892,
+      "revenue_today": 45230.50,
+      "average_order_value": 50.71
+    },
+    "aggregate": {
+      "analysis": {
+        "top_segment": "enterprise",
+        "growth_rate": 0.15,
+        "recommendation": "Focus on enterprise retention"
+      }
+    },
+    "health": {
+      "service": "order-service",
+      "status": "healthy",
+      "version": "3.1.0",
+      "latency_ms": 15
+    }
+  }
+}

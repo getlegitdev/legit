@@ -1,0 +1,6 @@
+{
+  "expected_competitors": ["Teams", "Discord", "Mattermost", "Rocket.Chat", "Google Chat"],
+  "keywords": ["competitor", "market", "messaging"],
+  "numeric_values": {},
+  "min_counts": { "competitors": 5 }
+}

@@ -1,0 +1,23 @@
+{
+  "task_description": "Design and implement a Python class for a simple validation framework that can validate data against a schema with custom rules.",
+  "input_data": {
+    "requirements": [
+      "Schema(definition) - Create a schema from a dict definition",
+      "validate(data) - Validate data against the schema, return ValidationResult",
+      "Support field types: string, int, float, bool, list, dict, email, url",
+      "Support constraints: required, min_length, max_length, min_value, max_value, pattern (regex)",
+      "Support nested object validation",
+      "Support custom validation rules via register_rule(name, fn)",
+      "ValidationResult should have: is_valid, errors (list of {field, message, rule})",
+      "Support partial validation (validate only specified fields)"
+    ],
+    "constraints": [
+      "Clear, descriptive error messages",
+      "Support for default values in schema",
+      "Validation rules should be composable",
+      "Raise SchemaError for invalid schema definitions",
+      "Type coercion should be optional (strict mode vs lenient mode)"
+    ],
+    "language": "python"
+  }
+}

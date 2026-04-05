@@ -1,0 +1,8 @@
+{
+  "keywords": ["DNS", "CNAME", "misconfiguration", "NXDOMAIN", "API", "mobile", "intermittent"],
+  "numeric_values": {},
+  "min_word_count": 400,
+  "required_sections": ["timeline", "root_cause", "impact", "remediation"],
+  "expected_severity": "SEV2",
+  "min_timeline_entries": 5
+}

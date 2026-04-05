@@ -1,0 +1,11 @@
+{
+  "numeric_values": { "status_code": 200 },
+  "keywords": ["status", "data", "users"],
+  "expected_response_data": {
+    "users": [
+      { "id": 1, "name": "Alice", "email": "alice@example.com" },
+      { "id": 2, "name": "Bob", "email": "bob@example.com" },
+      { "id": 3, "name": "Carol", "email": "carol@example.com" }
+    ]
+  }
+}

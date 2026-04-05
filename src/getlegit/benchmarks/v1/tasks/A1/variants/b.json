@@ -1,0 +1,39 @@
+{
+  "task_description": "Analyze the following daily temperature readings for a city and produce a summary with key statistics and insights.",
+  "input_data": {
+    "dataset": [
+      { "day": 1, "temp_celsius": 12.5 },
+      { "day": 2, "temp_celsius": 13.0 },
+      { "day": 3, "temp_celsius": 11.8 },
+      { "day": 4, "temp_celsius": 14.2 },
+      { "day": 5, "temp_celsius": 15.0 },
+      { "day": 6, "temp_celsius": 13.5 },
+      { "day": 7, "temp_celsius": 12.0 },
+      { "day": 8, "temp_celsius": 11.5 },
+      { "day": 9, "temp_celsius": 13.8 },
+      { "day": 10, "temp_celsius": 14.5 },
+      { "day": 11, "temp_celsius": 16.0 },
+      { "day": 12, "temp_celsius": 15.5 },
+      { "day": 13, "temp_celsius": 14.0 },
+      { "day": 14, "temp_celsius": 13.2 },
+      { "day": 15, "temp_celsius": 12.8 },
+      { "day": 16, "temp_celsius": 15.8 },
+      { "day": 17, "temp_celsius": 16.5 },
+      { "day": 18, "temp_celsius": 17.0 },
+      { "day": 19, "temp_celsius": 16.2 },
+      { "day": 20, "temp_celsius": 15.0 },
+      { "day": 21, "temp_celsius": 14.8 },
+      { "day": 22, "temp_celsius": 13.5 },
+      { "day": 23, "temp_celsius": 14.0 },
+      { "day": 24, "temp_celsius": 15.2 },
+      { "day": 25, "temp_celsius": 16.8 },
+      { "day": 26, "temp_celsius": 17.5 },
+      { "day": 27, "temp_celsius": 18.0 },
+      { "day": 28, "temp_celsius": 17.2 },
+      { "day": 29, "temp_celsius": 16.0 },
+      { "day": 30, "temp_celsius": 15.5 }
+    ],
+    "metric": "temp_celsius",
+    "unit": "Celsius"
+  }
+}

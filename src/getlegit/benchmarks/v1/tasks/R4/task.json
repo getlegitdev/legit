@@ -1,0 +1,81 @@
+{
+  "task_id": "R4",
+  "category": "research",
+  "level": 3,
+  "level_multiplier": 2.0,
+  "title": "Market size estimation",
+  "description": "Estimate the total addressable market (TAM), serviceable addressable market (SAM), and serviceable obtainable market (SOM) for a given product or industry segment.",
+  "time_limit_seconds": 900,
+  "baseline_seconds": 480,
+  "allowed_tools": ["web_search", "file_read"],
+  "layer1_weight": 0.20,
+  "layer2_weight": 0.80,
+  "output_schema": {
+    "type": "object",
+    "required": ["market_definition", "tam", "sam", "som", "methodology", "assumptions", "data_sources"],
+    "properties": {
+      "market_definition": {
+        "type": "object",
+        "required": ["industry", "segment", "geography", "time_horizon"],
+        "properties": {
+          "industry": { "type": "string" },
+          "segment": { "type": "string" },
+          "geography": { "type": "string" },
+          "time_horizon": { "type": "string" }
+        }
+      },
+      "tam": {
+        "type": "object",
+        "required": ["value_usd", "calculation", "growth_rate"],
+        "properties": {
+          "value_usd": { "type": "number" },
+          "calculation": { "type": "string" },
+          "growth_rate": { "type": "number" },
+          "year": { "type": "integer" }
+        }
+      },
+      "sam": {
+        "type": "object",
+        "required": ["value_usd", "calculation", "constraints"],
+        "properties": {
+          "value_usd": { "type": "number" },
+          "calculation": { "type": "string" },
+          "constraints": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "som": {
+        "type": "object",
+        "required": ["value_usd", "calculation", "capture_strategy"],
+        "properties": {
+          "value_usd": { "type": "number" },
+          "calculation": { "type": "string" },
+          "capture_strategy": { "type": "string" }
+        }
+      },
+      "methodology": { "type": "string" },
+      "assumptions": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "data_sources": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "type"],
+          "properties": {
+            "name": { "type": "string" },
+            "type": { "type": "string" },
+            "url": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 6 },
+    { "type": "required_fields", "weight": 6, "fields": ["tam.value_usd", "sam.value_usd", "som.value_usd"] },
+    { "type": "numeric_accuracy", "weight": 4, "field": "tam.value_usd", "tolerance": 0.50 },
+    { "type": "keyword_present", "weight": 4, "keywords": ["TAM", "SAM", "SOM", "market"] }
+  ],
+  "variants": ["a", "b", "c"]
+}

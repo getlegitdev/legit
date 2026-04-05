@@ -1,0 +1,15 @@
+{
+  "task_description": "Write an incident report for a database outage that caused 45 minutes of downtime on a production e-commerce platform.",
+  "input_data": {
+    "incident_type": "Database outage",
+    "system": "Production PostgreSQL cluster for e-commerce platform",
+    "duration": "45 minutes",
+    "date": "2026-03-15",
+    "context": "During peak traffic hours, the primary PostgreSQL database ran out of disk space due to an unmonitored temp table growth from a batch analytics job. The failover to the replica was delayed because the replica was 10 minutes behind due to replication lag.",
+    "requirements": {
+      "should_include": ["Timeline with at least 5 entries", "Root cause analysis", "Customer impact metrics", "Remediation actions taken", "Preventive measures"],
+      "severity_options": ["SEV1", "SEV2", "SEV3"],
+      "expected_severity": "SEV1"
+    }
+  }
+}

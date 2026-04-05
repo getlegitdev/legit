@@ -1,0 +1,18 @@
+{
+  "task_description": "Clean and normalize a customer database exported from a legacy CRM system containing OCR artifacts, encoding corruption, and inconsistent formatting.",
+  "input_data": {
+    "dataset_type": "Customer database",
+    "context": "A company migrating from a legacy CRM has exported 80 customer records that were originally scanned from paper forms using OCR. The data contains common OCR errors (e.g., 'l' and '1' confusion, 'O' and '0' swaps), mojibake from encoding issues (e.g., 'Ã©' instead of 'e'), inconsistent phone number formats (mixing parentheses, dashes, dots, spaces), inconsistent state abbreviations (CA vs California vs Calif.), duplicate entries with slight name variations, and missing or obviously invalid email addresses.",
+    "file_path": "legacy_crm_export.csv",
+    "total_records": 80,
+    "known_issues": {
+      "ocr_errors": 25,
+      "encoding_issues": 15,
+      "format_inconsistencies": 40,
+      "duplicates": 8,
+      "missing_values": 20,
+      "invalid_emails": 12
+    },
+    "fields": ["name", "email", "phone", "address", "city", "state", "zip", "company", "signup_date"]
+  }
+}

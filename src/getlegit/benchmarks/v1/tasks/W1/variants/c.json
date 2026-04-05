@@ -1,0 +1,13 @@
+{
+  "task_description": "Write a technical blog post about building resilient microservices with gRPC.",
+  "input_data": {
+    "topic": "Building Resilient Microservices with gRPC",
+    "target_audience": "Backend engineers designing distributed systems",
+    "tone": "Practical and architecture-focused",
+    "requirements": {
+      "min_word_count": 300,
+      "should_include": ["gRPC vs REST comparison", "Protocol Buffers", "Error handling and retries", "Service mesh integration"],
+      "tags_suggestion": ["grpc", "microservices", "distributed-systems", "backend"]
+    }
+  }
+}

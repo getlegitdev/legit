@@ -1,0 +1,71 @@
+{
+  "task_id": "A3",
+  "category": "analyze",
+  "level": 2,
+  "level_multiplier": 1.5,
+  "title": "Comparative analysis",
+  "description": "Compare two or more datasets and identify significant differences, similarities, and relative performance.",
+  "time_limit_seconds": 600,
+  "baseline_seconds": 300,
+  "allowed_tools": ["file_read", "code_execute"],
+  "layer1_weight": 0.40,
+  "layer2_weight": 0.60,
+  "output_schema": {
+    "type": "object",
+    "required": ["datasets_compared", "differences", "similarities", "ranking", "statistical_tests", "summary"],
+    "properties": {
+      "datasets_compared": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "differences": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["metric", "values", "significance"],
+          "properties": {
+            "metric": { "type": "string" },
+            "values": { "type": "object" },
+            "significance": { "type": "string" }
+          }
+        }
+      },
+      "similarities": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "ranking": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["dataset", "rank", "score"],
+          "properties": {
+            "dataset": { "type": "string" },
+            "rank": { "type": "number" },
+            "score": { "type": "number" }
+          }
+        }
+      },
+      "statistical_tests": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["test_name", "p_value", "conclusion"],
+          "properties": {
+            "test_name": { "type": "string" },
+            "p_value": { "type": "number" },
+            "conclusion": { "type": "string" }
+          }
+        }
+      },
+      "summary": { "type": "string" }
+    }
+  },
+  "layer1_checks": [
+    { "type": "schema_valid", "weight": 10 },
+    { "type": "min_count", "weight": 10, "field": "differences", "min": 2 },
+    { "type": "min_count", "weight": 10, "field": "similarities", "min": 1 },
+    { "type": "min_count", "weight": 10, "field": "ranking", "min": 2 }
+  ],
+  "variants": ["a", "b", "c"]
+}

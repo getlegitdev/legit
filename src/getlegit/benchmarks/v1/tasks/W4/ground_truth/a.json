@@ -1,0 +1,7 @@
+{
+  "keywords": ["notification", "push", "email", "SMS", "RabbitMQ", "preference", "GDPR", "rate limit", "channel", "delivery"],
+  "numeric_values": {},
+  "min_word_count": 800,
+  "required_sections": ["architecture", "api_design", "data_model", "implementation_plan"],
+  "must_address_scale": true
+}
